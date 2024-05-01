@@ -13,6 +13,6 @@ public class startmanager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        print("connected");
+        print("connecte");
     }
 }
