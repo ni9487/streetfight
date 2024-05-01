@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
+using Photon.Pun.Demo.PunBasics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,9 +16,13 @@ public class player2move : MonoBehaviour
     private SpriteRenderer sprite;
     private int extrajump;
     public GameObject lily2;
-    float mp;
+    public float mp;
     public float maxmp;
     public GameObject player2mp;
+
+    public Image player2skill2shader;
+
+    private float skill2cooldown;
 
     void Start()
     {
@@ -25,7 +31,7 @@ public class player2move : MonoBehaviour
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
         maxmp=10;
-        mp=0.97f*maxmp;
+        mp=1;
     }
 
     // Update is called once per frame
@@ -64,7 +70,7 @@ public class player2move : MonoBehaviour
         //招式2
         if(Input.GetKeyDown(KeyCode.Keypad1))
         {
-            if(mp>=1)
+            if(skill2cooldown==0)
             {
                 GameObject skill2 = Instantiate(lily2,this.transform.position,quaternion.identity);
                 lily2 fireball = skill2.GetComponent<lily2>() as lily2;
@@ -72,13 +78,28 @@ public class player2move : MonoBehaviour
                 {
                     fireball.isright=false;
                 }
-                mp-=1;
+                if(mp>=9.4f&&mp<9.7f)
+                {
+                    mp=9.7f;
+                }
+                if(mp<9.4)
+                { 
+                    mp+=0.5f;
+                }
+                skill2cooldown=3;
             }
         }
-        if(mp<9.7)
+
+        if(skill2cooldown>0)
         {
-            mp+=Time.deltaTime*0.2f;
+            skill2cooldown-=Time.deltaTime;
+            if(skill2cooldown<0)
+            {
+                skill2cooldown=0;
+            }
         }
+
+        mp-=Time.deltaTime*0.03f;
 
     }
 

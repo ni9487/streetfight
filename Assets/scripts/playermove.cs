@@ -18,6 +18,7 @@ public class playermove : MonoBehaviour
     public Color damageColor = Color.red; // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
+    public player2move player2mpnew;
 
     void Start()
     {
