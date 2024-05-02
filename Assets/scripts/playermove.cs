@@ -11,11 +11,11 @@ public class playermove : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
     private int extrajump;
-    float hp;
+    public float hp;
     public float maxhp;
     public GameObject player1hp;
 
-    public Color damageColor = Color.red; // 设置受伤时的颜色
+    public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
     public player2move player2mpnew;
@@ -75,7 +75,14 @@ public class playermove : MonoBehaviour
                 transform.Translate(-speed*150*Time.deltaTime,0,0);
             }
         }
-
+        if(hp<=0)
+        {
+            hp=0;
+        }
+        if(hp<9)
+        {
+            hp+=Time.deltaTime*0.01f;
+        }
     }
 
     IEnumerator ResetColorAfterDelay()//碰撞完等多久回色
@@ -99,12 +106,21 @@ public class playermove : MonoBehaviour
         if(other.gameObject.tag=="player2skill")
         {
             print(other.gameObject.name);
-            hp-=1;
+            if(hp>=0.6)
+            {
+                hp-=1;
+            }
+            if(hp<0.6)
+            {
+                hp=0;
+            }
             Destroy(other.gameObject);
             sprite.color=damageColor;
             StartCoroutine(ResetColorAfterDelay());
         }
     }
+
+    
 
     void flip(float dirx)
     {

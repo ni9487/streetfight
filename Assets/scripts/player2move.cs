@@ -89,7 +89,6 @@ public class player2move : MonoBehaviour
                 skill2cooldown=3;
             }
         }
-
         if(skill2cooldown>0)
         {
             skill2cooldown-=Time.deltaTime;
@@ -99,8 +98,12 @@ public class player2move : MonoBehaviour
             }
         }
 
-        mp-=Time.deltaTime*0.03f;
+        mp-=Time.deltaTime*0.02f;
 
+        if(mp<=0)
+        {
+            mp=0;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll) 
