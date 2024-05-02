@@ -14,6 +14,7 @@ public class playermove : MonoBehaviour
     public float hp;
     public float maxhp;
     public GameObject player1hp;
+    public GameObject playerBoom;
 
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -114,13 +115,17 @@ public class playermove : MonoBehaviour
             {
                 hp=0;
             }
+            if(hp==0)
+            {
+                Destroy(this.gameObject);
+            }
             Destroy(other.gameObject);
             sprite.color=damageColor;
             StartCoroutine(ResetColorAfterDelay());
         }
     }
 
-    
+
 
     void flip(float dirx)
     {
