@@ -117,7 +117,7 @@ public class playermove : MonoBehaviour
             }
             if(hp==0)
             {
-                Destroy(this.gameObject);
+                playerdie();
             }
             Destroy(other.gameObject);
             sprite.color=damageColor;
@@ -125,7 +125,11 @@ public class playermove : MonoBehaviour
         }
     }
 
-
+    public void playerdie()
+    {
+        Instantiate(playerBoom, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
 
     void flip(float dirx)
     {
