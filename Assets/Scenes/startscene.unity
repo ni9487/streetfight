@@ -1877,7 +1877,7 @@ MonoBehaviour:
   hp: 0
   maxhp: 0
   player1hp: {fileID: 1079105965}
-  playerBoom: {fileID: 7229975352920758050, guid: 87350f4082a479649b6114f0be6c9467, type: 3}
+  playerBoom: {fileID: 186466317227897814, guid: 649da1040c5151643941ee9344bec785, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.1
   player2mpnew: {fileID: 0}
