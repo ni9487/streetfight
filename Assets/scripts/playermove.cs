@@ -28,7 +28,7 @@ public class playermove : MonoBehaviour
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
         maxhp=10;
-        hp=0.97f*maxhp;
+        hp=0.17f*maxhp;
         originalColor = sprite.color;
     }
 
@@ -117,6 +117,7 @@ public class playermove : MonoBehaviour
             }
             if(hp==0)
             {
+                player1hp.transform.localScale=new Vector3(0,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
                 playerdie();
             }
             Destroy(other.gameObject);
