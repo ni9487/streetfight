@@ -10,3 +10,7 @@ public class scenemanagerscript : MonoBehaviour
         SceneManager.LoadScene(scenename);
     }
 }
+
+public static class PlayerInfo {
+    public static string characterSelected;
+}
