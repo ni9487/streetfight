@@ -1,6 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
+using Photon.Pun.Demo.PunBasics;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playermove : MonoBehaviour
@@ -17,11 +21,12 @@ public class playermove : MonoBehaviour
     public GameObject playerBoom;
     public float mp;
     public float maxmp;
-    public GameObject player2mp;
+    public GameObject player1mp;
+
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
-    public player2move player2mpnew;
+    public playermove playermpnew;
 
     void Start()
     {
@@ -31,6 +36,8 @@ public class playermove : MonoBehaviour
         extrajump=2;
         maxhp=10;
         hp=0.97f*maxhp;
+        maxmp = 10;
+        mp = 0;
         originalColor = sprite.color;
     }
 
@@ -39,7 +46,9 @@ public class playermove : MonoBehaviour
     {
         float percent=(float)hp/(float)maxhp;
         player1hp.transform.localScale=new Vector3(percent,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
-        if(Input.GetKey(KeyCode.A))
+        float percentmp = (float)mp / (float)maxmp;
+        player1mp.transform.localScale = new Vector3(percentmp, player1mp.transform.localScale.y, player1mp.transform.localScale.z);
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(-speed*Time.deltaTime,0,0);
             float curspeed=-speed*Time.deltaTime;

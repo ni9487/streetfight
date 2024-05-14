@@ -26,7 +26,7 @@ public class player12move : MonoBehaviour
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
-    public player2move player2mpnew;
+    public player12move player12mpnew;
 
     public GameObject lily2;
     public Image player2skill2shader;
@@ -42,7 +42,7 @@ public class player12move : MonoBehaviour
         maxmp=10;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
-        mp=1;
+        mp=0;
     }
 
     // Update is called once per frame
