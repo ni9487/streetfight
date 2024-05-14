@@ -20,6 +20,8 @@ public class player12move : MonoBehaviour
     public GameObject player1hp;
     public GameObject playerBoom;
     public float mp;
+    public float maxmp;
+    public GameObject player1mp;
 
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -27,7 +29,6 @@ public class player12move : MonoBehaviour
     public player2move player2mpnew;
 
     public GameObject lily2;
-    public GameObject player1mp;
     public Image player2skill2shader;
     private float skill2cooldown;
 
@@ -38,6 +39,7 @@ public class player12move : MonoBehaviour
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
         maxhp=10;
+        maxmp=10;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
         mp=1;
@@ -46,8 +48,10 @@ public class player12move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float percent=(float)hp/(float)maxhp;
-        player1hp.transform.localScale=new Vector3(percent,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
+        float percent=(float)mp/(float)maxmp;
+        player1mp.transform.localScale=new Vector3(percent,player1mp.transform.localScale.y,player1mp.transform.localScale.z);
+        float percenthp=(float)hp/(float)maxhp;
+        player1hp.transform.localScale=new Vector3(percenthp,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
         if(Input.GetKey(KeyCode.A))
         {
             transform.Translate(-speed*Time.deltaTime,0,0);
