@@ -15,7 +15,9 @@ public class playermove : MonoBehaviour
     public float maxhp;
     public GameObject player1hp;
     public GameObject playerBoom;
-
+    public float mp;
+    public float maxmp;
+    public GameObject player2mp;
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
