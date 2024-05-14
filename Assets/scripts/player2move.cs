@@ -40,7 +40,7 @@ public class player2move : MonoBehaviour
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
         maxmp=10;
-        mp=1;
+        mp= 0;
         maxhp=10;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
@@ -111,8 +111,6 @@ public class player2move : MonoBehaviour
                 skill2cooldown=0;
             }
         }
-
-        mp-=Time.deltaTime*0.02f;
 
         if(mp<=0)
         {
