@@ -1160,7 +1160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &927103847
 Rigidbody2D:
   serializedVersion: 4
@@ -2236,6 +2236,9 @@ MonoBehaviour:
   maxhp: 0
   player1hp: {fileID: 1079105965}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
+  mp: 0
+  maxmp: 0
+  player2mp: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   player2mpnew: {fileID: 0}
