@@ -22,11 +22,16 @@ public class playermove : MonoBehaviour
     public float mp;
     public float maxmp;
     public GameObject player1mp;
+    public Transform player1skill1;
+    public Transform player1skill1down;
+    public Transform player1skill1up;
 
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     private Color originalColor;
     public playermove playermpnew;
+
+    private int skillCount = 0; //1skill times
 
     void Start()
     {
@@ -40,6 +45,93 @@ public class playermove : MonoBehaviour
         mp = 0;
         originalColor = sprite.color;
     }
+
+    IEnumerator FollowPlayer2D(Transform ball2D) 
+    {
+        float existTime = 0.2f; // 圆球存在的最大时间
+        Vector3 initialScale = ball2D.localScale; // 初始大小
+        while (existTime > 0) 
+        {
+            if (ball2D == null) 
+            {
+                yield break; // 如果ball2D已经被销毁，则退出协程
+            }
+            // 根据距离调整球体的大小，距离越小，球体越大
+            float scale = (0.27f-existTime)/0.2f;
+            ball2D.localScale = initialScale * scale; // 调整大小
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+        Destroy(ball2D.gameObject);
+    }
+
+    IEnumerator DelayedGenerateBall2Ddown()
+    {
+        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        GenerateBall2Ddown();
+    }
+
+    IEnumerator DelayedGenerateBall2Dup()
+    {
+        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        GenerateBall2Dup();
+    }
+
+    IEnumerator DelayedGenerateBall2D()
+    {
+        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        GenerateBall2D();
+    }
+
+    void GenerateBall2D() 
+    {
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        {
+            skillCount++; // 增加技能生成次数
+
+            Transform ball2D = Instantiate(player1skill1, transform.position, Quaternion.identity);
+            player1skill1 fireball = ball2D.GetComponent<player1skill1>() as player1skill1;
+            if(!sprite.flipX)
+            {
+                fireball.isright=false;
+            }
+            StartCoroutine(FollowPlayer2D(ball2D));
+            StartCoroutine(DelayedGenerateBall2Ddown());
+        }
+    }
+
+    void GenerateBall2Ddown()
+    {
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        {
+            skillCount++; // 增加技能生成次数
+            Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
+            player1skill1down fireball = ball2D.GetComponent<player1skill1down>() as player1skill1down;
+            if(!sprite.flipX)
+            {
+                fireball.isright=false;
+            }
+            StartCoroutine(FollowPlayer2D(ball2D));
+            StartCoroutine(DelayedGenerateBall2Dup());
+        }
+    } 
+
+    void GenerateBall2Dup()
+    {
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        {
+            skillCount++; // 增加技能生成次数
+            Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
+            player1skill1up fireball = ball2D.GetComponent<player1skill1up>() as player1skill1up;
+            if(!sprite.flipX)
+            {
+                fireball.isright=false;
+            }
+            StartCoroutine(FollowPlayer2D(ball2D));
+            StartCoroutine(DelayedGenerateBall2D());
+        }
+    } 
 
     // Update is called once per frame
     void Update()
@@ -94,6 +186,20 @@ public class playermove : MonoBehaviour
         if(hp<9)
         {
             hp+=Time.deltaTime*0.01f;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            skillCount=0;
+            GenerateBall2D();
+            if(mp>=9.4f&&mp<9.7f)
+            {
+                mp=9.7f;
+            }
+            if(mp<9.4)
+            { 
+                mp+=0.5f;
+            }
         }
     }
 

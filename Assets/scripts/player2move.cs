@@ -36,6 +36,7 @@ public class player2move : MonoBehaviour
     //大招球
     public Transform lily3;
     public Transform player1;
+    public Transform player12;
 
     void Start()
     {
@@ -52,15 +53,20 @@ public class player2move : MonoBehaviour
 
     IEnumerator FollowPlayer2D(Transform ball2D) 
     {
-        float existTime = 7.0f; // 圆球存在的最大时间
+        float existTime = 5.0f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0) 
         {
+            if (ball2D == null) 
+            {
+                yield break; // 如果ball2D已经被销毁，则退出协程
+            }
             ball2D.position = Vector2.MoveTowards(ball2D.position, player1.position, Time.deltaTime * speed*0.5f);
 
-            float distance = Vector2.Distance(ball2D.position, player1.position);
+            //ball2D.position = Vector2.MoveTowards(ball2D.position, player12.position, Time.deltaTime * speed*0.5f);
+
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (8.0f-existTime)/5.0f;
+            float scale = (7.0f-existTime)/5.0f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -189,11 +195,11 @@ public class player2move : MonoBehaviour
         if(other.gameObject.tag=="player1skill")
         {
             print(other.gameObject.name);
-            if(hp>=0.6)
+            if(hp>=0.3)
             {
-                hp-=1;
+                hp-=0.4f;
             }
-            if(hp<0.6)
+            if(hp<0.3)
             {
                 hp=0;
             }

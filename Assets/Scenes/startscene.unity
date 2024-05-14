@@ -1336,7 +1336,7 @@ MonoBehaviour:
   player1mp: {fileID: 1995824268}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7176471}
   duration: 0.1
-  player2mpnew: {fileID: 0}
+  player12mpnew: {fileID: 0}
   lily2: {fileID: 4485844080618372517, guid: 8c0f2f818073cd046894f76dfc989def, type: 3}
 --- !u!1 &980813726
 GameObject:
@@ -1474,7 +1474,8 @@ MonoBehaviour:
   duration: 0.1
   player2mpnew: {fileID: 0}
   lily3: {fileID: 5954437688160005976, guid: 4419d9082651f9d43bc607450fc18da3, type: 3}
-  player1: {fileID: 927103850}
+  player1: {fileID: 1583054848}
+  player12: {fileID: 927103850}
 --- !u!50 &1041973078
 Rigidbody2D:
   serializedVersion: 4
@@ -2068,7 +2069,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1583054845
 Rigidbody2D:
   serializedVersion: 4
@@ -2238,10 +2239,13 @@ MonoBehaviour:
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   mp: 0
   maxmp: 0
-  player2mp: {fileID: 0}
+  player1mp: {fileID: 1995824268}
+  player1skill1: {fileID: 5483425428817941479, guid: a072731dd3ed1fc48ba7d3b542f146ce, type: 3}
+  player1skill1down: {fileID: 4275117398577762263, guid: 30d2ae0f9fc127c49819ee8ec5170d86, type: 3}
+  player1skill1up: {fileID: 3467479409435312092, guid: 0ef0b68c4b64f66469b3107c46bdf501, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
-  player2mpnew: {fileID: 0}
+  playermpnew: {fileID: 0}
 --- !u!1 &1622094027
 GameObject:
   m_ObjectHideFlags: 0
