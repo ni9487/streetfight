@@ -33,6 +33,10 @@ public class player2move : MonoBehaviour
 
     private float skill2cooldown;
 
+    //大招球
+    public Transform lily3;
+    public Transform player1;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +48,31 @@ public class player2move : MonoBehaviour
         maxhp=10;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
+    }
+
+    IEnumerator FollowPlayer2D(Transform ball2D) 
+    {
+        float existTime = 7.0f; // 圆球存在的最大时间
+        Vector3 initialScale = ball2D.localScale; // 初始大小
+        while (existTime > 0) 
+        {
+            ball2D.position = Vector2.MoveTowards(ball2D.position, player1.position, Time.deltaTime * speed*0.5f);
+
+            float distance = Vector2.Distance(ball2D.position, player1.position);
+            // 根据距离调整球体的大小，距离越小，球体越大
+            float scale = (8.0f-existTime)/5.0f;
+            ball2D.localScale = initialScale * scale; // 调整大小
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+        Destroy(ball2D.gameObject);
+    }
+
+    void GenerateBall2D() 
+    {
+        Transform ball2D = Instantiate(lily3, transform.position, Quaternion.identity);
+        StartCoroutine(FollowPlayer2D(ball2D));
     }
 
     // Update is called once per frame
@@ -110,6 +139,12 @@ public class player2move : MonoBehaviour
             {
                 skill2cooldown=0;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad3)) 
+        {
+            // 生成圆球
+            GenerateBall2D();
         }
 
         mp-=Time.deltaTime*0.02f;

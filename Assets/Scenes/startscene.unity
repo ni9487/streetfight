@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 927103851}
   m_Layer: 6
   m_Name: Player1 (2)
-  m_TagString: Player2
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1325,8 +1325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1c841285080144db5dcd3e15142ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 270
-  jumpForce: 1000
+  speed: 300
+  jumpForce: 1200
   hp: 0
   maxhp: 0
   player1hp: {fileID: 1079105965}
@@ -1460,8 +1460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cfb007ef16bd3469e6d9570544bce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 270
-  jumpForce: 1000
+  speed: 300
+  jumpForce: 1200
   lily2: {fileID: 4485844080618372517, guid: a03f76882e4e71a4da93a2ac878b67f8, type: 3}
   hp: 0
   maxhp: 0
@@ -1473,6 +1473,8 @@ MonoBehaviour:
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   player2mpnew: {fileID: 0}
+  lily3: {fileID: 5954437688160005976, guid: 4419d9082651f9d43bc607450fc18da3, type: 3}
+  player1: {fileID: 927103850}
 --- !u!50 &1041973078
 Rigidbody2D:
   serializedVersion: 4
