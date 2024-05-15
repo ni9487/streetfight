@@ -208,7 +208,7 @@ public class player2move : MonoBehaviour
                 player2hp.transform.localScale=new Vector3(0,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
                 playerdie();
             }
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             sprite.color=damageColor;
             StartCoroutine(ResetColorAfterDelay());
         }
