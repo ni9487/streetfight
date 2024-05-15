@@ -32,6 +32,9 @@ public class playermove : MonoBehaviour
     public playermove playermpnew;
 
     private int skillCount = 0; //1skill times
+    public Image player1skill1shader;
+
+    private float skill1cooldown;
 
     void Start()
     {
@@ -168,17 +171,17 @@ public class playermove : MonoBehaviour
         {
             rb.AddForce(-Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        if(Input.GetMouseButtonDown(0))
-        {
-            if(sprite.flipX==false)
-            {
-                transform.Translate(speed*150*Time.deltaTime,0,0);
-            }
-            else
-            {
-                transform.Translate(-speed*150*Time.deltaTime,0,0);
-            }
-        }
+        // if(Input.GetKeyDown(KeyCode.Keypad8))
+        // {
+        //     if(sprite.flipX==false)
+        //     {
+        //         transform.Translate(speed*15*Time.deltaTime,0,0);
+        //     }
+        //     else
+        //     {
+        //         transform.Translate(-speed*15*Time.deltaTime,0,0);
+        //     }
+        // }
         if(hp<=0)
         {
             hp=0;
@@ -188,7 +191,7 @@ public class playermove : MonoBehaviour
             hp+=Time.deltaTime*0.01f;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad7))
+        if(Input.GetKeyDown(KeyCode.Keypad7)&&(skill1cooldown==0))
         {
             skillCount=0;
             GenerateBall2D();
@@ -199,6 +202,15 @@ public class playermove : MonoBehaviour
             if(mp<9.4)
             { 
                 mp+=0.5f;
+            }
+            skill1cooldown=3;
+        }
+        if(skill1cooldown>0)
+        {
+            skill1cooldown-=Time.deltaTime;
+            if(skill1cooldown<0)
+            {
+                skill1cooldown=0;
             }
         }
     }
