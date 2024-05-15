@@ -12,6 +12,7 @@ public class p2s3cool : MonoBehaviour
         // 按下數字鍵1時觸發
         if (Input.GetKeyDown(KeyCode.Keypad3)&&numberText.text == "")
         {
+            print("fxck");
             numberText.text = "9";
             StartCoroutine(CountdownRoutine());
         }

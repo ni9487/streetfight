@@ -1742,7 +1742,6 @@ MonoBehaviour:
   hp: 0
   maxhp: 0
   player2hp: {fileID: 2071497368}
-  mp: 0
   maxmp: 0
   player2mp: {fileID: 1622094027}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
@@ -3088,7 +3087,6 @@ GameObject:
   - component: {fileID: 2067369379}
   - component: {fileID: 2067369382}
   - component: {fileID: 2067369381}
-  - component: {fileID: 2067369380}
   m_Layer: 5
   m_Name: Number Text
   m_TagString: Untagged
@@ -3115,20 +3113,6 @@ RectTransform:
   m_AnchoredPosition: {x: 2.8000183, y: -4.3999786}
   m_SizeDelta: {x: 226.4831, y: 415.9236}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2067369380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2067369378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a677f5409ee4f6047a1e28aaa8e4c5e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberText: {fileID: 2067369381}
-  count: 9
 --- !u!114 &2067369381
 MonoBehaviour:
   m_ObjectHideFlags: 0

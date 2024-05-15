@@ -19,7 +19,7 @@ public class player2move : MonoBehaviour
     public float hp;
     public float maxhp;
     public GameObject player2hp;
-    public float mp;
+    public static float mp;
     public float maxmp;
     public GameObject player2mp;
     public GameObject playerBoom;
@@ -127,13 +127,13 @@ public class player2move : MonoBehaviour
                 {
                     fireball.isright=false;
                 }
-                if(mp>=9.4f&&mp<9.7f)
+                if(mp>=8.2f&&mp<9.7f)
                 {
                     mp=9.7f;
                 }
-                if(mp<9.4)
+                if(mp<8.7)
                 { 
-                    mp+=0.5f;
+                    mp+=1.5f;
                 }
                 skill2cooldown=3;
             }
@@ -149,11 +149,13 @@ public class player2move : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad3)) 
         {
-            // 生成圆球
-            GenerateBall2D();
+            if(mp>=9.7f)
+            {
+                // 生成圆球
+                GenerateBall2D();
+                mp=0;
+            }
         }
-
-        mp-=Time.deltaTime*0.02f;
 
         if(mp<=0)
         {
