@@ -245,7 +245,6 @@ public class playermove : MonoBehaviour
             sprite.color = defenseColor;
             StartCoroutine(ResetColorAfterDelay2());
         }
-<<<<<<< HEAD
         // if(Input.GetKeyDown(KeyCode.Keypad8))
         // {
         //     if(sprite.flipX==false)
@@ -257,8 +256,6 @@ public class playermove : MonoBehaviour
         //         transform.Translate(-speed*15*Time.deltaTime,0,0);
         //     }
         // }
-        if (hp<=0)
-=======
         if(Input.GetKeyDown(KeyCode.Keypad8))
         {
             if(sprite.flipX==false)
@@ -273,7 +270,6 @@ public class playermove : MonoBehaviour
             }
         }
         if(hp<=0)
->>>>>>> d91153026f0b3384f6989682731ffd68ce9852d9
         {
             hp=0;
         }
@@ -342,7 +338,6 @@ public class playermove : MonoBehaviour
     {
         if (other.gameObject.tag == "player2skill")
         {
-<<<<<<< HEAD
             if (sprite.color != originalColor)
             {
                 hp -= 0;
@@ -351,40 +346,13 @@ public class playermove : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay2());
             }
             else
-=======
-            print(other.gameObject.name);
-            if(hp>=600)
             {
-                hp-=600;
-            }
-            if(hp<600)
-            {
-                hp=0;
-            }
-            if(hp==0)
-            {
-                player1hp.transform.localScale=new Vector3(0,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
-                playerdie();
-            }
-            Destroy(other.gameObject);
-            sprite.color=damageColor;
-            StartCoroutine(ResetColorAfterDelay());
-        }
-        if(other.gameObject.tag=="player2skill3")
-        {
-            print(other.gameObject.name);
-            if(hp>=4000)
-            {
-                hp-=4000;
-            }
-            if(hp<4000)
->>>>>>> d91153026f0b3384f6989682731ffd68ce9852d9
-            {
-                if (hp >= 0.6)
+                print(other.gameObject.name);
+                if (hp >= 600)
                 {
-                    hp -= 1;
+                    hp -= 600;
                 }
-                if (hp < 0.6)
+                if (hp < 600)
                 {
                     hp = 0;
                 }
@@ -396,6 +364,42 @@ public class playermove : MonoBehaviour
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+        if(other.gameObject.tag=="player2skill3")
+        {
+            if (sprite.color != originalColor)
+            {
+                hp -= 0;
+                Destroy(other.gameObject);
+                sprite.color = defenseColor;
+                StartCoroutine(ResetColorAfterDelay2());
+            }
+            else
+            {
+                if (hp >= 4000)
+                {
+                    hp -= 4000;
+                }
+                if (hp < 4000)
+                {
+                    if (hp >= 0.6)
+                    {
+                        hp -= 1;
+                    }
+                    if (hp < 0.6)
+                    {
+                        hp = 0;
+                    }
+                    if (hp == 0)
+                    {
+                        player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                        playerdie();
+                    }
+                    Destroy(other.gameObject);
+                    sprite.color = damageColor;
+                    StartCoroutine(ResetColorAfterDelay());
+                }
             }
         }
     }

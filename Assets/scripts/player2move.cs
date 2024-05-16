@@ -207,7 +207,6 @@ public class player2move : MonoBehaviour
     { 
         if(other.gameObject.tag=="player1skill1updown")
         {
-<<<<<<< HEAD
             if (sprite.color != originalColor)
             {
                 hp -= 0;
@@ -216,41 +215,13 @@ public class player2move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay2());
             }
             else
-=======
-            print(other.gameObject.name);
-            if(hp>=600)
-            {
-                hp-=600f;
-            }
-            if(hp<600)
-            {
-                hp=0;
-            }
-            if(hp==0)
-            {
-                player2hp.transform.localScale=new Vector3(0,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
-                playerdie();
-            }
-            //Destroy(other.gameObject);
-            sprite.color=damageColor;
-            StartCoroutine(ResetColorAfterDelay());
-        }
-        if(other.gameObject.tag=="player1skill1")
-        {
-            print(other.gameObject.name);
-            if(hp>=400)
-            {
-                hp-=400f;
-            }
-            if(hp<400)
->>>>>>> b4c9f179c4cc39503d28d2b9cbc788d98a745804
             {
                 print(other.gameObject.name);
-                if (hp >= 0.3)
+                if (hp >= 600)
                 {
-                    hp -= 0.4f;
+                    hp -= 600f;
                 }
-                if (hp < 0.3)
+                if (hp < 600)
                 {
                     hp = 0;
                 }
@@ -262,6 +233,43 @@ public class player2move : MonoBehaviour
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+        if(other.gameObject.tag=="player1skill1")
+        {
+            if (sprite.color != originalColor)
+            {
+                hp -= 0;
+                Destroy(other.gameObject);
+                sprite.color = defenseColor;
+                StartCoroutine(ResetColorAfterDelay2());
+            }
+            else
+            {
+                if (hp >= 400)
+                {
+                    hp -= 400f;
+                }
+                if (hp < 400)
+                {
+                    print(other.gameObject.name);
+                    if (hp >= 0.3)
+                    {
+                        hp -= 0.4f;
+                    }
+                    if (hp < 0.3)
+                    {
+                        hp = 0;
+                    }
+                    if (hp == 0)
+                    {
+                        player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                        playerdie();
+                    }
+                    Destroy(other.gameObject);
+                    sprite.color = damageColor;
+                    StartCoroutine(ResetColorAfterDelay());
+                }
             }
         }
     }
