@@ -45,7 +45,7 @@ public class player2move : MonoBehaviour
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
         maxmp=10;
-        mp= 0;
+        mp= 9;
         maxhp=10;
         hp=0.97f*maxhp;
         originalColor = sprite.color;

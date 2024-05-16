@@ -42,9 +42,9 @@ public class playermove : MonoBehaviour
         anim= GetComponent<Animator>();
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
-        maxhp=10;
+        maxhp=10000;
         hp=0.97f*maxhp;
-        maxmp = 10;
+        maxmp = 25;
         mp = 0;
         originalColor = sprite.color;
     }
@@ -171,31 +171,33 @@ public class playermove : MonoBehaviour
         {
             rb.AddForce(-Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        // if(Input.GetKeyDown(KeyCode.Keypad8))
-        // {
-        //     if(sprite.flipX==false)
-        //     {
-        //         transform.Translate(speed*15*Time.deltaTime,0,0);
-        //     }
-        //     else
-        //     {
-        //         transform.Translate(-speed*15*Time.deltaTime,0,0);
-        //     }
-        // }
+        if(Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            if(sprite.flipX==false)
+            {
+                //transform.Translate(speed*15*Time.deltaTime,0,0);
+                rb.AddForce(Vector2.right * jumpForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                //transform.Translate(-speed*15*Time.deltaTime,0,0);
+                rb.AddForce(Vector2.left * jumpForce, ForceMode2D.Impulse);
+            }
+        }
         if(hp<=0)
         {
             hp=0;
         }
-        if(hp<9)
+        if(hp<9800)
         {
-            hp+=Time.deltaTime*0.01f;
+            hp+=Time.deltaTime;
         }
 
         if(Input.GetKeyDown(KeyCode.Keypad7)&&(skill1cooldown==0))
         {
             skillCount=0;
             GenerateBall2D();
-            if(mp>=9.4f&&mp<9.7f)
+            if(mp>=9.4f&&mp<24f)
             {
                 mp=9.7f;
             }
@@ -236,11 +238,31 @@ public class playermove : MonoBehaviour
         if(other.gameObject.tag=="player2skill")
         {
             print(other.gameObject.name);
-            if(hp>=0.6)
+            if(hp>=600)
             {
-                hp-=1;
+                hp-=600;
             }
-            if(hp<0.6)
+            if(hp<600)
+            {
+                hp=0;
+            }
+            if(hp==0)
+            {
+                player1hp.transform.localScale=new Vector3(0,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
+                playerdie();
+            }
+            Destroy(other.gameObject);
+            sprite.color=damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+        if(other.gameObject.tag=="player2skill3")
+        {
+            print(other.gameObject.name);
+            if(hp>=4000)
+            {
+                hp-=4000;
+            }
+            if(hp<4000)
             {
                 hp=0;
             }
