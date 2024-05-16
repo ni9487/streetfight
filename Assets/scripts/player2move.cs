@@ -46,7 +46,7 @@ public class player2move : MonoBehaviour
         extrajump=2;
         maxmp=10;
         mp= 9;
-        maxhp=10;
+        maxhp=10000;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
     }
@@ -166,9 +166,9 @@ public class player2move : MonoBehaviour
         {
             hp=0;
         }
-        if(hp<9)
+        if(hp<9800)
         {
-            hp+=Time.deltaTime*0.01f;
+            hp+=Time.deltaTime;
         }
     }
 
@@ -194,14 +194,34 @@ public class player2move : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) 
     { 
-        if(other.gameObject.tag=="player1skill")
+        if(other.gameObject.tag=="player1skill1updown")
         {
             print(other.gameObject.name);
-            if(hp>=0.3)
+            if(hp>=600)
             {
-                hp-=0.4f;
+                hp-=600f;
             }
-            if(hp<0.3)
+            if(hp<600)
+            {
+                hp=0;
+            }
+            if(hp==0)
+            {
+                player2hp.transform.localScale=new Vector3(0,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
+                playerdie();
+            }
+            //Destroy(other.gameObject);
+            sprite.color=damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+        if(other.gameObject.tag=="player1skill1")
+        {
+            print(other.gameObject.name);
+            if(hp>=400)
+            {
+                hp-=400f;
+            }
+            if(hp<400)
             {
                 hp=0;
             }
