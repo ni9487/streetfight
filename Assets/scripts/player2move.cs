@@ -26,6 +26,8 @@ public class player2move : MonoBehaviour
 
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
+    public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
+    public float duration2 = 1f;
     private Color originalColor;
     public player2move player2mpnew;
 
@@ -111,13 +113,14 @@ public class player2move : MonoBehaviour
             }
             //anim.SetBool("jump",true);
         }
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            rb.AddForce(-Vector2.up * jumpForce, ForceMode2D.Impulse);
+            sprite.color = defenseColor;
+            StartCoroutine(ResetColorAfterDelay2());
         }
 
         //招式2
-        if(Input.GetKeyDown(KeyCode.Keypad1))
+        if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             if(skill2cooldown==0)
             {
@@ -180,8 +183,16 @@ public class player2move : MonoBehaviour
         sprite.color = originalColor;
     }
 
+    IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
+    {
+        // 等待一段时间
+        yield return new WaitForSeconds(duration2);
+        // 恢复原始颜色
+        sprite.color = originalColor;
+    }
+
     void OnCollisionEnter2D(Collision2D coll) 
-    { 
+    {
         if(coll.gameObject.tag=="enemy")
         {
             //anim.SetBool("hurt",true);
@@ -196,23 +207,33 @@ public class player2move : MonoBehaviour
     { 
         if(other.gameObject.tag=="player1skill")
         {
-            print(other.gameObject.name);
-            if(hp>=0.3)
+            if (sprite.color != originalColor)
             {
-                hp-=0.4f;
+                hp -= 0;
+                Destroy(other.gameObject);
+                sprite.color = defenseColor;
+                StartCoroutine(ResetColorAfterDelay2());
             }
-            if(hp<0.3)
+            else
             {
-                hp=0;
+                print(other.gameObject.name);
+                if (hp >= 0.3)
+                {
+                    hp -= 0.4f;
+                }
+                if (hp < 0.3)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
+                Destroy(other.gameObject);
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
             }
-            if(hp==0)
-            {
-                player2hp.transform.localScale=new Vector3(0,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
-                playerdie();
-            }
-            //Destroy(other.gameObject);
-            sprite.color=damageColor;
-            StartCoroutine(ResetColorAfterDelay());
         }
     }
 
