@@ -19,7 +19,7 @@ public class playermove : MonoBehaviour
     public float maxhp;
     public GameObject player1hp;
     public GameObject playerBoom;
-    public float mp;
+    public static float mp;
     public float maxmp;
     public GameObject player1mp;
     public Transform player1skill1;
@@ -37,6 +37,7 @@ public class playermove : MonoBehaviour
     public Image player1skill1shader;
 
     private float skill1cooldown;
+    private float skill2cooldown;
 
     void Start()
     {
@@ -242,19 +243,7 @@ public class playermove : MonoBehaviour
         {
             rb.AddForce(-Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
-        if(Input.GetKeyDown(KeyCode.Keypad8))
-        {
-            if(sprite.flipX==false)
-            {
-                //transform.Translate(speed*15*Time.deltaTime,0,0);
-                rb.AddForce(Vector2.right * jumpForce, ForceMode2D.Impulse);
-            }
-            else
-            {
-                //transform.Translate(-speed*15*Time.deltaTime,0,0);
-                rb.AddForce(Vector2.left * jumpForce, ForceMode2D.Impulse);
-            }
-        }
+        
         if(hp<=0)
         {
             hp=0;
@@ -268,18 +257,41 @@ public class playermove : MonoBehaviour
         {
             skillCount=0;
             GenerateBall2D();
-            if(mp>=9.4f&&mp<24f)
+            if(mp>=20f&&mp<24f)
             {
-                mp=9.7f;
+                mp=24f;
             }
-            if(mp<9.4)
+            if(mp<20)
             { 
-                mp+=0.5f;
+                mp+=4f;
             }
             skill1cooldown=3;
         }
 
-        if(Input.GetKeyDown(KeyCode.Keypad9))
+        if(Input.GetKeyDown(KeyCode.Keypad8)&&skill2cooldown==0)
+        {
+            if(sprite.flipX==false)
+            {
+                //transform.Translate(speed*15*Time.deltaTime,0,0);
+                rb.AddForce(Vector2.right * jumpForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                //transform.Translate(-speed*15*Time.deltaTime,0,0);
+                rb.AddForce(Vector2.left * jumpForce, ForceMode2D.Impulse);
+            }
+            if(mp>=20f&&mp<24f)
+            {
+                mp=24f;
+            }
+            if(mp<20)
+            { 
+                mp+=4f;
+            }
+            skill2cooldown=4;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Keypad9)&&mp>=24)
         {
             skillCountbig=0;
             GenerateBall2Dbig();
@@ -292,6 +304,14 @@ public class playermove : MonoBehaviour
             if(skill1cooldown<0)
             {
                 skill1cooldown=0;
+            }
+        }
+        if(skill2cooldown>0)
+        {
+            skill2cooldown-=Time.deltaTime;
+            if(skill2cooldown<0)
+            {
+                skill2cooldown=0;
             }
         }
     }

@@ -197,11 +197,11 @@ public class player2move : MonoBehaviour
         if(other.gameObject.tag=="player1skill1updown")
         {
             print(other.gameObject.name);
-            if(hp>=600)
+            if(hp>=400)
             {
-                hp-=600f;
+                hp-=400f;
             }
-            if(hp<600)
+            if(hp<400)
             {
                 hp=0;
             }
@@ -217,11 +217,11 @@ public class player2move : MonoBehaviour
         if(other.gameObject.tag=="player1skill1")
         {
             print(other.gameObject.name);
-            if(hp>=400)
+            if(hp>=600)
             {
-                hp-=400f;
+                hp-=600f;
             }
-            if(hp<400)
+            if(hp<600)
             {
                 hp=0;
             }
