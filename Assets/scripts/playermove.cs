@@ -6,10 +6,11 @@ using Photon.Pun.Demo.PunBasics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 public class playermove : MonoBehaviour
 {
-    [SerializeField] float speed=5f;
+    [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 10f;
     private Rigidbody2D rb;
     private Animator anim;
@@ -19,7 +20,7 @@ public class playermove : MonoBehaviour
     public float maxhp;
     public GameObject player1hp;
     public GameObject playerBoom;
-    public float mp;
+    public static float mp;
     public float maxmp;
     public GameObject player1mp;
     public Transform player1skill1;
@@ -27,9 +28,9 @@ public class playermove : MonoBehaviour
     public Transform player1skill1up;
     public Transform player1skill1mid;
 
-    public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
+    public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
-    public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
+
     private Color originalColor;
     public playermove playermpnew;
 
@@ -38,36 +39,38 @@ public class playermove : MonoBehaviour
     public Image player1skill1shader;
 
     private float skill1cooldown;
-    private float defensecooldown;
+    private float skill2cooldown;
 
     private bool isDefending = false; // 是否处于防御状态
     private bool canMove = true; // 是否可以移动
+    private float defensecooldown;
+    public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim= GetComponent<Animator>();
-        sprite= GetComponent<SpriteRenderer>();
-        extrajump=2;
-        maxhp=10000;
-        hp=0.97f*maxhp;
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+        extrajump = 2;
+        maxhp = 10000;
+        hp = 0.97f * maxhp;
         maxmp = 25;
         mp = 0;
         originalColor = sprite.color;
     }
 
-    IEnumerator FollowPlayer2D(Transform ball2D) 
+    IEnumerator FollowPlayer2D(Transform ball2D)
     {
         float existTime = 0.2f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
-        while (existTime > 0) 
+        while (existTime > 0)
         {
-            if (ball2D == null) 
+            if (ball2D == null)
             {
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (0.27f-existTime)/0.2f;
+            float scale = (0.27f - existTime) / 0.2f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -113,7 +116,7 @@ public class playermove : MonoBehaviour
         GenerateBall2Dbig();
     }
 
-    void GenerateBall2D() 
+    void GenerateBall2D()
     {
         if (skillCount < 4) // 检查技能生成次数是否小于七次
         {
@@ -121,9 +124,9 @@ public class playermove : MonoBehaviour
 
             Transform ball2D = Instantiate(player1skill1mid, transform.position, Quaternion.identity);
             player1skill1mid fireball = ball2D.GetComponent<player1skill1mid>() as player1skill1mid;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2Ddown());
@@ -137,14 +140,14 @@ public class playermove : MonoBehaviour
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
             player1skill1down fireball = ball2D.GetComponent<player1skill1down>() as player1skill1down;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2Dup());
         }
-    } 
+    }
 
     void GenerateBall2Dup()
     {
@@ -153,17 +156,17 @@ public class playermove : MonoBehaviour
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
             player1skill1up fireball = ball2D.GetComponent<player1skill1up>() as player1skill1up;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2D());
         }
-    } 
+    }
 
     //big skill
-    void GenerateBall2Dbig() 
+    void GenerateBall2Dbig()
     {
         if (skillCountbig < 7) // 检查技能生成次数是否小于七次
         {
@@ -171,9 +174,9 @@ public class playermove : MonoBehaviour
 
             Transform ball2D = Instantiate(player1skill1, transform.position, Quaternion.identity);
             player1skill1 fireball = ball2D.GetComponent<player1skill1>() as player1skill1;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2Ddownbig());
@@ -187,14 +190,14 @@ public class playermove : MonoBehaviour
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
             player1skill1down fireball = ball2D.GetComponent<player1skill1down>() as player1skill1down;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2Dupbig());
         }
-    } 
+    }
 
     void GenerateBall2Dupbig()
     {
@@ -203,20 +206,20 @@ public class playermove : MonoBehaviour
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
             player1skill1up fireball = ball2D.GetComponent<player1skill1up>() as player1skill1up;
-            if(!sprite.flipX)
+            if (!sprite.flipX)
             {
-                fireball.isright=false;
+                fireball.isright = false;
             }
             StartCoroutine(FollowPlayer2D(ball2D));
             StartCoroutine(DelayedGenerateBall2Dbig());
         }
-    } 
+    }
 
     // Update is called once per frame
     void Update()
     {
-        float percent=(float)hp/(float)maxhp;
-        player1hp.transform.localScale=new Vector3(percent,player1hp.transform.localScale.y,player1hp.transform.localScale.z);
+        float percent = (float)hp / (float)maxhp;
+        player1hp.transform.localScale = new Vector3(percent, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
         float percentmp = (float)mp / (float)maxmp;
         player1mp.transform.localScale = new Vector3(percentmp, player1mp.transform.localScale.y, player1mp.transform.localScale.z);
         if (canMove && !isDefending)
@@ -245,18 +248,23 @@ public class playermove : MonoBehaviour
                 }
                 //anim.SetBool("jump",true);
             }
-            // if(Input.GetKeyDown(KeyCode.Keypad8))
-            // {
-            //     if(sprite.flipX==false)
-            //     {
-            //         transform.Translate(speed*15*Time.deltaTime,0,0);
-            //     }
-            //     else
-            //     {
-            //         transform.Translate(-speed*15*Time.deltaTime,0,0);
-            //     }
-            // }
-            if (Input.GetKeyDown(KeyCode.Keypad8))
+
+            if (Input.GetKeyDown(KeyCode.Keypad7) && skill1cooldown == 0)
+            {
+                skillCount = 0;
+                GenerateBall2D();
+                if (mp >= 20f && mp < 24f)
+                {
+                    mp = 24f;
+                }
+                if (mp < 20)
+                {
+                    mp += 4f;
+                }
+                skill1cooldown = 3;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Keypad8) && skill2cooldown == 0)
             {
                 if (sprite.flipX == false)
                 {
@@ -268,53 +276,22 @@ public class playermove : MonoBehaviour
                     //transform.Translate(-speed*15*Time.deltaTime,0,0);
                     rb.AddForce(Vector2.left * jumpForce, ForceMode2D.Impulse);
                 }
-            }
-            if (hp <= 0)
-            {
-                hp = 0;
-            }
-            if (hp < 9800)
-            {
-                hp += Time.deltaTime;
+                if (mp >= 20f && mp < 24f)
+                {
+                    mp = 24f;
+                }
+                if (mp < 20)
+                {
+                    mp += 4f;
+                }
+                skill2cooldown = 4;
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad7) && (skill1cooldown == 0))
-            {
-                skillCount = 0;
-                GenerateBall2D();
-                if (mp >= 9.4f && mp < 24f)
-                {
-                    mp = 9.7f;
-                }
-                if (mp < 9.4)
-                {
-                    mp += 0.5f;
-                }
-                skill1cooldown = 3;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Keypad9))
+            if (Input.GetKeyDown(KeyCode.Keypad9) && mp == 24)
             {
                 skillCountbig = 0;
                 GenerateBall2Dbig();
                 mp = 0;
-            }
-            
-            if (skill1cooldown > 0)
-            {
-                skill1cooldown -= Time.deltaTime;
-                if (skill1cooldown < 0)
-                {
-                    skill1cooldown = 0;
-                }
-            }
-            if (defensecooldown > 0)
-            {
-                defensecooldown -= Time.deltaTime;
-                if (defensecooldown < 0)
-                {
-                    defensecooldown = 0;
-                }
             }
         }
 
@@ -324,8 +301,17 @@ public class playermove : MonoBehaviour
             isDefending = true;
             canMove = false; // 禁止移动
             sprite.color = defenseColor;
-            StartCoroutine(ResetColorAndMovementAfterDelay());
+            StartCoroutine(ResetColorAfterDelay2());
             defensecooldown = 5;
+        }
+
+        if (mp <= 0)
+        {
+            mp = 0;
+        }
+        if (mp >= 24)
+        {
+            mp = 24;
         }
 
         if (hp <= 0)
@@ -337,15 +323,22 @@ public class playermove : MonoBehaviour
             hp += Time.deltaTime;
         }
 
-        if (skill1cooldown>0)
+        if (skill1cooldown > 0)
         {
-            skill1cooldown-=Time.deltaTime;
-            if(skill1cooldown<0)
+            skill1cooldown -= Time.deltaTime;
+            if (skill1cooldown < 0)
             {
-                skill1cooldown=0;
+                skill1cooldown = 0;
             }
         }
-
+        if (skill2cooldown > 0)
+        {
+            skill2cooldown -= Time.deltaTime;
+            if (skill2cooldown < 0)
+            {
+                skill2cooldown = 0;
+            }
+        }
         if (defensecooldown > 0)
         {
             defensecooldown -= Time.deltaTime;
@@ -354,6 +347,7 @@ public class playermove : MonoBehaviour
                 defensecooldown = 0;
             }
         }
+
     }
 
     IEnumerator ResetColorAfterDelay()//碰撞完等多久回色
@@ -364,7 +358,7 @@ public class playermove : MonoBehaviour
         sprite.color = originalColor;
     }
 
-    IEnumerator ResetColorAndMovementAfterDelay()//碰撞完等多久回色
+    IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
     {
         yield return new WaitForSeconds(1f); // 等待一秒
 
@@ -378,33 +372,28 @@ public class playermove : MonoBehaviour
         sprite.color = originalColor;
     }
 
-    void OnCollisionEnter2D(Collision2D coll) 
+    void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.gameObject.tag=="ground")
+        if (coll.gameObject.tag == "ground")
         {
-            extrajump=2;
-        }     
+            extrajump = 2;
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "player2skill")
         {
-            if (sprite.color != originalColor)
-            {
-                hp -= 0;
-                Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAndMovementAfterDelay());
-            }
-            else
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
                 print(other.gameObject.name);
-                if (hp >= 600)
+                if (hp >= 800)
                 {
-                    hp -= 600;
+                    hp -= 800;
                 }
-                if (hp < 600)
+                if (hp < 800)
                 {
                     hp = 0;
                 }
@@ -418,16 +407,11 @@ public class playermove : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
-        if(other.gameObject.tag=="player2skill3")
+        if (other.gameObject.tag == "player2skill3")
         {
-            if (sprite.color != originalColor)
-            {
-                hp -= 0;
-                Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAndMovementAfterDelay());
-            }
-            else
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
                 if (hp >= 4000)
                 {
@@ -435,19 +419,13 @@ public class playermove : MonoBehaviour
                 }
                 if (hp < 4000)
                 {
-                    if (hp >= 0.6)
-                    {
-                        hp -= 1;
-                    }
-                    if (hp < 0.6)
-                    {
-                        hp = 0;
-                    }
-                    if (hp == 0)
-                    {
-                        player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
-                        playerdie();
-                    }
+                    hp = 0;
+
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
                     Destroy(other.gameObject);
                     sprite.color = damageColor;
                     StartCoroutine(ResetColorAfterDelay());
@@ -464,13 +442,13 @@ public class playermove : MonoBehaviour
 
     void flip(float dirx)
     {
-        if(dirx>0f)
+        if (dirx > 0f)
         {
-            sprite.flipX=false;
+            sprite.flipX = false;
         }
-        else if(dirx<0f)
+        else if (dirx < 0f)
         {
-            sprite.flipX=true;
+            sprite.flipX = true;
         }
     }
 }

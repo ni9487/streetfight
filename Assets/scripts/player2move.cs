@@ -6,10 +6,11 @@ using Photon.Pun.Demo.PunBasics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using static System.Net.Mime.MediaTypeNames;
 
 public class player2move : MonoBehaviour
 {
-    [SerializeField] float speed=5f;
+    [SerializeField] float speed = 5f;
     [SerializeField] float jumpForce = 10f;
     private Rigidbody2D rb;
     private Animator anim;
@@ -24,7 +25,7 @@ public class player2move : MonoBehaviour
     public GameObject player2mp;
     public GameObject playerBoom;
 
-    public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
+    public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
     private Color originalColor;
@@ -33,6 +34,7 @@ public class player2move : MonoBehaviour
     public Image player2skill2shader;
 
     private float skill2cooldown;
+    private float skill1cooldown;
     private float defensecooldown;
 
     private bool isDefending = false; // 是否处于防御状态
@@ -46,32 +48,32 @@ public class player2move : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim= GetComponent<Animator>();
-        sprite= GetComponent<SpriteRenderer>();
-        extrajump=2;
-        maxmp=10;
-        mp= 9;
-        maxhp=10000;
-        hp=0.97f*maxhp;
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+        extrajump = 2;
+        maxmp = 25;
+        mp = 0;
+        maxhp = 10000;
+        hp = 0.97f * maxhp;
         originalColor = sprite.color;
     }
 
-    IEnumerator FollowPlayer2D(Transform ball2D) 
+    IEnumerator FollowPlayer2D(Transform ball2D)
     {
         float existTime = 5.0f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
-        while (existTime > 0) 
+        while (existTime > 0)
         {
-            if (ball2D == null) 
+            if (ball2D == null)
             {
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
-            ball2D.position = Vector2.MoveTowards(ball2D.position, player1.position, Time.deltaTime * speed*0.5f);
+            ball2D.position = Vector2.MoveTowards(ball2D.position, player1.position, Time.deltaTime * speed * 0.5f);
 
             //ball2D.position = Vector2.MoveTowards(ball2D.position, player12.position, Time.deltaTime * speed*0.5f);
 
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (7.0f-existTime)/5.0f;
+            float scale = (7.0f - existTime) / 5.0f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -80,7 +82,7 @@ public class player2move : MonoBehaviour
         Destroy(ball2D.gameObject);
     }
 
-    void GenerateBall2D() 
+    void GenerateBall2D()
     {
         Transform ball2D = Instantiate(lily3, transform.position, Quaternion.identity);
         StartCoroutine(FollowPlayer2D(ball2D));
@@ -89,10 +91,10 @@ public class player2move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float percent=(float)mp/(float)maxmp;
-        player2mp.transform.localScale=new Vector3(percent,player2mp.transform.localScale.y,player2mp.transform.localScale.z);
-        float percenthp=(float)hp/(float)maxhp;
-        player2hp.transform.localScale=new Vector3(percenthp,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
+        float percent = (float)mp / (float)maxmp;
+        player2mp.transform.localScale = new Vector3(percent, player2mp.transform.localScale.y, player2mp.transform.localScale.z);
+        float percenthp = (float)hp / (float)maxhp;
+        player2hp.transform.localScale = new Vector3(percenthp, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
         if (canMove && !isDefending)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
@@ -130,57 +132,42 @@ public class player2move : MonoBehaviour
                     {
                         fireball.isright = false;
                     }
-                    if (mp >= 8.2f && mp < 9.7f)
+                    if (mp >= 20 && mp < 24)
                     {
-                        mp = 9.7f;
+                        mp = 24;
                     }
-                    if (mp < 8.7)
+                    if (mp < 20)
                     {
-                        mp += 1.5f;
+                        mp += 4;
                     }
                     skill2cooldown = 3;
                 }
             }
-            if (skill2cooldown > 0)
-            {
-                skill2cooldown -= Time.deltaTime;
-                if (skill2cooldown < 0)
-                {
-                    skill2cooldown = 0;
-                }
-            }
 
-            if (defensecooldown > 0)
+            if (Input.GetKeyDown(KeyCode.Keypad2))
             {
-                defensecooldown -= Time.deltaTime;
-                if (defensecooldown < 0)
+                if (skill1cooldown == 0)
                 {
-                    defensecooldown = 0;
+                    if (mp >= 20 && mp < 24)
+                    {
+                        mp = 24;
+                    }
+                    if (mp < 20)
+                    {
+                        mp += 4;
+                    }
+                    skill1cooldown = 5;
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad3))
             {
-                if (mp >= 9.7f)
+                if (mp >= 24f)
                 {
                     // 生成圆球
                     GenerateBall2D();
                     mp = 0;
                 }
-            }
-
-            if (mp <= 0)
-            {
-                mp = 0;
-            }
-
-            if (hp <= 0)
-            {
-                hp = 0;
-            }
-            if (hp < 9800)
-            {
-                hp += Time.deltaTime;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
@@ -193,12 +180,21 @@ public class player2move : MonoBehaviour
             defensecooldown = 5;
         }
 
-        if(skill2cooldown>0)
+        if (skill2cooldown > 0)
         {
-            skill2cooldown-=Time.deltaTime;
-            if(skill2cooldown<0)
+            skill2cooldown -= Time.deltaTime;
+            if (skill2cooldown < 0)
             {
-                skill2cooldown=0;
+                skill2cooldown = 0;
+            }
+        }
+
+        if (skill1cooldown > 0)
+        {
+            skill1cooldown -= Time.deltaTime;
+            if (skill1cooldown < 0)
+            {
+                skill1cooldown = 0;
             }
         }
 
@@ -211,18 +207,22 @@ public class player2move : MonoBehaviour
             }
         }
 
-        if (mp<=0)
+        if (mp <= 0)
         {
-            mp=0;
+            mp = 0;
+        }
+        if (mp >= 24)
+        {
+            mp = 24;
         }
 
-        if(hp<=0)
+        if (hp <= 0)
         {
-            hp=0;
+            hp = 0;
         }
-        if(hp<9800)
+        if (hp < 9800)
         {
-            hp+=Time.deltaTime;
+            hp += Time.deltaTime;
         }
     }
 
@@ -248,37 +248,31 @@ public class player2move : MonoBehaviour
         sprite.color = originalColor;
     }
 
-    void OnCollisionEnter2D(Collision2D coll) 
+    void OnCollisionEnter2D(Collision2D coll)
     {
-        if(coll.gameObject.tag=="enemy")
+        if (coll.gameObject.tag == "enemy")
         {
             //anim.SetBool("hurt",true);
-        } 
-        if(coll.gameObject.tag=="ground")
+        }
+        if (coll.gameObject.tag == "ground")
         {
-            extrajump=2;
-        }       
+            extrajump = 2;
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other) 
-    { 
-        if(other.gameObject.tag=="player1skill1updown")
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player1skill1updown")
         {
-            if (sprite.color != originalColor)
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
-                hp -= 0;
-                Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAfterDelay2());
-            }
-            else
-            {
-                print(other.gameObject.name);
-                if (hp >= 600)
+                if (hp >= 400)
                 {
-                    hp -= 600f;
+                    hp -= 400f;
                 }
-                if (hp < 600)
+                if (hp < 400)
                 {
                     hp = 0;
                 }
@@ -292,41 +286,31 @@ public class player2move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
-        if(other.gameObject.tag=="player1skill1")
+        if (other.gameObject.tag == "player1skill1")
         {
-            if (sprite.color != originalColor)
+
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
-                hp -= 0;
+                if (hp >= 600)
+                {
+                    hp -= 600f;
+                }
+                if (hp < 600)
+                {
+                    hp = 0;
+                }
+
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
                 Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAfterDelay2());
-            }
-            else
-            {
-                if (hp >= 400)
-                {
-                    hp -= 400f;
-                }
-                if (hp < 400)
-                {
-                    print(other.gameObject.name);
-                    if (hp >= 0.3)
-                    {
-                        hp -= 0.4f;
-                    }
-                    if (hp < 0.3)
-                    {
-                        hp = 0;
-                    }
-                    if (hp == 0)
-                    {
-                        player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
-                        playerdie();
-                    }
-                    Destroy(other.gameObject);
-                    sprite.color = damageColor;
-                    StartCoroutine(ResetColorAfterDelay());
-                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+
             }
         }
     }
@@ -339,14 +323,15 @@ public class player2move : MonoBehaviour
 
     void flip(float dirx)
     {
-        if(dirx>0f)
+        if (dirx > 0f)
         {
-            sprite.flipX=false;
+            sprite.flipX = false;
         }
-        else if(dirx<0f)
+        else if (dirx < 0f)
         {
-            sprite.flipX=true;
+            sprite.flipX = true;
         }
     }
 }
+
 
