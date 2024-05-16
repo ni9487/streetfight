@@ -33,6 +33,7 @@ public class player2move : MonoBehaviour
     public Image player2skill2shader;
 
     private float skill2cooldown;
+    private float skill1cooldown;
     private float defensecooldown;
 
     private bool isDefending = false; // 是否处于防御状态
@@ -49,8 +50,8 @@ public class player2move : MonoBehaviour
         anim= GetComponent<Animator>();
         sprite= GetComponent<SpriteRenderer>();
         extrajump=2;
-        maxmp=10;
-        mp= 9;
+        maxmp=25;
+        mp= 0;
         maxhp=10000;
         hp=0.97f*maxhp;
         originalColor = sprite.color;
@@ -130,57 +131,42 @@ public class player2move : MonoBehaviour
                     {
                         fireball.isright = false;
                     }
-                    if (mp >= 8.2f && mp < 9.7f)
+                    if (mp >= 20 && mp < 24)
                     {
-                        mp = 9.7f;
+                        mp = 24;
                     }
-                    if (mp < 8.7)
+                    if (mp < 20)
                     {
-                        mp += 1.5f;
+                        mp += 4;
                     }
                     skill2cooldown = 3;
                 }
             }
-            if (skill2cooldown > 0)
-            {
-                skill2cooldown -= Time.deltaTime;
-                if (skill2cooldown < 0)
-                {
-                    skill2cooldown = 0;
-                }
-            }
 
-            if (defensecooldown > 0)
+            if (Input.GetKeyDown(KeyCode.Keypad2))
             {
-                defensecooldown -= Time.deltaTime;
-                if (defensecooldown < 0)
+                if (skill1cooldown == 0)
                 {
-                    defensecooldown = 0;
+                    if (mp >= 20 && mp < 24)
+                    {
+                        mp = 24;
+                    }
+                    if (mp < 20)
+                    {
+                        mp += 4;
+                    }
+                    skill1cooldown = 5;
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad3))
             {
-                if (mp >= 9.7f)
+                if (mp >= 24f)
                 {
                     // 生成圆球
                     GenerateBall2D();
                     mp = 0;
                 }
-            }
-
-            if (mp <= 0)
-            {
-                mp = 0;
-            }
-
-            if (hp <= 0)
-            {
-                hp = 0;
-            }
-            if (hp < 9800)
-            {
-                hp += Time.deltaTime;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
@@ -202,6 +188,15 @@ public class player2move : MonoBehaviour
             }
         }
 
+        if(skill1cooldown>0)
+        {
+            skill1cooldown-=Time.deltaTime;
+            if(skill1cooldown<0)
+            {
+                skill1cooldown=0;
+            }
+        }
+
         if (defensecooldown > 0)
         {
             defensecooldown -= Time.deltaTime;
@@ -214,6 +209,10 @@ public class player2move : MonoBehaviour
         if (mp<=0)
         {
             mp=0;
+        }
+        if(mp>=24)
+        {
+            mp=24;
         }
 
         if(hp<=0)
@@ -264,27 +263,15 @@ public class player2move : MonoBehaviour
     { 
         if(other.gameObject.tag=="player1skill1updown")
         {
-            print(other.gameObject.name);
-            if(hp>=400)
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
-                hp-=400f;
-            }
-            if(hp<400)
-            if (sprite.color != originalColor)
-            {
-                hp -= 0;
-                Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAfterDelay2());
-            }
-            else
-            {
-                print(other.gameObject.name);
-                if (hp >= 600)
+                if (hp >= 400)
                 {
-                    hp -= 600f;
+                    hp -= 400f;
                 }
-                if (hp < 600)
+                if (hp < 400)
                 {
                     hp = 0;
                 }
@@ -300,45 +287,29 @@ public class player2move : MonoBehaviour
         }
         if(other.gameObject.tag=="player1skill1")
         {
-            print(other.gameObject.name);
-            if(hp>=600)
+
+            Destroy(other.gameObject);
+
+            if (sprite.color == originalColor)
             {
-                hp-=600f;
-            }
-            if(hp<600)
-            if (sprite.color != originalColor)
-            {
-                hp -= 0;
+                if (hp >= 600)
+                {
+                    hp -= 600f;
+                }
+                if (hp < 600)
+                {
+                    hp=0;
+                }
+                    
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
                 Destroy(other.gameObject);
-                sprite.color = defenseColor;
-                StartCoroutine(ResetColorAfterDelay2());
-            }
-            else
-            {
-                if (hp >= 400)
-                {
-                    hp -= 400f;
-                }
-                if (hp < 400)
-                {
-                    print(other.gameObject.name);
-                    if (hp >= 0.3)
-                    {
-                        hp -= 0.4f;
-                    }
-                    if (hp < 0.3)
-                    {
-                        hp = 0;
-                    }
-                    if (hp == 0)
-                    {
-                        player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
-                        playerdie();
-                    }
-                    Destroy(other.gameObject);
-                    sprite.color = damageColor;
-                    StartCoroutine(ResetColorAfterDelay());
-                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                
             }
         }
     }

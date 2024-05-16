@@ -2878,6 +2878,7 @@ MonoBehaviour:
   damageColor: {r: 1, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   playermpnew: {fileID: 0}
+  defenseColor: {r: 0.42830187, g: 0.6166258, b: 1, a: 0.7058824}
 --- !u!1 &1622094027
 GameObject:
   m_ObjectHideFlags: 0
