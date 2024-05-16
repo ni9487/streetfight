@@ -27,13 +27,16 @@ public class player2move : MonoBehaviour
     public Color damageColor = new Color32(200,0,0,10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
     public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
-    public float duration2 = 1f;
     private Color originalColor;
     public player2move player2mpnew;
 
     public Image player2skill2shader;
 
     private float skill2cooldown;
+    private float defensecooldown;
+
+    private bool isDefending = false; // 是否处于防御状态
+    private bool canMove = true; // 是否可以移动
 
     //大招球
     public Transform lily3;
@@ -90,57 +93,106 @@ public class player2move : MonoBehaviour
         player2mp.transform.localScale=new Vector3(percent,player2mp.transform.localScale.y,player2mp.transform.localScale.z);
         float percenthp=(float)hp/(float)maxhp;
         player2hp.transform.localScale=new Vector3(percenthp,player2hp.transform.localScale.y,player2hp.transform.localScale.z);
-        if(Input.GetKey(KeyCode.LeftArrow))
+        if (canMove && !isDefending)
         {
-            transform.Translate(-speed*Time.deltaTime,0,0);
-            float curspeed=-speed*Time.deltaTime;
-            flip(curspeed);
-            //anim.SetBool("jump",false);
-        }
-        if(Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Translate(speed*Time.deltaTime,0,0);
-            float curspeed=speed*Time.deltaTime;
-            flip(curspeed);
-            //anim.SetBool("jump",false);
-        }
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if(extrajump>0)
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                extrajump-=1;
+                transform.Translate(-speed * Time.deltaTime, 0, 0);
+                float curspeed = -speed * Time.deltaTime;
+                flip(curspeed);
+                //anim.SetBool("jump",false);
             }
-            //anim.SetBool("jump",true);
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.Translate(speed * Time.deltaTime, 0, 0);
+                float curspeed = speed * Time.deltaTime;
+                flip(curspeed);
+                //anim.SetBool("jump",false);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if (extrajump > 0)
+                {
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    extrajump -= 1;
+                }
+                //anim.SetBool("jump",true);
+            }
+
+            //招式2
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                if (skill2cooldown == 0)
+                {
+                    GameObject skill2 = Instantiate(lily2, this.transform.position, quaternion.identity);
+                    lily2 fireball = skill2.GetComponent<lily2>() as lily2;
+                    if (!sprite.flipX)
+                    {
+                        fireball.isright = false;
+                    }
+                    if (mp >= 8.2f && mp < 9.7f)
+                    {
+                        mp = 9.7f;
+                    }
+                    if (mp < 8.7)
+                    {
+                        mp += 1.5f;
+                    }
+                    skill2cooldown = 3;
+                }
+            }
+            if (skill2cooldown > 0)
+            {
+                skill2cooldown -= Time.deltaTime;
+                if (skill2cooldown < 0)
+                {
+                    skill2cooldown = 0;
+                }
+            }
+
+            if (defensecooldown > 0)
+            {
+                defensecooldown -= Time.deltaTime;
+                if (defensecooldown < 0)
+                {
+                    defensecooldown = 0;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Keypad3))
+            {
+                if (mp >= 9.7f)
+                {
+                    // 生成圆球
+                    GenerateBall2D();
+                    mp = 0;
+                }
+            }
+
+            if (mp <= 0)
+            {
+                mp = 0;
+            }
+
+            if (hp <= 0)
+            {
+                hp = 0;
+            }
+            if (hp < 9800)
+            {
+                hp += Time.deltaTime;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
         {
+            // 角色进入防御状态
+            isDefending = true;
+            canMove = false; // 禁止移动
             sprite.color = defenseColor;
             StartCoroutine(ResetColorAfterDelay2());
+            defensecooldown = 5;
         }
 
-        //招式2
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            if(skill2cooldown==0)
-            {
-                GameObject skill2 = Instantiate(lily2,this.transform.position,quaternion.identity);
-                lily2 fireball = skill2.GetComponent<lily2>() as lily2;
-                if(!sprite.flipX)
-                {
-                    fireball.isright=false;
-                }
-                if(mp>=8.2f&&mp<9.7f)
-                {
-                    mp=9.7f;
-                }
-                if(mp<8.7)
-                { 
-                    mp+=1.5f;
-                }
-                skill2cooldown=3;
-            }
-        }
         if(skill2cooldown>0)
         {
             skill2cooldown-=Time.deltaTime;
@@ -150,17 +202,16 @@ public class player2move : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad3)) 
+        if (defensecooldown > 0)
         {
-            if(mp>=9.7f)
+            defensecooldown -= Time.deltaTime;
+            if (defensecooldown < 0)
             {
-                // 生成圆球
-                GenerateBall2D();
-                mp=0;
+                defensecooldown = 0;
             }
         }
 
-        if(mp<=0)
+        if (mp<=0)
         {
             mp=0;
         }
@@ -185,8 +236,14 @@ public class player2move : MonoBehaviour
 
     IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
     {
-        // 等待一段时间
-        yield return new WaitForSeconds(duration2);
+        yield return new WaitForSeconds(1f); // 等待一秒
+
+        // 恢复移动
+        canMove = true;
+
+        // 角色离开防御状态
+        isDefending = false;
+
         // 恢复原始颜色
         sprite.color = originalColor;
     }

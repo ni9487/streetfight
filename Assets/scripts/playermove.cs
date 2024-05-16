@@ -38,6 +38,7 @@ public class playermove : MonoBehaviour
     public Image player1skill1shader;
 
     private float skill1cooldown;
+    private float defensecooldown;
 
     private bool isDefending = false; // 是否处于防御状态
     private bool canMove = true; // 是否可以移动
@@ -307,15 +308,24 @@ public class playermove : MonoBehaviour
                     skill1cooldown = 0;
                 }
             }
+            if (defensecooldown > 0)
+            {
+                defensecooldown -= Time.deltaTime;
+                if (defensecooldown < 0)
+                {
+                    defensecooldown = 0;
+                }
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动
             sprite.color = defenseColor;
             StartCoroutine(ResetColorAndMovementAfterDelay());
+            defensecooldown = 5;
         }
 
         if (hp <= 0)
@@ -333,6 +343,15 @@ public class playermove : MonoBehaviour
             if(skill1cooldown<0)
             {
                 skill1cooldown=0;
+            }
+        }
+
+        if (defensecooldown > 0)
+        {
+            defensecooldown -= Time.deltaTime;
+            if (defensecooldown < 0)
+            {
+                defensecooldown = 0;
             }
         }
     }
