@@ -114,6 +114,13 @@ public class playermove : MonoBehaviour
         GenerateBall2Dbig();
     }
 
+    //press 8
+    IEnumerator Delaymove()
+    {
+        yield return new WaitForSeconds(0.25f);
+        canMove=true;
+    }
+
     void GenerateBall2D()
     {
         if (skillCount < 4) // 检查技能生成次数是否小于七次
@@ -224,14 +231,16 @@ public class playermove : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Translate(-speed * Time.deltaTime, 0, 0);
+                rb.velocity =new Vector2(-speed,rb.velocity.y);
+                //transform.Translate(-speed * Time.deltaTime, 0, 0);
                 float curspeed = -speed * Time.deltaTime;
                 flip(curspeed);
                 //anim.SetBool("jump",false);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                transform.Translate(speed * Time.deltaTime, 0, 0);
+                rb.velocity =new Vector2(speed,rb.velocity.y);
+                //transform.Translate(speed * Time.deltaTime, 0, 0);
                 float curspeed = speed * Time.deltaTime;
                 flip(curspeed);
                 //anim.SetBool("jump",false);
@@ -241,7 +250,8 @@ public class playermove : MonoBehaviour
             {
                 if (extrajump > 0)
                 {
-                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    rb.velocity =new Vector2(rb.velocity.x,jumpForce);
+                    //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                     extrajump -= 1;
                 }
                 //anim.SetBool("jump",true);
@@ -264,15 +274,18 @@ public class playermove : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.Keypad8)&&skill2cooldown==0)
             {
+                canMove=false;
                 if(sprite.flipX==false)
                 {
+                    rb.velocity=new Vector2(rb.velocity.x+jumpForce,rb.velocity.y);
                     //transform.Translate(speed*15*Time.deltaTime,0,0);
-                    rb.AddForce(Vector2.right * jumpForce, ForceMode2D.Impulse);
+                    //rb.AddForce(Vector2.right * jumpForce*6, ForceMode2D.Impulse);
                 }
                 else
                 {
+                    rb.velocity=new Vector2(rb.velocity.x-jumpForce,rb.velocity.y);
                     //transform.Translate(-speed*15*Time.deltaTime,0,0);
-                    rb.AddForce(Vector2.left * jumpForce, ForceMode2D.Impulse);
+                    //rb.AddForce(Vector2.left * jumpForce*6, ForceMode2D.Impulse);
                 }
                 if (mp >= 20f && mp < 24f)
                 {
@@ -283,6 +296,7 @@ public class playermove : MonoBehaviour
                     mp += 4f;
                 }
                 skill2cooldown = 4;
+                StartCoroutine(Delaymove());
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad9)&&mp==24)

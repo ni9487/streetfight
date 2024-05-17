@@ -98,14 +98,16 @@ public class player2move : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.Translate(-speed * Time.deltaTime, 0, 0);
+                rb.velocity =new Vector2(-speed,rb.velocity.y);
+                //transform.Translate(-speed * Time.deltaTime, 0, 0);
                 float curspeed = -speed * Time.deltaTime;
                 flip(curspeed);
                 //anim.SetBool("jump",false);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.Translate(speed * Time.deltaTime, 0, 0);
+                rb.velocity =new Vector2(speed,rb.velocity.y);
+                //transform.Translate(speed * Time.deltaTime, 0, 0);
                 float curspeed = speed * Time.deltaTime;
                 flip(curspeed);
                 //anim.SetBool("jump",false);
@@ -114,7 +116,8 @@ public class player2move : MonoBehaviour
             {
                 if (extrajump > 0)
                 {
-                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                    rb.velocity =new Vector2(rb.velocity.x,jumpForce);
+                    //rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                     extrajump -= 1;
                 }
                 //anim.SetBool("jump",true);
