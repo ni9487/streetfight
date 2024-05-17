@@ -54,7 +54,7 @@ public class player2move : MonoBehaviour
         maxmp = 25;
         mp = 0;
         maxhp = 10000;
-        hp = 0.97f * maxhp;\
+        hp = 0.97f * maxhp;
         originalColor = sprite.color;
     }
 
