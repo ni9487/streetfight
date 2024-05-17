@@ -198,15 +198,6 @@ public class player2move : MonoBehaviour
             }
         }
 
-        if(skill1cooldown>0)
-        {
-            skill1cooldown-=Time.deltaTime;
-            if(skill1cooldown<0)
-            {
-                skill1cooldown=0;
-            }
-        }
-
         if (defensecooldown > 0)
         {
             defensecooldown -= Time.deltaTime;
@@ -223,10 +214,6 @@ public class player2move : MonoBehaviour
         if (mp >= 24)
         {
             mp = 24;
-        }
-        if(mp>=24)
-        {
-            mp=24;
         }
 
         if (hp <= 0)
@@ -314,7 +301,7 @@ public class player2move : MonoBehaviour
                 {
                     hp = 0;
                 }
-                    
+
                 if (hp == 0)
                 {
                     player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
@@ -323,6 +310,7 @@ public class player2move : MonoBehaviour
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+
             }
         }
     }
@@ -345,5 +333,6 @@ public class player2move : MonoBehaviour
         }
     }
 }
+
 
 
