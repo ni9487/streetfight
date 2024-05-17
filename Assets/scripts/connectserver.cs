@@ -14,6 +14,6 @@ public class connectserver : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         print("connected success");
-        SceneManager.LoadScene("pickhero");
+        SceneManager.LoadScene("lobby");
     }
 }
