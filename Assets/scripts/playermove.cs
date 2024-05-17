@@ -29,6 +29,7 @@ public class playermove : MonoBehaviour
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
+
     private Color originalColor;
     public playermove playermpnew;
 
@@ -257,22 +258,22 @@ public class playermove : MonoBehaviour
                 //anim.SetBool("jump",true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad7)&&skill1cooldown==0)
+            if (Input.GetKeyDown(KeyCode.Keypad7) && skill1cooldown == 0)
             {
-                skillCount=0;
+                skillCount = 0;
                 GenerateBall2D();
-                if(mp>=20f&&mp<24f)
+                if (mp >= 20f && mp < 24f)
                 {
-                    mp=24f;
+                    mp = 24f;
                 }
-                if(mp<20)
-                { 
-                    mp+=4f;
+                if (mp < 20)
+                {
+                    mp += 4f;
                 }
-                skill1cooldown=3;
+                skill1cooldown = 3;
             }
 
-            if(Input.GetKeyDown(KeyCode.Keypad8)&&skill2cooldown==0)
+            if (Input.GetKeyDown(KeyCode.Keypad8) && skill2cooldown == 0)
             {
                 canMove=false;
                 if(sprite.flipX==false)
@@ -299,7 +300,7 @@ public class playermove : MonoBehaviour
                 StartCoroutine(Delaymove());
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad9)&&mp==24)
+            if (Input.GetKeyDown(KeyCode.Keypad9) && mp == 24)
             {
                 skillCountbig = 0;
                 GenerateBall2Dbig();
@@ -325,14 +326,14 @@ public class playermove : MonoBehaviour
         {
             mp = 24;
         }
-        
-        if(hp<=0)
+
+        if (hp <= 0)
         {
-            hp=0;
+            hp = 0;
         }
-        if(hp<9800)
+        if (hp < 9800)
         {
-            hp+=Time.deltaTime;
+            hp += Time.deltaTime;
         }
 
         if (skill1cooldown > 0)
@@ -343,12 +344,12 @@ public class playermove : MonoBehaviour
                 skill1cooldown = 0;
             }
         }
-        if(skill2cooldown>0)
+        if (skill2cooldown > 0)
         {
-            skill2cooldown-=Time.deltaTime;
-            if(skill2cooldown<0)
+            skill2cooldown -= Time.deltaTime;
+            if (skill2cooldown < 0)
             {
-                skill2cooldown=0;
+                skill2cooldown = 0;
             }
         }
         if (defensecooldown > 0)
@@ -359,6 +360,7 @@ public class playermove : MonoBehaviour
                 defensecooldown = 0;
             }
         }
+
     }
 
     IEnumerator ResetColorAfterDelay()//碰撞完等多久回色
@@ -396,6 +398,7 @@ public class playermove : MonoBehaviour
         if (other.gameObject.tag == "player2skill")
         {
             Destroy(other.gameObject);
+
             if (sprite.color == originalColor)
             {
                 print(other.gameObject.name);
@@ -432,7 +435,7 @@ public class playermove : MonoBehaviour
                     hp = 0;
 
                 }
-                if(hp==0)
+                if (hp == 0)
                 {
                     player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
                     playerdie();
@@ -462,3 +465,4 @@ public class playermove : MonoBehaviour
         }
     }
 }
+
