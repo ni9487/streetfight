@@ -6,7 +6,6 @@ using Photon.Pun.Demo.PunBasics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using static System.Net.Mime.MediaTypeNames;
 
 public class player2move : MonoBehaviour
 {
@@ -277,8 +276,6 @@ public class player2move : MonoBehaviour
     {
         if (other.gameObject.tag == "player1skill1updown")
         {
-            Destroy(other.gameObject);
-
             if (sprite.color == originalColor)
             {
                 if (hp >= 400)
@@ -294,16 +291,16 @@ public class player2move : MonoBehaviour
                     player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
                     playerdie();
                 }
-                Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+            }
+            else
+            {
+                Destroy(other.gameObject);
             }
         }
         if (other.gameObject.tag == "player1skill1")
         {
-
-            Destroy(other.gameObject);
-
             if (sprite.color == originalColor)
             {
                 if (hp >= 600)
@@ -320,9 +317,13 @@ public class player2move : MonoBehaviour
                     player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
                     playerdie();
                 }
-                Destroy(other.gameObject);
+                
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+            }
+            else
+            {
+                Destroy(other.gameObject);
             }
         }
     }

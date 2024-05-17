@@ -6,7 +6,6 @@ using Photon.Pun.Demo.PunBasics;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using static System.Net.Mime.MediaTypeNames;
 
 public class playermove : MonoBehaviour
 {
