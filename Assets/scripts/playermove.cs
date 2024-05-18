@@ -49,6 +49,12 @@ public class playermove : MonoBehaviour
     public GameObject targetPrefab;  // Assign the Target prefab in inspector
     public Transform lilyPrefab;    // Assign the Lily1 prefab in inspector
 
+    public bool dizzy;
+    public GameObject dizzcirclePrefab;
+
+    public bool isDashing = false; // 表示是否正在冲刺
+    public Collider2D dashTrigger;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -60,6 +66,7 @@ public class playermove : MonoBehaviour
         maxmp = 25;
         mp = 0;
         originalColor = sprite.color;
+        dashTrigger.enabled = false;
     }
 
     //sword qi
@@ -152,6 +159,8 @@ public class playermove : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         canMove=true;
+        isDashing = false;
+        dashTrigger.enabled=false;
     }
 
     //press 2
@@ -300,7 +309,7 @@ public class playermove : MonoBehaviour
         player1hp.transform.localScale = new Vector3(percent, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
         float percentmp = (float)mp / (float)maxmp;
         player1mp.transform.localScale = new Vector3(percentmp, player1mp.transform.localScale.y, player1mp.transform.localScale.z);
-        if (canMove && !isDefending)
+        if (canMove && !isDefending&&!dizzy)
         {
             if (Input.GetKey(KeyCode.A))
             {
@@ -347,6 +356,8 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Keypad8) && skill2cooldown == 0)
             {
+                isDashing = true;
+                dashTrigger.enabled=true;
                 canMove=false;
                 if(sprite.flipX==false)
                 {
@@ -460,6 +471,13 @@ public class playermove : MonoBehaviour
         sprite.color = originalColor;
     }
 
+    IEnumerator dizzdelay()
+    {
+        // 等待一段时间
+        yield return new WaitForSeconds(0.7f);
+        dizzy=false;
+    }
+
     IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
     {
         yield return new WaitForSeconds(1f); // 等待一秒
@@ -472,6 +490,29 @@ public class playermove : MonoBehaviour
 
         // 恢复原始颜色
         sprite.color = originalColor;
+        
+    }
+
+    IEnumerator DizzcircleRoutine(GameObject dizzcircle)
+    {
+        float existTime = 1.0f;
+        Vector3 offset = new Vector3(0, 50f, 0);
+        while (existTime > 0)
+        {
+            if (dizzcircle == null)
+            {
+                yield break; // 如果 dizzcircle 已经被销毁，则退出协程
+            }
+
+            // 让 dizzcircle 跟随目标
+            dizzcircle.transform.position = transform.position+offset;
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 1 秒后销毁 dizzcircle
+        Destroy(dizzcircle);
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -482,7 +523,7 @@ public class playermove : MonoBehaviour
         }
         if (coll.gameObject.tag == "player2skill1")
         {
-            if (sprite.color == originalColor)
+            if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
                 if (hp >= 800)
@@ -508,10 +549,16 @@ public class playermove : MonoBehaviour
     {
         if (other.gameObject.tag == "player2skill")
         {
-            Destroy(other.gameObject);
-
-            if (sprite.color == originalColor)
+            if (sprite.color == originalColor||sprite.color == damageColor)
             {
+                dizzy=true;
+                Destroy(other.gameObject);
+
+                Vector3 dizzposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
+                GameObject dizzcircle = Instantiate(dizzcirclePrefab, dizzposition, Quaternion.identity);
+            
+                // 开始一个协程，控制 dizzcircle 在 1 秒后消失，并让它跟随 player1
+                StartCoroutine(DizzcircleRoutine(dizzcircle));
                 print(other.gameObject.name);
                 if (hp >= 800)
                 {
@@ -529,30 +576,29 @@ public class playermove : MonoBehaviour
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(dizzdelay());
             }
         }
         
         if (other.gameObject.tag == "player2skill3")
         {
-            if (sprite.color == originalColor)
+            print(other.gameObject.name);
+            if (hp >= 3500)
             {
-                print(other.gameObject.name);
-                if (hp >= 4000)
-                {
-                    hp -= 4000;
-                }
-                if (hp < 4000)
-                {
-                    hp = 0;
-                }
-                if (hp == 0)
-                {
-                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
-                    playerdie();
-                }
-                sprite.color = damageColor;
-                StartCoroutine(ResetColorAfterDelay());
+                hp -= 3500;
             }
+            if (hp < 3500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+            
             Destroy(other.gameObject);
         }
     }
