@@ -33,7 +33,7 @@ public class player2move : MonoBehaviour
     public Image player2skill2shader;
 
     private float skill2cooldown;
-    private float skill1cooldown;
+    public static float skill1cooldown=0;
     private float defensecooldown;
 
     private bool isDefending = false; // 是否处于防御状态
@@ -158,7 +158,7 @@ public class player2move : MonoBehaviour
                     {
                         mp += 4;
                     }
-                    skill1cooldown = 5;
+                    skill1cooldown = 2;
                 }
             }
 

@@ -39,11 +39,15 @@ public class playermove : MonoBehaviour
 
     private float skill1cooldown;
     private float skill2cooldown;
+    private float p2s1cooldown;
 
     private bool isDefending = false; // 是否处于防御状态
     private bool canMove = true; // 是否可以移动
     private float defensecooldown;
     public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
+
+    public GameObject targetPrefab;  // Assign the Target prefab in inspector
+    public Transform lilyPrefab;    // Assign the Lily1 prefab in inspector
 
     void Start()
     {
@@ -58,6 +62,7 @@ public class playermove : MonoBehaviour
         originalColor = sprite.color;
     }
 
+    //sword qi
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
         float existTime = 0.2f; // 圆球存在的最大时间
@@ -76,6 +81,33 @@ public class playermove : MonoBehaviour
             yield return null;
         }
         Destroy(ball2D.gameObject);
+    }
+
+    //lily1
+    IEnumerator grow(Transform ball2D)
+    {
+        float existTime = 0.3f; // 圆球存在的最大时间
+        Vector3 initialScale = ball2D.localScale; // 初始大小
+        Vector3 iniposition = ball2D.localPosition;
+        float timer = 0f; 
+
+        while (existTime > 0)
+        {
+            if (ball2D == null)
+            {
+                yield break; // 如果ball2D已经被销毁，则退出协程
+            }
+            // 根据距离调整球体的大小，距离越小，球体越大
+            float scale = (0.3f - existTime) / 0.2f;
+            ball2D.localScale = initialScale * scale; // 调整大小
+            ball2D.localPosition = new Vector3(iniposition.x, iniposition.y + timer*180, iniposition.z);
+
+            existTime -= Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(ball2D.gameObject);
+        
     }
 
     IEnumerator DelayedGenerateBall2Ddown()
@@ -120,6 +152,46 @@ public class playermove : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         canMove=true;
+    }
+
+    //press 2
+    IEnumerator SpawnTarget()
+    {
+        // Instantiate the target prefab at the player's position
+        
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y-17 , transform.position.z);
+        GameObject target = Instantiate(targetPrefab, targetPosition, Quaternion.identity);
+        StartCoroutine(RotateObject(target, 0.4f));
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(0.4f);
+       
+        // Destroy the target object
+        Destroy(target);
+        Vector3 lilyPosition = new Vector3(targetPosition.x, targetPosition.y-20 , targetPosition.z);
+        // Instantiate the lily prefab at the target's (player's) last position
+        Transform lily = Instantiate(lilyPrefab, lilyPosition, Quaternion.identity);
+
+        StartCoroutine(grow(lily));
+
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RotateObject(GameObject target, float duration)
+    {
+        float time = 0f;
+
+        while (time < duration)
+        {
+            // Rotate the object each frame by 90 degrees around the Z axis
+            target.transform.Rotate(new Vector3(0, 0, 90) * Time.deltaTime);
+
+            // Increment the time by the time between frames
+            time += Time.deltaTime;
+
+            // Wait for the next frame
+            yield return null;
+        }
     }
 
     void GenerateBall2D()
@@ -308,6 +380,14 @@ public class playermove : MonoBehaviour
             }
         }
 
+        //lily1
+        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0)
+        {
+            StartCoroutine(SpawnTarget());
+            p2s1cooldown=2;
+        }
+
+
         if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
             // 角色进入防御状态
@@ -361,6 +441,15 @@ public class playermove : MonoBehaviour
             }
         }
 
+        if (p2s1cooldown > 0)
+        {
+            p2s1cooldown -= Time.deltaTime;
+            if (p2s1cooldown < 0)
+            {
+                p2s1cooldown = 0;
+            }
+        }
+
     }
 
     IEnumerator ResetColorAfterDelay()//碰撞完等多久回色
@@ -391,6 +480,28 @@ public class playermove : MonoBehaviour
         {
             extrajump = 2;
         }
+        if (coll.gameObject.tag == "player2skill1")
+        {
+            if (sprite.color == originalColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -420,12 +531,12 @@ public class playermove : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
+        
         if (other.gameObject.tag == "player2skill3")
         {
-            Destroy(other.gameObject);
-
             if (sprite.color == originalColor)
             {
+                print(other.gameObject.name);
                 if (hp >= 4000)
                 {
                     hp -= 4000;
@@ -433,17 +544,16 @@ public class playermove : MonoBehaviour
                 if (hp < 4000)
                 {
                     hp = 0;
-
                 }
                 if (hp == 0)
                 {
                     player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
                     playerdie();
-                    Destroy(other.gameObject);
-                    sprite.color = damageColor;
-                    StartCoroutine(ResetColorAfterDelay());
                 }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
             }
+            Destroy(other.gameObject);
         }
     }
 

@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1953ba65c1b254d4dbbafb6c8f54e838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShaker: {fileID: 0}
 --- !u!58 &4853870716331475745
 CircleCollider2D:
   m_ObjectHideFlags: 0
