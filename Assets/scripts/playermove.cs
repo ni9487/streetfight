@@ -530,7 +530,7 @@ public class playermove : MonoBehaviour
                 {
                     hp -= 800;
                 }
-                if (hp < 800)
+                else if (hp < 800)
                 {
                     hp = 0;
                 }
@@ -564,7 +564,7 @@ public class playermove : MonoBehaviour
                 {
                     hp -= 800;
                 }
-                if (hp < 800)
+                else if (hp < 800)
                 {
                     hp = 0;
                 }
@@ -582,12 +582,13 @@ public class playermove : MonoBehaviour
         
         if (other.gameObject.tag == "player2skill3")
         {
+            Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 3500)
             {
                 hp -= 3500;
             }
-            if (hp < 3500)
+            else if (hp < 3500)
             {
                 hp = 0;
             }

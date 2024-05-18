@@ -310,7 +310,7 @@ public class player2move : MonoBehaviour
                 {
                     hp -= 400f;
                 }
-                if (hp < 400)
+                else if (hp < 400)
                 {
                     hp = 0;
                 }
@@ -335,7 +335,7 @@ public class player2move : MonoBehaviour
                 {
                     hp -= 400f;
                 }
-                if (hp < 400)
+                else if (hp < 400)
                 {
                     hp = 0;
                 }
@@ -361,7 +361,7 @@ public class player2move : MonoBehaviour
             {
                 hp -= 600f;
             }
-            if (hp < 600)
+            else if (hp < 600)
             {
                 hp = 0;
             }
