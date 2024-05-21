@@ -47,6 +47,19 @@ public class lobbymanager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void onclickjoinroom()
+    {
+        string roomname=getroomname();
+        if(roomname.Length>0)
+        {
+            PhotonNetwork.JoinRoom(roomname);
+        }
+        else
+        {
+            print("invalid roomname");
+        }
+    }
+
     public override void OnJoinedRoom()
     {
         print("room joined");
@@ -55,10 +68,14 @@ public class lobbymanager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        print("update");
         StringBuilder sb=new StringBuilder();
         foreach(RoomInfo roominfo in roomList)
         {
-            sb.AppendLine("→ "+ roominfo.Name);
+            if(roominfo.PlayerCount>0)
+            {
+                sb.AppendLine("→ "+ roominfo.Name );
+            }
         }
         textroomlist.text = sb.ToString();
     }
