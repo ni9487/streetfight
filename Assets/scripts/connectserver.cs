@@ -9,6 +9,7 @@ public class connectserver : MonoBehaviourPunCallbacks
     public void onclickstart()
     {
         PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.AutomaticallySyncScene=true;
         print("success");
     }
     public override void OnConnectedToMaster()

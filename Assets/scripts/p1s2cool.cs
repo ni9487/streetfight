@@ -10,7 +10,7 @@ public class p1s2cool : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.Keypad8)&&numberText.text == "")
+        if (Input.GetKeyDown(KeyCode.Y)&&numberText.text == "")
         {
             numberText.text = "4";
             StartCoroutine(CountdownRoutine());

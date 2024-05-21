@@ -339,7 +339,7 @@ public class playermove : MonoBehaviour
                 //anim.SetBool("jump",true);
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad7) && skill1cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
             {
                 skillCount = 0;
                 GenerateBall2D();
@@ -354,7 +354,7 @@ public class playermove : MonoBehaviour
                 skill1cooldown = 3;
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad8) && skill2cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
             {
                 isDashing = true;
                 dashTrigger.enabled=true;
@@ -383,7 +383,7 @@ public class playermove : MonoBehaviour
                 StartCoroutine(Delaymove());
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad9) && mp == 24)
+            if (Input.GetKeyDown(KeyCode.U) && mp == 24)
             {
                 skillCountbig = 0;
                 GenerateBall2Dbig();

@@ -9,7 +9,7 @@ public class p1s2darken : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.Keypad8)&&targetImage.color == Color.white)
+        if (Input.GetKeyDown(KeyCode.Y)&&targetImage.color == Color.white)
         {
             StartCoroutine(DarkenImageCoroutine());
         }
