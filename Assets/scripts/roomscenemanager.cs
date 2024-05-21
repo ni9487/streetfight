@@ -15,7 +15,7 @@ public class roomscenemanager : MonoBehaviourPunCallbacks
     {
         if(PhotonNetwork.CurrentRoom == null)
         {
-        SceneManager. LoadScene ("LobbyScene");
+            SceneManager. LoadScene ("LobbyScene");
         }
         else
         {
@@ -35,9 +35,11 @@ public class roomscenemanager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newplayer)
     {
         UpdatePlayerList();
+        Debug.Log("Player entered: " + newplayer.NickName); 
     }
-    public override void OnPlayerLeftRoom(Player newplayer)
+    public override void OnPlayerLeftRoom(Player otherplayer)
     {
         UpdatePlayerList();
+        Debug.Log("Player left: " + otherplayer.NickName); 
     }
 }

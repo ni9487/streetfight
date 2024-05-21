@@ -10,6 +10,7 @@ using System.Text;
 public class lobbymanager : MonoBehaviourPunCallbacks
 {
     [SerializeField] InputField inputroomname;
+    [SerializeField] InputField inputplayername;
     [SerializeField] Text textroomlist;
     // Start is called before the first frame update
     void Start()
@@ -34,12 +35,20 @@ public class lobbymanager : MonoBehaviourPunCallbacks
         return roomname.Trim();
     }
 
+    public string getplayername()
+    {
+        string playername = inputplayername.text;
+        return playername.Trim();
+    }
+
     public void onclickcreateroom()
     {
         string roomname=getroomname();
-        if(roomname.Length>0)
+        string playername=getplayername();
+        if(roomname.Length>0&&playername.Length>0)
         {
             PhotonNetwork.CreateRoom(roomname);
+            PhotonNetwork.LocalPlayer.NickName=playername;
         }
         else
         {
@@ -50,9 +59,11 @@ public class lobbymanager : MonoBehaviourPunCallbacks
     public void onclickjoinroom()
     {
         string roomname=getroomname();
-        if(roomname.Length>0)
+        string playername=getplayername();
+        if(roomname.Length>0&&playername.Length>0)
         {
             PhotonNetwork.JoinRoom(roomname);
+            PhotonNetwork.LocalPlayer.NickName=playername;
         }
         else
         {
