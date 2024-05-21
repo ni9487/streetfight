@@ -8,16 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/pickhero.unity
     guid: dd2c1ad2349225a42b9081c2ae28533c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/startscene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/lobby.unity
     guid: d347ed6ab4a0dfe4dbe723d31d5ba91a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/connectscene.unity
     guid: 98fc35ff42f17a2419ee097fc6cc7f45
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/roomscene.unity
-    guid: d6b0a93dbee693e449ca8c4f7fde050b
+    guid: d9b0633b49981bb4ca4a922d12fca4e4
+  - enabled: 0
+    path: Assets/Scenes/Choose.unity
+    guid: 3dc219c81c863c444a69d16c1f0b06d5
+  - enabled: 1
+    path: Assets/Scenes/st.unity
+    guid: 8360c976243fa31409ed2dab60f16bf1
   m_configObjects: {}

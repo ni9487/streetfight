@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class scenemanagerscript : MonoBehaviour
+public class scenemanagerscript : MonoBehaviourPunCallbacks
 {
     public void loadscene(string scenename)
     {
