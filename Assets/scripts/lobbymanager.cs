@@ -74,7 +74,7 @@ public class lobbymanager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         print("room joined");
-        SceneManager.LoadScene("roomscene");
+        SceneManager.LoadScene("startscene");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
