@@ -26,6 +26,7 @@ public class player3move : MonoBehaviour
     public float maxmp;
     public GameObject player3mp;
     public GameObject playerBoom;
+    public GameObject player3skill2;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -117,12 +118,12 @@ public class player3move : MonoBehaviour
     }
     IEnumerator DelayedGenerateBall2Ddown()
     {
-        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        yield return new WaitForSeconds(0.05f); // 等待0.5秒
         GenerateBall2Ddown();
     }
     void GenerateBall2D()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 7) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
 
@@ -138,7 +139,7 @@ public class player3move : MonoBehaviour
     }
     void GenerateBall2Ddown()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 7) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player3skill1down, transform.position, Quaternion.identity);
@@ -153,12 +154,12 @@ public class player3move : MonoBehaviour
     }
     IEnumerator DelayedGenerateBall2Dup()
     {
-        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        yield return new WaitForSeconds(0.05f); // 等待0.5秒
         GenerateBall2Dup();
     }
     void GenerateBall2Dup()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 7) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player3skill1up, transform.position, Quaternion.identity);
@@ -173,7 +174,7 @@ public class player3move : MonoBehaviour
     }
     IEnumerator DelayedGenerateBall2D()
     {
-        yield return new WaitForSeconds(0.1f); // 等待0.5秒
+        yield return new WaitForSeconds(0.05f); // 等待0.5秒
         GenerateBall2D();
     }
     // Update is called once per frame
@@ -223,7 +224,25 @@ public class player3move : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill1cooldown = 1;
+                skill1cooldown = 0.5f;
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad5) && skill2cooldown == 0)
+            {
+                GameObject skill2 = Instantiate(player3skill2, this.transform.position, quaternion.identity);
+                player3skill2 fireball = skill2.GetComponent<player3skill2>() as player3skill2;
+                if (!sprite.flipX)
+                {
+                    fireball.isright = false;
+                }
+                if (mp >= 20 && mp < 24)
+                {
+                    mp = 24;
+                }
+                if (mp < 20)
+                {
+                    mp += 4;
+                }
+                skill2cooldown = 3;
             }
         }
         if (Input.GetKeyDown(KeyCode.K) && (defensecooldown == 0))
