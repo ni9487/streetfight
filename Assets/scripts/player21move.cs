@@ -311,7 +311,7 @@ public class player21move : MonoBehaviour
         player1mp.transform.localScale = new Vector3(percentmp, player1mp.transform.localScale.y, player1mp.transform.localScale.z);
         if (canMove && !isDefending&&!dizzy)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 rb.velocity =new Vector2(-speed,rb.velocity.y);
                 //transform.Translate(-speed * Time.deltaTime, 0, 0);
@@ -319,7 +319,7 @@ public class player21move : MonoBehaviour
                 flip(curspeed);
                 //anim.SetBool("jump",false);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 rb.velocity =new Vector2(speed,rb.velocity.y);
                 //transform.Translate(speed * Time.deltaTime, 0, 0);
@@ -328,7 +328,7 @@ public class player21move : MonoBehaviour
                 //anim.SetBool("jump",false);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 if (extrajump > 0)
                 {
@@ -339,7 +339,7 @@ public class player21move : MonoBehaviour
                 //anim.SetBool("jump",true);
             }
 
-            if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Keypad1) && skill1cooldown == 0)
             {
                 skillCount = 0;
                 GenerateBall2D();
@@ -354,7 +354,7 @@ public class player21move : MonoBehaviour
                 skill1cooldown = 3;
             }
 
-            if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Keypad2) && skill2cooldown == 0)
             {
                 isDashing = true;
                 dashTrigger.enabled=true;
@@ -383,7 +383,7 @@ public class player21move : MonoBehaviour
                 StartCoroutine(Delaymove());
             }
 
-            if (Input.GetKeyDown(KeyCode.U) && mp == 24)
+            if (Input.GetKeyDown(KeyCode.Keypad3) && mp == 24)
             {
                 skillCountbig = 0;
                 GenerateBall2Dbig();
@@ -399,7 +399,7 @@ public class player21move : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
+        if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
         {
             // 角色进入防御状态
             isDefending = true;
