@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 395273748221807499}
   - component: {fileID: 2268063291019159524}
   - component: {fileID: 147668190506847414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: player3skill1up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,3 +231,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bdf442bd02bcb84bba4f34ca8728a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  isright: 1
