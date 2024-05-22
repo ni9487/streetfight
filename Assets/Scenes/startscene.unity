@@ -2482,6 +2482,8 @@ MonoBehaviour:
   maxmp: 0
   player2mp: {fileID: 1622094027}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
+  dizzy: 0
+  dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}

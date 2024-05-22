@@ -23,6 +23,8 @@ public class player2move : MonoBehaviour
     public float maxmp;
     public GameObject player2mp;
     public GameObject playerBoom;
+    public bool dizzy;
+    public GameObject dizzcirclePrefab;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -96,7 +98,7 @@ public class player2move : MonoBehaviour
         player2mp.transform.localScale = new Vector3(percent, player2mp.transform.localScale.y, player2mp.transform.localScale.z);
         float percenthp = (float)hp / (float)maxhp;
         player2hp.transform.localScale = new Vector3(percenthp, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
-        if (canMove && !isDefending)
+        if (canMove && !isDefending && !dizzy)
         {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
@@ -379,6 +381,12 @@ public class player2move : MonoBehaviour
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
+                dizzy = true;
+
+                Vector3 dizzposition = new Vector3(transform.position.x, transform.position.y + 50, transform.position.z);
+                GameObject dizzcircle = Instantiate(dizzcirclePrefab, dizzposition, Quaternion.identity);
+
+                StartCoroutine(DizzcircleRoutine(dizzcircle));
                 // 获取 player3 的位置
                 Transform player3Transform = GameObject.FindGameObjectWithTag("Player3").transform;
 
@@ -400,11 +408,41 @@ public class player2move : MonoBehaviour
 
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(dizzdelay());
             }
 
             // 只在这里销毁 player3skill2
             Destroy(other.gameObject);
         }
+    }
+
+    IEnumerator dizzdelay()
+    {
+        // 等待一段时间
+        yield return new WaitForSeconds(1f);
+        dizzy = false;
+    }
+
+    IEnumerator DizzcircleRoutine(GameObject dizzcircle)
+    {
+        float existTime = 1.0f;
+        Vector3 offset = new Vector3(0, 50f, 0);
+        while (existTime > 0)
+        {
+            if (dizzcircle == null)
+            {
+                yield break; // 如果 dizzcircle 已经被销毁，则退出协程
+            }
+
+            // 让 dizzcircle 跟随目标
+            dizzcircle.transform.position = transform.position + offset;
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 1 秒后销毁 dizzcircle
+        Destroy(dizzcircle);
     }
 
     public void playerdie()
