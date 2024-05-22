@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2919195734521909632}
   m_Layer: 0
   m_Name: player3skill1down
-  m_TagString: Untagged
+  m_TagString: player1skill1updown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,3 +231,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347c78c0c92c5a444aaee05cf2ab017d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
+  isright: 1
