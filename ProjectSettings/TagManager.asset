@@ -14,6 +14,8 @@ TagManager:
   - player1skill1updown
   - player2skill1
   - player3
+  - player21skill1updown
+  - player21skill1
   layers:
   - Default
   - TransparentFX
