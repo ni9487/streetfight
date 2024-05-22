@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3110964588545084581}
   m_Layer: 6
   m_Name: player3skill1mid
-  m_TagString: Untagged
+  m_TagString: player1skill1updown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
