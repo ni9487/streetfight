@@ -228,12 +228,9 @@ public class player3move : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Keypad5) && skill2cooldown == 0)
             {
-                GameObject skill2 = Instantiate(player3skill2, this.transform.position, quaternion.identity);
-                player3skill2 fireball = skill2.GetComponent<player3skill2>() as player3skill2;
-                if (!sprite.flipX)
-                {
-                    fireball.isright = false;
-                }
+                GameObject skill2 = Instantiate(player3skill2, this.transform.position, Quaternion.identity);
+                player3skill2 fireball = skill2.GetComponent<player3skill2>();
+                fireball.isright = !sprite.flipX; // Set direction based on the player's facing direction
                 if (mp >= 20 && mp < 24)
                 {
                     mp = 24;

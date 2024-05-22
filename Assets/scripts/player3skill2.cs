@@ -7,28 +7,28 @@ public class player3skill2 : MonoBehaviour
     public float timer;
     public bool isright = true;
     private SpriteRenderer spr;
-    // Start is called before the first frame update
+
     void Start()
     {
         spr = this.gameObject.GetComponent<SpriteRenderer>();
         timer = 4f;
 
-        if (isright != true)
+        if (!isright)
         {
             spr.flipX = true;
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        float moveSpeed = 15f * Time.deltaTime * 60;
         if (isright)
         {
-            this.gameObject.transform.position += new Vector3(-7f * Time.deltaTime * 60, 0, 0);
+            this.gameObject.transform.position += new Vector3(moveSpeed, 0, 0);
         }
         else
         {
-            this.gameObject.transform.position += new Vector3(7f * Time.deltaTime * 60, 0, 0);
+            this.gameObject.transform.position += new Vector3(-moveSpeed, 0, 0);
         }
 
         timer -= Time.deltaTime;
