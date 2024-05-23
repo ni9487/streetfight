@@ -58,6 +58,7 @@ public class player21move : MonoBehaviour
     public GameObject player2;
 
     public GameObject lowspeedPrefab;
+    public GameObject player12;
 
     void Start()
     {
@@ -433,6 +434,13 @@ public class player21move : MonoBehaviour
             defensecooldown = 5;
         }
 
+        if (Input.GetKeyDown(KeyCode.Y)&&p2s1cooldown==0&&player12.activeSelf)
+        {
+            StartCoroutine(SpawnTarget());
+            p2s1cooldown=2;
+        }
+        
+
         if (mp <= 0)
         {
             mp = 0;
@@ -580,7 +588,7 @@ public class player21move : MonoBehaviour
         {
             extrajump = 2;
         }
-        if (coll.gameObject.tag == "player2skill1")
+        if (coll.gameObject.tag == "player12skill1")
         {
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
@@ -794,6 +802,61 @@ public class player21move : MonoBehaviour
             sprite.color = damageColor;
             StartCoroutine(ResetColorAfterDelay());
         }
+
+        if (other.gameObject.tag == "player12skill")
+        {
+            if (sprite.color == originalColor||sprite.color == damageColor)
+            {
+                dizzy=true;
+                Destroy(other.gameObject);
+
+                Vector3 dizzposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
+                GameObject dizzcircle = Instantiate(dizzcirclePrefab, dizzposition, Quaternion.identity);
+            
+                // 开始一个协程，控制 dizzcircle 在 1 秒后消失，并让它跟随 player1
+                StartCoroutine(DizzcircleRoutine(dizzcircle));
+                print(other.gameObject.name);
+                if (hp >= 600)
+                {
+                    hp -= 600;
+                }
+                else if (hp < 600)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                Destroy(other.gameObject);
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(dizzdelay());
+            }
+        }
+        
+        if (other.gameObject.tag == "player12skill3")
+        {
+            Destroy(other.gameObject);
+            print(other.gameObject.name);
+            if (hp >= 2500)
+            {
+                hp -= 2500;
+            }
+            else if (hp < 2500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+
     }
 
     public void playerdie()

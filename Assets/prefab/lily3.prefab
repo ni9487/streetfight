@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6751808098783751708}
   - component: {fileID: -8288576963115885753}
   - component: {fileID: 4853870716331475745}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: lily3
   m_TagString: player2skill3
   m_Icon: {fileID: 0}
