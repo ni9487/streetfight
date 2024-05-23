@@ -3456,7 +3456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1342816082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3478,7 +3478,7 @@ MonoBehaviour:
   maxmp: 0
   player1mp: {fileID: 1622094027}
   player1skill1: {fileID: 5483425428817941479, guid: 7ee8b4131e76c7148a0505b069270b10, type: 3}
-  player1skill1down: {fileID: 4275117398577762263, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
+  player1skill1down: {fileID: 4275117398577762263, guid: 30d2ae0f9fc127c49819ee8ec5170d86, type: 3}
   player1skill1up: {fileID: 3467479409435312092, guid: 58dda6bd435a77843ac1e7b76d42e24c, type: 3}
   player1skill1mid: {fileID: 4275117398577762263, guid: c5039e6c84974fb45a431a33748b6f9d, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.5019608}
