@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class player3skill31 : MonoBehaviour
 {
-    // ¤U­°³t«×
+    // ï¿½Uï¿½ï¿½ï¿½tï¿½ï¿½
     [SerializeField]
-    private float fallSpeed = 5f;
+    private float fallSpeed = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +18,13 @@ public class player3skill31 : MonoBehaviour
     void Update()
     {
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Player2") || collider.gameObject.CompareTag("Ground"))
+        {
+            Destroy(gameObject); // Destroy the arrow
+        }
     }
 }

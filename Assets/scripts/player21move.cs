@@ -665,6 +665,11 @@ public class player21move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
+
+        if (other.gameObject.tag == "player3skill3")
+        {
+            
+        }
         
         if (other.gameObject.tag == "player2skill3")
         {
