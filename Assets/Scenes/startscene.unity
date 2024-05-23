@@ -1007,7 +1007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &481930196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,6 +1033,8 @@ MonoBehaviour:
   player3mp: {fileID: 1995824268}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 030979c85b65470459ba6cd3f20d3019, type: 3}
+  player3skill3: {fileID: 0}
+  player3skill31: {fileID: 0}
   damageColor: {r: 0.88235295, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
@@ -2545,6 +2547,7 @@ MonoBehaviour:
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
+  player3skill31: {fileID: 0}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
