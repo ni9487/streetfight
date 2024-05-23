@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 147668190506847414}
   m_Layer: 6
   m_Name: player3skill1up
-  m_TagString: player1skill1updown
+  m_TagString: player3skill1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3671884807770516055}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00013117216, y: 0.00246376, z: 0.08893791, w: 0.99603415}
+  m_LocalRotation: {x: -0.00024212465, y: 0.0024563682, z: 0.043620124, w: 0.9990452}
   m_LocalPosition: {x: 325, y: 248, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.04, y: 0.28, z: 10.205}
+  m_LocalEulerAnglesHint: {x: -0.04, y: 0.28, z: 5}
 --- !u!212 &395273748221807499
 SpriteRenderer:
   m_ObjectHideFlags: 0

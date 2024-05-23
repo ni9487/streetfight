@@ -435,7 +435,7 @@ public class player3move : MonoBehaviour
             }
         }
 
-        if (other.gameObject.tag == "player1skill1updown")
+        if (other.gameObject.tag == "player21skill1updown")
         {
             if ((sprite.color == originalColor || sprite.color == damageColor) && !isDefending)
             {
@@ -463,7 +463,7 @@ public class player3move : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
-        if (other.gameObject.tag == "player1skill1")
+        if (other.gameObject.tag == "player21skill1")
         {
             if (hp >= 600)
             {

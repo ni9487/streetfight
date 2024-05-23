@@ -11,7 +11,7 @@ public class player3skill1up : MonoBehaviour
     void Start()
     {
         spr = this.gameObject.GetComponent<SpriteRenderer>();
-        timer = 0.3f;
+        timer = 1f;
 
         if (isright != true)
         {
@@ -28,11 +28,11 @@ public class player3skill1up : MonoBehaviour
     {
         if (isright)
         {
-            this.gameObject.transform.position += new Vector3(-7f * Time.deltaTime * 80, 2f * Time.deltaTime * 80, 0);
+            this.gameObject.transform.position += new Vector3(-10f * Time.deltaTime * 80, 2f * Time.deltaTime * 80, 0);
         }
         else
         {
-            this.gameObject.transform.position += new Vector3(7f * Time.deltaTime * 80, 2f * Time.deltaTime * 80, 0);
+            this.gameObject.transform.position += new Vector3(10f * Time.deltaTime * 80, 2f * Time.deltaTime * 80, 0);
         }
 
         timer -= Time.deltaTime;

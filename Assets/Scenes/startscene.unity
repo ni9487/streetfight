@@ -2460,7 +2460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1041973077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,7 +3221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1342816082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3246,17 +3246,18 @@ MonoBehaviour:
   player1skill1down: {fileID: 4275117398577762263, guid: 30d2ae0f9fc127c49819ee8ec5170d86, type: 3}
   player1skill1up: {fileID: 3467479409435312092, guid: 0ef0b68c4b64f66469b3107c46bdf501, type: 3}
   player1skill1mid: {fileID: 4275117398577762263, guid: 311e1adfd84ffed48babc523f850a37b, type: 3}
-  damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.039215688}
+  damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.5019608}
   duration: 0.1
   playermpnew: {fileID: 0}
   player1skill1shader: {fileID: 0}
-  defenseColor: {r: 0.1254902, g: 0, b: 0, a: 0.039215688}
-  targetPrefab: {fileID: 0}
+  defenseColor: {r: 0.34528297, g: 0.5758615, b: 1, a: 0.72156864}
+  targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   isDashing: 0
   dashTrigger: {fileID: 196043255}
+  player2: {fileID: 927103845}
 --- !u!60 &1342816083
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3890,6 +3891,9 @@ MonoBehaviour:
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   isDashing: 0
   dashTrigger: {fileID: 196043255}
+  player2: {fileID: 1041973076}
+  player21: {fileID: 0}
+  player23: {fileID: 0}
 --- !u!60 &1583054850
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4961,6 +4965,10 @@ PrefabInstance:
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2921254093547819328, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x

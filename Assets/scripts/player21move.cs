@@ -55,6 +55,8 @@ public class player21move : MonoBehaviour
     public bool isDashing = false; // 表示是否正在冲刺
     public Collider2D dashTrigger;
 
+    public GameObject player2;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -391,12 +393,12 @@ public class player21move : MonoBehaviour
             }
         }
 
-        //lily1
-        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0)
-        {
-            StartCoroutine(SpawnTarget());
-            p2s1cooldown=2;
-        }
+        // //lily1
+        // if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0)
+        // {
+        //     StartCoroutine(SpawnTarget());
+        //     p2s1cooldown=2;
+        // }
 
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
@@ -543,6 +545,29 @@ public class player21move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
+        if (coll.gameObject.tag == "player3skill2")
+        {
+            if (sprite.color == originalColor||sprite.color == damageColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                else if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+            }
+            Destroy(coll.gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -577,6 +602,29 @@ public class player21move : MonoBehaviour
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
                 StartCoroutine(dizzdelay());
+            }
+        }
+
+        if (other.gameObject.tag == "player3skill1")
+        {
+            if (sprite.color == originalColor||sprite.color == damageColor)
+            {
+            
+                if (hp >= 200)
+                {
+                    hp -= 200;
+                }
+                else if (hp < 200)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
             }
         }
         

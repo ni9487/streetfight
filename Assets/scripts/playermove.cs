@@ -55,6 +55,10 @@ public class playermove : MonoBehaviour
     public bool isDashing = false; // 表示是否正在冲刺
     public Collider2D dashTrigger;
 
+    public GameObject player2;
+    public GameObject player21;
+    public GameObject player23;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -392,7 +396,7 @@ public class playermove : MonoBehaviour
         }
 
         //lily1
-        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0)
+        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0&&player2.activeSelf)
         {
             StartCoroutine(SpawnTarget());
             p2s1cooldown=2;
