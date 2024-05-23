@@ -59,6 +59,8 @@ public class playermove : MonoBehaviour
     public GameObject player21;
     public GameObject player23;
 
+    public GameObject lowspeedPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -86,6 +88,26 @@ public class playermove : MonoBehaviour
             }
             // 根据距离调整球体的大小，距离越小，球体越大
             float scale = (0.27f - existTime) / 0.2f;
+            ball2D.localScale = initialScale * scale; // 调整大小
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+        Destroy(ball2D.gameObject);
+    }
+
+    IEnumerator FollowPlayer2Dlong(Transform ball2D)
+    {
+        float existTime = 0.6f; // 圆球存在的最大时间
+        Vector3 initialScale = ball2D.localScale; // 初始大小
+        while (existTime > 0)
+        {
+            if (ball2D == null)
+            {
+                yield break; // 如果ball2D已经被销毁，则退出协程
+            }
+            // 根据距离调整球体的大小，距离越小，球体越大
+            float scale = (0.7f - existTime) / 0.3f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -259,7 +281,7 @@ public class playermove : MonoBehaviour
     //big skill
     void GenerateBall2Dbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
 
@@ -269,14 +291,14 @@ public class playermove : MonoBehaviour
             {
                 fireball.isright = false;
             }
-            StartCoroutine(FollowPlayer2D(ball2D));
+            StartCoroutine(FollowPlayer2Dlong(ball2D));
             StartCoroutine(DelayedGenerateBall2Ddownbig());
         }
     }
 
     void GenerateBall2Ddownbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -292,7 +314,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Dupbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -519,6 +541,35 @@ public class playermove : MonoBehaviour
         Destroy(dizzcircle);
     }
 
+    IEnumerator SlowDown()
+    {
+        speed *= 0.3f; // 速度降低90%
+        yield return new WaitForSeconds(1.3f); // 维持减速一段时间
+        speed /= 0.3f; // 恢复正常速度
+    }
+
+    IEnumerator lowspeedRoutine(GameObject low)
+    {
+        float existTime = 1.3f;
+        Vector3 offset = new Vector3(0, 50f, 0);
+        while (existTime > 0)
+        {
+            if (low == null)
+            {
+                yield break; // 如果 dizzcircle 已经被销毁，则退出协程
+            }
+
+            // 让 dizzcircle 跟随目标
+            low.transform.position = transform.position+offset;
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 1 秒后销毁 dizzcircle
+        Destroy(low);
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "ground")
@@ -564,11 +615,11 @@ public class playermove : MonoBehaviour
                 // 开始一个协程，控制 dizzcircle 在 1 秒后消失，并让它跟随 player1
                 StartCoroutine(DizzcircleRoutine(dizzcircle));
                 print(other.gameObject.name);
-                if (hp >= 800)
+                if (hp >= 600)
                 {
-                    hp -= 800;
+                    hp -= 600;
                 }
-                else if (hp < 800)
+                else if (hp < 600)
                 {
                     hp = 0;
                 }
@@ -588,11 +639,11 @@ public class playermove : MonoBehaviour
         {
             Destroy(other.gameObject);
             print(other.gameObject.name);
-            if (hp >= 3500)
+            if (hp >= 2500)
             {
-                hp -= 3500;
+                hp -= 2500;
             }
-            else if (hp < 3500)
+            else if (hp < 2500)
             {
                 hp = 0;
             }
@@ -603,8 +654,87 @@ public class playermove : MonoBehaviour
             }
             sprite.color = damageColor;
             StartCoroutine(ResetColorAfterDelay());
+        }
+
+        if (other.gameObject.tag=="player21") // 确保是与 Player1 发生碰撞
+        {
+            if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
+            {
+                Vector3 lowspeedposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
+                GameObject lowspeed = Instantiate(lowspeedPrefab, lowspeedposition, Quaternion.identity);
             
-            Destroy(other.gameObject);
+                // 开始一个协程，控制 dizzcircle 在 1 秒后消失，并让它跟随 player1
+                StartCoroutine(lowspeedRoutine(lowspeed));
+
+                StartCoroutine(SlowDown());
+                if (hp >= 400)
+                {
+                    hp -= 400f;
+                }
+                else if (hp < 400)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                if(sprite.color!=defenseColor&&!isDefending)
+                {
+                    sprite.color = damageColor;
+                }
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+
+        if (other.gameObject.tag == "player21skill1updown")
+        {
+            if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
+            {
+                if (hp >= 400)
+                {
+                    hp -= 400f;
+                }
+                else if (hp < 400)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                if(sprite.color!=defenseColor&&!isDefending)
+                {
+                    sprite.color = damageColor;
+                }
+                StartCoroutine(ResetColorAfterDelay());
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.gameObject.tag == "player21skill1")
+        {
+            if (hp >= 600)
+            {
+                hp -= 600f;
+            }
+            else if (hp < 600)
+            {
+                hp = 0;
+            }
+
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
         }
     }
 
