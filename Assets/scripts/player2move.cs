@@ -286,6 +286,12 @@ public class player2move : MonoBehaviour
         Destroy(low);
     }
 
+    IEnumerator DestroyAfterDelay(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.1f); // 等待1秒
+        Destroy(objectToDestroy); // 销毁对象
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "enemy")
@@ -295,6 +301,30 @@ public class player2move : MonoBehaviour
         if (coll.gameObject.tag == "ground")
         {
             extrajump = 2;
+        }
+        if (coll.gameObject.tag == "player3skill2")
+        {
+            if (sprite.color == originalColor||sprite.color == damageColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                else if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(DestroyAfterDelay(coll.gameObject));
+            }
+            
         }
     }
 
@@ -328,6 +358,29 @@ public class player2move : MonoBehaviour
                 {
                     sprite.color = damageColor;
                 }
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+
+        if (other.gameObject.tag == "player3skill1")
+        {
+            if (sprite.color == originalColor||sprite.color == damageColor)
+            {
+            
+                if (hp >= 150)
+                {
+                    hp -= 150;
+                }
+                else if (hp < 150)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
