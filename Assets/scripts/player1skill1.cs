@@ -11,7 +11,7 @@ public class player1skill1 : MonoBehaviour
     void Start()
     {
         spr=this.gameObject.GetComponent<SpriteRenderer>();
-        timer=0.3f;
+        timer=7f;
 
         if(isright!=true)
         {

@@ -49,6 +49,8 @@ public class player2move : MonoBehaviour
 
     public GameObject lowspeedPrefab;
 
+    private bool isSpawning = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -407,7 +409,26 @@ public class player2move : MonoBehaviour
         }
         if (other.gameObject.tag == "player3skill3")
         {
+            isSpawning=true;
+            StartCoroutine(downarrowdelay());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player3skill3")
+        {
+            // 停止生成箭矢
+            isSpawning = false;
+        }
+    }
+
+    IEnumerator downarrowdelay()
+    {
+        while (isSpawning)
+        {
             GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
         }
     }
 

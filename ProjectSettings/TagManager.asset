@@ -18,8 +18,7 @@ TagManager:
   - player21skill1
   - player3skill2
   - player3skill1
-  - player3skill3
-  - player3skill31
+  - player21
   layers:
   - Default
   - TransparentFX
@@ -32,7 +31,7 @@ TagManager:
   - player1
   - player2
   - player3
-  - 
+  - slow
   - 
   - 
   - 

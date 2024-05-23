@@ -57,6 +57,8 @@ public class player21move : MonoBehaviour
 
     public GameObject player2;
 
+    public GameObject lowspeedPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -523,6 +525,35 @@ public class player21move : MonoBehaviour
         Destroy(objectToDestroy); // 销毁对象
     }
 
+    IEnumerator SlowDown()
+    {
+        speed *= 0.3f; // 速度降低90%
+        yield return new WaitForSeconds(1.3f); // 维持减速一段时间
+        speed /= 0.3f; // 恢复正常速度
+    }
+
+    IEnumerator lowspeedRoutine(GameObject low)
+    {
+        float existTime = 1.3f;
+        Vector3 offset = new Vector3(0, 50f, 0);
+        while (existTime > 0)
+        {
+            if (low == null)
+            {
+                yield break; // 如果 dizzcircle 已经被销毁，则退出协程
+            }
+
+            // 让 dizzcircle 跟随目标
+            low.transform.position = transform.position+offset;
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 1 秒后销毁 dizzcircle
+        Destroy(low);
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "ground")
@@ -634,6 +665,11 @@ public class player21move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
+
+        if (other.gameObject.tag == "player3skill3")
+        {
+            
+        }
         
         if (other.gameObject.tag == "player2skill3")
         {
@@ -656,6 +692,87 @@ public class player21move : MonoBehaviour
             StartCoroutine(ResetColorAfterDelay());
             
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag=="Player1") // 确保是与 Player1 发生碰撞
+        {
+            if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
+            {
+                Vector3 lowspeedposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
+                GameObject lowspeed = Instantiate(lowspeedPrefab, lowspeedposition, Quaternion.identity);
+            
+                // 开始一个协程，控制 dizzcircle 在 1 秒后消失，并让它跟随 player1
+                StartCoroutine(lowspeedRoutine(lowspeed));
+
+                StartCoroutine(SlowDown());
+                if (hp >= 400)
+                {
+                    hp -= 400f;
+                }
+                else if (hp < 400)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                if(sprite.color!=defenseColor&&!isDefending)
+                {
+                    sprite.color = damageColor;
+                }
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+
+        if (other.gameObject.tag == "player1skill1updown")
+        {
+            if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
+            {
+                if (hp >= 400)
+                {
+                    hp -= 400f;
+                }
+                else if (hp < 400)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                if(sprite.color!=defenseColor&&!isDefending)
+                {
+                    sprite.color = damageColor;
+                }
+                StartCoroutine(ResetColorAfterDelay());
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.gameObject.tag == "player1skill1")
+        {
+            if (hp >= 600)
+            {
+                hp -= 600f;
+            }
+            else if (hp < 600)
+            {
+                hp = 0;
+            }
+
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
         }
     }
 
