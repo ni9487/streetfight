@@ -94,6 +94,26 @@ public class player21move : MonoBehaviour
         Destroy(ball2D.gameObject);
     }
 
+    IEnumerator FollowPlayer2Dlong(Transform ball2D)
+    {
+        float existTime = 0.6f; // 圆球存在的最大时间
+        Vector3 initialScale = ball2D.localScale; // 初始大小
+        while (existTime > 0)
+        {
+            if (ball2D == null)
+            {
+                yield break; // 如果ball2D已经被销毁，则退出协程
+            }
+            // 根据距离调整球体的大小，距离越小，球体越大
+            float scale = (0.7f - existTime) / 0.3f;
+            ball2D.localScale = initialScale * scale; // 调整大小
+
+            existTime -= Time.deltaTime;
+            yield return null;
+        }
+        Destroy(ball2D.gameObject);
+    }
+
     //lily1
     IEnumerator grow(Transform ball2D)
     {
@@ -209,7 +229,7 @@ public class player21move : MonoBehaviour
 
     void GenerateBall2D()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
 
@@ -226,7 +246,7 @@ public class player21move : MonoBehaviour
 
     void GenerateBall2Ddown()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -242,7 +262,7 @@ public class player21move : MonoBehaviour
 
     void GenerateBall2Dup()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -259,7 +279,7 @@ public class player21move : MonoBehaviour
     //big skill
     void GenerateBall2Dbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
 
@@ -269,14 +289,14 @@ public class player21move : MonoBehaviour
             {
                 fireball.isright = false;
             }
-            StartCoroutine(FollowPlayer2D(ball2D));
+            StartCoroutine(FollowPlayer2Dlong(ball2D));
             StartCoroutine(DelayedGenerateBall2Ddownbig());
         }
     }
 
     void GenerateBall2Ddownbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -292,7 +312,7 @@ public class player21move : MonoBehaviour
 
     void GenerateBall2Dupbig()
     {
-        if (skillCountbig < 7) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
