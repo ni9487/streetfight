@@ -566,7 +566,6 @@ public class player21move : MonoBehaviour
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
             }
-            Destroy(coll.gameObject);
         }
     }
 

@@ -25,6 +25,7 @@ public class player2move : MonoBehaviour
     public GameObject playerBoom;
     public bool dizzy;
     public GameObject dizzcirclePrefab;
+    public GameObject player3skill31;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -381,12 +382,6 @@ public class player2move : MonoBehaviour
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
-                dizzy = true;
-
-                Vector3 dizzposition = new Vector3(transform.position.x, transform.position.y + 50, transform.position.z);
-                GameObject dizzcircle = Instantiate(dizzcirclePrefab, dizzposition, Quaternion.identity);
-
-                StartCoroutine(DizzcircleRoutine(dizzcircle));
                 // 获取 player3 的位置
                 Transform player3Transform = GameObject.FindGameObjectWithTag("Player3").transform;
 
@@ -405,14 +400,14 @@ public class player2move : MonoBehaviour
                     // 更新 player2 的位置
                     transform.position += new Vector3(knockbackDistance.x, knockbackDistance.y, 0);
                 }
-
+                Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
-                StartCoroutine(dizzdelay());
             }
-
-            // 只在这里销毁 player3skill2
-            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "player3skill3")
+        {
+            GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
         }
     }
 
