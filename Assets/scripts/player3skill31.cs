@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class player3skill31 : MonoBehaviour
+{
+    // ¤U­°³t«×
+    [SerializeField]
+    private float fallSpeed = 5f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        transform.position = new Vector3(transform.position.x, 500f, transform.position.z);
+        transform.rotation = Quaternion.Euler(0, 0, -90);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+    }
+}

@@ -27,6 +27,8 @@ public class player3move : MonoBehaviour
     public GameObject player3mp;
     public GameObject playerBoom;
     public GameObject player3skill2;
+    public GameObject player3skill3;
+    public GameObject player3skill31;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -240,6 +242,13 @@ public class player3move : MonoBehaviour
                     mp += 4;
                 }
                 skill2cooldown = 3;
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad6))
+            {
+                Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 30, transform.position.z);
+                GameObject skill3 = Instantiate(player3skill3, targetPosition, Quaternion.identity);
+                player3skill3 fireball = skill3.GetComponent<player3skill3>();
+                fireball.isright = sprite.flipX;
             }
         }
         if (Input.GetKeyDown(KeyCode.K) && (defensecooldown == 0))
