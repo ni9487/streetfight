@@ -65,7 +65,6 @@ public class player23move : MonoBehaviour
         originalColor = sprite.color;
     }
 
-    //sword qi
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
         float existTime = 1f; // 圆球存在的最大时间
@@ -83,14 +82,10 @@ public class player23move : MonoBehaviour
             existTime -= Time.deltaTime;
             yield return null;
         }
-        Destroy(ball2D.gameObject);
-    }
-
-    IEnumerator dizzdelay()
-    {
-        // 等待一段时间
-        yield return new WaitForSeconds(0.7f);
-        dizzy = false;
+        if (ball2D != null)
+        {
+            Destroy(ball2D.gameObject);
+        }
     }
 
     IEnumerator grow(Transform ball2D)
@@ -115,8 +110,18 @@ public class player23move : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        Destroy(ball2D.gameObject);
+        if (ball2D != null)
+        {
+            Destroy(ball2D.gameObject);
+        }
+    }
 
+
+    IEnumerator dizzdelay()
+    {
+        // 等待一段时间
+        yield return new WaitForSeconds(0.7f);
+        dizzy = false;
     }
 
     IEnumerator DelayedGenerateBall2Ddown()
@@ -131,13 +136,16 @@ public class player23move : MonoBehaviour
             skillCount++; // 增加技能生成次数
 
             Transform ball2D = Instantiate(player3skill1mid, transform.position, Quaternion.identity);
-            player3skill1mid fireball = ball2D.GetComponent<player3skill1mid>() as player3skill1mid;
-            if (!sprite.flipX)
+            if (ball2D != null)
             {
-                fireball.isright = false;
+                player3skill1mid fireball = ball2D.GetComponent<player3skill1mid>() as player3skill1mid;
+                if (!sprite.flipX)
+                {
+                    fireball.isright = false;
+                }
+                StartCoroutine(FollowPlayer2D(ball2D));
+                StartCoroutine(DelayedGenerateBall2Ddown());
             }
-            StartCoroutine(FollowPlayer2D(ball2D));
-            StartCoroutine(DelayedGenerateBall2Ddown());
         }
     }
     void GenerateBall2Ddown()
@@ -146,13 +154,16 @@ public class player23move : MonoBehaviour
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player3skill1down, transform.position, Quaternion.identity);
-            player3skill1down fireball = ball2D.GetComponent<player3skill1down>() as player3skill1down;
-            if (!sprite.flipX)
+            if (ball2D != null)
             {
-                fireball.isright = false;
+                player3skill1down fireball = ball2D.GetComponent<player3skill1down>() as player3skill1down;
+                if (!sprite.flipX)
+                {
+                    fireball.isright = false;
+                }
+                StartCoroutine(FollowPlayer2D(ball2D));
+                StartCoroutine(DelayedGenerateBall2Dup());
             }
-            StartCoroutine(FollowPlayer2D(ball2D));
-            StartCoroutine(DelayedGenerateBall2Dup());
         }
     }
     IEnumerator DelayedGenerateBall2Dup()
@@ -166,13 +177,16 @@ public class player23move : MonoBehaviour
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player3skill1up, transform.position, Quaternion.identity);
-            player3skill1up fireball = ball2D.GetComponent<player3skill1up>() as player3skill1up;
-            if (!sprite.flipX)
+            if (ball2D != null)
             {
-                fireball.isright = false;
+                player3skill1up fireball = ball2D.GetComponent<player3skill1up>() as player3skill1up;
+                if (!sprite.flipX)
+                {
+                    fireball.isright = false;
+                }
+                StartCoroutine(FollowPlayer2D(ball2D));
+                StartCoroutine(DelayedGenerateBall2D());
             }
-            StartCoroutine(FollowPlayer2D(ball2D));
-            StartCoroutine(DelayedGenerateBall2D());
         }
     }
     IEnumerator DelayedGenerateBall2D()
