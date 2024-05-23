@@ -690,7 +690,6 @@ public class playermove : MonoBehaviour
 
         if (other.gameObject.tag == "player21skill1updown")
         {
-            print("ff");
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
                 if (hp >= 400)

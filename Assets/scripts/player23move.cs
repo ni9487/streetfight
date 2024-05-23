@@ -68,7 +68,7 @@ public class player23move : MonoBehaviour
     //sword qi
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
-        float existTime = 1f; // 圆球存在的最大时间
+        float existTime = 0.7f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
