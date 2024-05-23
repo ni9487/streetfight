@@ -4979,8 +4979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e468d38d822dad441b6fbceaaf4532b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 10
+  speed: 300
+  jumpForce: 800
   player3skill1: {fileID: 0}
   player3skill1down: {fileID: 1538348768562764789, guid: 4da71f546d6b6f0488ed2b45353af453, type: 3}
   player3skill1up: {fileID: 4297111269026860140, guid: d1bb6917ec65310409c43b9cdfb980b3, type: 3}
