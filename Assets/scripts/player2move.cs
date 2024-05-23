@@ -428,7 +428,7 @@ public class player2move : MonoBehaviour
         while (isSpawning)
         {
             GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 
