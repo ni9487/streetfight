@@ -64,7 +64,7 @@ public class player2move : MonoBehaviour
 
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
-        float existTime = 5.0f; // 圆球存在的最大时间
+        float existTime = 4.0f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
