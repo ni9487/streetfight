@@ -517,6 +517,12 @@ public class player21move : MonoBehaviour
         Destroy(dizzcircle);
     }
 
+    IEnumerator DestroyAfterDelay(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.1f); // 等待1秒
+        Destroy(objectToDestroy); // 销毁对象
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "ground")
@@ -565,8 +571,9 @@ public class player21move : MonoBehaviour
                 }
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(DestroyAfterDelay(coll.gameObject));
             }
-            Destroy(coll.gameObject);
+            
         }
     }
 
