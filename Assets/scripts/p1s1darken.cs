@@ -21,7 +21,7 @@ public class p1s1darken : MonoBehaviour
         targetImage.color = new Color32( 100, 100, 100, 200 );
 
         // 等待三秒
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         // 恢復圖片原始顏色
         targetImage.color = Color.white;

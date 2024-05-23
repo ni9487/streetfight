@@ -28,11 +28,11 @@ public class player1skill1 : MonoBehaviour
     {
         if(isright)
         {
-            this.gameObject.transform.position+=new Vector3(-7f*Time.deltaTime*80,0,0);
+            this.gameObject.transform.position+=new Vector3(-10f*Time.deltaTime*80,0,0);
         }
         else
         {
-            this.gameObject.transform.position+=new Vector3(7f*Time.deltaTime*80,0,0);
+            this.gameObject.transform.position+=new Vector3(10f*Time.deltaTime*80,0,0);
         }
 
         timer-=Time.deltaTime;

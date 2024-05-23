@@ -231,7 +231,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2D()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
 
@@ -248,7 +248,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Ddown()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -264,7 +264,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Dup()
     {
-        if (skillCount < 4) // 检查技能生成次数是否小于七次
+        if (skillCount < 6) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -281,7 +281,7 @@ public class playermove : MonoBehaviour
     //big skill
     void GenerateBall2Dbig()
     {
-        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
 
@@ -298,7 +298,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Ddownbig()
     {
-        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -314,7 +314,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Dupbig()
     {
-        if (skillCountbig < 9) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -377,7 +377,7 @@ public class playermove : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill1cooldown = 3;
+                skill1cooldown = 2;
             }
 
             if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)

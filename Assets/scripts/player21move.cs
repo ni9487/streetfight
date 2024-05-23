@@ -648,11 +648,11 @@ public class player21move : MonoBehaviour
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
             
-                if (hp >= 200)
+                if (hp >= 150)
                 {
-                    hp -= 200;
+                    hp -= 150;
                 }
-                else if (hp < 200)
+                else if (hp < 150)
                 {
                     hp = 0;
                 }

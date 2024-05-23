@@ -67,7 +67,7 @@ public class player3move : MonoBehaviour
     //sword qi
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
-        float existTime = 0.2f; // 圆球存在的最大时间
+        float existTime = 1f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
@@ -76,7 +76,7 @@ public class player3move : MonoBehaviour
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (0.27f - existTime) / 0.2f;
+            float scale = (1.2f - existTime) / 0.8f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
