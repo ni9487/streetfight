@@ -60,6 +60,9 @@ public class player21move : MonoBehaviour
     public GameObject lowspeedPrefab;
     public GameObject player12;
 
+    private bool isSpawning = false;
+    public GameObject player3skill31;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -376,7 +379,7 @@ public class player21move : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill1cooldown = 3;
+                skill1cooldown = 2;
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad2) && skill2cooldown == 0)
@@ -404,7 +407,7 @@ public class player21move : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill2cooldown = 4;
+                skill2cooldown = 3;
                 StartCoroutine(Delaymove());
             }
 
@@ -582,6 +585,15 @@ public class player21move : MonoBehaviour
         Destroy(low);
     }
 
+    IEnumerator downarrowdelay()
+    {
+        while (isSpawning)
+        {
+            GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "ground")
@@ -696,8 +708,31 @@ public class player21move : MonoBehaviour
 
         if (other.gameObject.tag == "player3skill3")
         {
-            
+            isSpawning=true;
+            StartCoroutine(downarrowdelay());
         }
+
+        if (other.gameObject.tag == "player3skill31")
+        {
+            Destroy(other.gameObject);
+            print(other.gameObject.name);
+            if (hp >= 500)
+            {
+                hp -= 500;
+            }
+            else if (hp < 500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+
         
         if (other.gameObject.tag == "player2skill3")
         {
@@ -857,6 +892,15 @@ public class player21move : MonoBehaviour
             StartCoroutine(ResetColorAfterDelay());
         }
 
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player3skill3")
+        {
+            // 停止生成箭矢
+            isSpawning = false;
+        }
     }
 
     public void playerdie()
