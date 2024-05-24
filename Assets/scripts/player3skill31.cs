@@ -22,7 +22,7 @@ public class player3skill31 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("player2") || collider.gameObject.CompareTag("ground")||collider.gameObject.CompareTag("player21")||collider.gameObject.CompareTag("player23")  )
+        if (collider.gameObject.CompareTag("Player2") || collider.gameObject.CompareTag("ground")||collider.gameObject.CompareTag("player21")||collider.gameObject.CompareTag("player23")  )
         {
             Destroy(gameObject); // Destroy the arrow
         }
