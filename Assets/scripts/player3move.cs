@@ -353,6 +353,15 @@ public class player3move : MonoBehaviour
             }
         }
 
+        if (p2s1cooldown > 0)
+        {
+            p2s1cooldown -= Time.deltaTime;
+            if (p2s1cooldown < 0)
+            {
+                p2s1cooldown = 0;
+            }
+        }
+
         if (mp <= 0)
         {
             mp = 0;
