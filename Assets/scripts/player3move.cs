@@ -426,7 +426,7 @@ public class player3move : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player1") // 确保是与 Player1 发生碰撞
+        if (other.gameObject.tag == "player21") // 确保是与 Player1 发生碰撞
         {
             if ((sprite.color == originalColor || sprite.color == damageColor) && !isDefending)
             {
