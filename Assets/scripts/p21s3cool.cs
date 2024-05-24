@@ -2,17 +2,17 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class p2s1cool  : MonoBehaviour
+public class p21s3cool : MonoBehaviour
 {
     public Text numberText; // 用於顯示數字的Text組件
-    public float count=3;
+    public float count=9;
 
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.Keypad2)&&numberText.text == "")
+        if (Input.GetKeyDown(KeyCode.Keypad3)&&numberText.text == "")
         {
-            numberText.text = "2";
+            numberText.text = "9";
             StartCoroutine(CountdownRoutine());
         }
     }
@@ -20,7 +20,7 @@ public class p2s1cool  : MonoBehaviour
     IEnumerator CountdownRoutine()
     {
         // 每秒倒數一次，直到達到0
-        for (int i = 2; i > 0; i--)
+        for (int i = 9; i > 0; i--)
         {
             // 更新Text顯示的數字
             numberText.text = i.ToString();
