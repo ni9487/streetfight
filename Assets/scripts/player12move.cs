@@ -25,7 +25,7 @@ public class player12move : MonoBehaviour
     public GameObject playerBoom;
     public bool dizzy;
     public GameObject dizzcirclePrefab;
-    public GameObject player3skill31;
+    public GameObject player23skill31;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -402,7 +402,7 @@ public class player12move : MonoBehaviour
         {
             extrajump = 2;
         }
-        if (coll.gameObject.tag == "player3skill2")
+        if (coll.gameObject.tag == "player23skill2")
         {
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
@@ -508,7 +508,26 @@ public class player12move : MonoBehaviour
             isSpawning=true;
             StartCoroutine(downarrowdelay());
         }
-
+        if (other.gameObject.tag == "player23skill31")
+        {
+            Destroy(other.gameObject);
+            print(other.gameObject.name);
+            if (hp >= 500)
+            {
+                hp -= 500;
+            }
+            else if (hp < 500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
         if (other.gameObject.tag=="player21") // 确保是与 Player1 发生碰撞
         {
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
@@ -658,7 +677,7 @@ public class player12move : MonoBehaviour
     {
         while (isSpawning)
         {
-            GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
+            GameObject skill3 = Instantiate(player23skill31, this.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
         }
     }
