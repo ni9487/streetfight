@@ -50,6 +50,7 @@ public class player23move : MonoBehaviour
     public GameObject dizzcirclePrefab;
 
     public GameObject lowspeedPrefab;
+    private bool isSpawning = false;
 
     // Start is called before the first frame update
     void Start()
@@ -560,6 +561,20 @@ public class player23move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
                 StartCoroutine(dizzdelay());
             }
+        }
+        if (other.gameObject.tag == "player23skill3")
+        {
+            isSpawning = true;
+            StartCoroutine(downarrowdelay());
+        }
+    }
+
+    IEnumerator downarrowdelay()
+    {
+        while (isSpawning)
+        {
+            GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 

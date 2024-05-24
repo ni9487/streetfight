@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2287750675621539008}
   - component: {fileID: 5663977200921355037}
   m_Layer: 0
-  m_Name: player21skill1down
-  m_TagString: player23skill31
+  m_Name: player23skil31
+  m_TagString: player3skill31
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
