@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5663977200921355037}
   m_Layer: 0
   m_Name: player23skil31
-  m_TagString: player3skill31
+  m_TagString: player23skill31
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 21
-  m_Sprite: {fileID: 21300000, guid: 10c659d7647d89f46a35f06e30c6fa64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02cba2baaff99324a92bfd3b567e4cb8, type: 3}
   m_Color: {r: 1, g: 0.6874504, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
