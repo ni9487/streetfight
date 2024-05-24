@@ -1657,7 +1657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &481930196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,7 +1684,7 @@ MonoBehaviour:
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 030979c85b65470459ba6cd3f20d3019, type: 3}
   player3skill3: {fileID: 1996798936641943797, guid: 0763edff1d1cf604eb078a2c006788e0, type: 3}
-  player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
+  player3skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
   damageColor: {r: 0.88235295, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
@@ -3579,7 +3579,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: aa3f1fd8f8a2908409cb703b30cd93c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6273,7 +6273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1583054845
 Rigidbody2D:
   serializedVersion: 4
@@ -7738,7 +7738,7 @@ MonoBehaviour:
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 29565087d1eca1241b54562c08baf976, type: 3}
   player3skill3: {fileID: 4390629143909002730, guid: 986608686e6e6b04c8cd07dc920d4c32, type: 3}
-  player3skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
+  player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.34509805, g: 0.5764706, b: 1, a: 1}
