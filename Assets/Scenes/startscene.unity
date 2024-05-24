@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 481930200}
   m_Layer: 8
   m_Name: Player3
-  m_TagString: Player1
+  m_TagString: player3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,9 +1047,6 @@ MonoBehaviour:
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
-  targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
-  lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
-  player2: {fileID: 1041973076}
 --- !u!212 &481930197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4898,9 +4895,9 @@ GameObject:
   - component: {fileID: 2022421505}
   - component: {fileID: 2022421504}
   - component: {fileID: 2022421503}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Player3(2)
-  m_TagString: Player1
+  m_TagString: player23
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5015,7 +5012,7 @@ MonoBehaviour:
   player3skill2: {fileID: 8463804640586992008, guid: 29565087d1eca1241b54562c08baf976, type: 3}
   player3skill3: {fileID: 4390629143909002730, guid: 986608686e6e6b04c8cd07dc920d4c32, type: 3}
   player3skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
-  damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.039215688}
+  damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
   defenseColor: {r: 0.34509805, g: 0.5764706, b: 1, a: 1}
   player3mpnew: {fileID: 0}
@@ -5084,7 +5081,7 @@ Transform:
   m_GameObject: {fileID: 2022421502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 468.67035, y: 239.51532, z: 0}
+  m_LocalPosition: {x: 606, y: 225, z: 0}
   m_LocalScale: {x: 112, y: 116, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5382,6 +5379,10 @@ PrefabInstance:
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: m_TagString
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 2921254093547819328, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x

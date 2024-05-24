@@ -578,6 +578,19 @@ public class player2move : MonoBehaviour
                     // 更新 player2 的位置
                     transform.position += new Vector3(knockbackDistance.x, knockbackDistance.y, 0);
                 }
+                if (hp > 300)
+                {
+                    hp -= 300;
+                }
+                else if (hp < 300)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                    playerdie();
+                }
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
                 StartCoroutine(ResetColorAfterDelay());
