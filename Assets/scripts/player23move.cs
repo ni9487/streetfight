@@ -58,6 +58,8 @@ public class player23move : MonoBehaviour
     public GameObject player2;
     public GameObject player12;
 
+    public float shoottimes;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +72,7 @@ public class player23move : MonoBehaviour
         maxhp = 10000;
         hp = 0.97f * maxhp;
         originalColor = sprite.color;
+        shoottimes=0;
     }
 
     IEnumerator FollowPlayer2D(Transform ball2D)
@@ -83,7 +86,7 @@ public class player23move : MonoBehaviour
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (1.2f - existTime) / 0.8f;
+            float scale = (1.5f - existTime) / 0.7f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -277,10 +280,25 @@ public class player23move : MonoBehaviour
                 }
                 //anim.SetBool("jump",true);
             }
-            if (Input.GetKeyDown(KeyCode.Keypad4) && skill1cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Keypad1) && skill1cooldown == 0)
             {
                 skillCount = 0;
-                GenerateBall2D();
+                if(shoottimes>=3)
+                {
+                    GenerateBall2D();
+                    shoottimes=0;
+                }
+
+                Transform ball2D = Instantiate(player3skill1mid, transform.position, Quaternion.identity);
+                if (ball2D != null)
+                {
+                    player3skill1mid fireball = ball2D.GetComponent<player3skill1mid>() as player3skill1mid;
+                    if (!sprite.flipX)
+                    {
+                        fireball.isright = false;
+                    }
+                }
+                
                 if (mp >= 20f && mp < 24f)
                 {
                     mp = 24f;
@@ -289,9 +307,10 @@ public class player23move : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill1cooldown = 0.5f;
+                skill1cooldown = 0.9f;
+                shoottimes+=1;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad5) && skill2cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Keypad2) && skill2cooldown == 0)
             {
                 GameObject skill2 = Instantiate(player3skill2, this.transform.position, Quaternion.identity);
                 player3skill2 fireball = skill2.GetComponent<player3skill2>();
@@ -306,12 +325,14 @@ public class player23move : MonoBehaviour
                 }
                 skill2cooldown = 3;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad6))
+            if (Input.GetKeyDown(KeyCode.Keypad3)&&mp>=24)
             {
                 Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 30, transform.position.z);
                 GameObject skill3 = Instantiate(player3skill3, targetPosition, Quaternion.identity);
                 player3skill3 fireball = skill3.GetComponent<player3skill3>();
                 fireball.isright = sprite.flipX;
+
+                mp=0;
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))

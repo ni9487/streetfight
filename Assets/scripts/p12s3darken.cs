@@ -9,15 +9,15 @@ public class p12s3darken : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.U)&&targetImage.color == Color.white&&playermove.mp >= 24)
+        if (Input.GetKeyDown(KeyCode.U)&&targetImage.color == Color.white&&player12move.mp >= 24)
         {
             DarkenImageCoroutine();
         }
-        if (playermove.mp < 24)
+        if (player12move.mp < 24)
         {
             DarkenImageCoroutine();
         }
-        if (playermove.mp >= 24)
+        if (player12move.mp >= 24)
         {
             targetImage.color = Color.white;
         }
