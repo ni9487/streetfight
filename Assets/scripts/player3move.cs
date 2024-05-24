@@ -453,9 +453,37 @@ public class player3move : MonoBehaviour
         // 1 秒后销毁 dizzcircle
         Destroy(dizzcircle);
     }
-
+    IEnumerator DestroyAfterDelay(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.1f); // 等待1秒
+        Destroy(objectToDestroy); // 销毁对象
+    }
     void OnCollisionEnter2D(Collision2D coll)
     {
+        if (coll.gameObject.tag == "player23skill2")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                else if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player3hp.transform.localScale = new Vector3(0, player3hp.transform.localScale.y, player3hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(DestroyAfterDelay(coll.gameObject));
+            }
+
+        }
         if (coll.gameObject.tag == "player2skill1")
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
@@ -662,6 +690,33 @@ public class player3move : MonoBehaviour
                 {
                     player3hp.transform.localScale = new Vector3(0, player3hp.transform.localScale.y, player3hp.transform.localScale.z);
                     playerdie();
+                }
+                Destroy(other.gameObject);
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+        if (other.gameObject.tag == "player23skill2")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                // 获取 player3 的位置
+                Transform player3Transform = GameObject.FindGameObjectWithTag("Player3").transform;
+
+                // 计算 player2 和 player3 之间的距离
+                float distanceToPlayer3 = Vector2.Distance(transform.position, player3Transform.position);
+
+                // 如果距离小于等于 3 公分
+                if (distanceToPlayer3 <= 0.03f) // Unity 使用米作为单位，所以 3 公分是 0.03 米
+                {
+                    // 计算后退方向
+                    Vector2 knockbackDirection = (transform.position - player3Transform.position).normalized;
+
+                    // 计算后退距离为 6 公分（0.06 米）
+                    Vector2 knockbackDistance = knockbackDirection * 0.06f;
+
+                    // 更新 player2 的位置
+                    transform.position += new Vector3(knockbackDistance.x, knockbackDistance.y, 0);
                 }
                 Destroy(other.gameObject);
                 sprite.color = damageColor;

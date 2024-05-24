@@ -454,8 +454,37 @@ public class player23move : MonoBehaviour
         // 1 秒后销毁 dizzcircle
         Destroy(dizzcircle);
     }
+    IEnumerator DestroyAfterDelay(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.1f); // 等待1秒
+        Destroy(objectToDestroy); // 销毁对象
+    }
     void OnCollisionEnter2D(Collision2D coll)
     {
+        if (coll.gameObject.tag == "player3skill2")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                else if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player3hp.transform.localScale = new Vector3(0, player3hp.transform.localScale.y, player3hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(DestroyAfterDelay(coll.gameObject));
+            }
+
+        }
         if (coll.gameObject.tag == "player12skill1")
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
@@ -666,19 +695,6 @@ public class player23move : MonoBehaviour
 
                     // 更新 player2 的位置
                     transform.position += new Vector3(knockbackDistance.x, knockbackDistance.y, 0);
-                }
-                if (hp > 300)
-                {
-                    hp -= 300;
-                }
-                else if (hp < 300)
-                {
-                    hp = 0;
-                }
-                if (hp == 0)
-                {
-                    player3hp.transform.localScale = new Vector3(0, player3hp.transform.localScale.y, player3hp.transform.localScale.z);
-                    playerdie();
                 }
                 Destroy(other.gameObject);
                 sprite.color = damageColor;
