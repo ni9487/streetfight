@@ -1195,7 +1195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &481930196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,7 +2442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &927103847
 Rigidbody2D:
   serializedVersion: 4
@@ -2618,7 +2618,7 @@ MonoBehaviour:
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
-  player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
+  player23skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7176471}
   duration: 0.1
   defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
@@ -2824,7 +2824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1041973077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5542,7 +5542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &2022421503
 Rigidbody2D:
   serializedVersion: 4
@@ -5661,10 +5661,10 @@ MonoBehaviour:
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
-  targetPrefab: {fileID: 0}
-  lilyPrefab: {fileID: 0}
+  targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
+  lilyPrefab: {fileID: 584768981286125758, guid: d23e3cae5e8d67e4f8f2e5e1a2a37333, type: 3}
   player2: {fileID: 0}
-  player12: {fileID: 0}
+  player12: {fileID: 927103845}
 --- !u!212 &2022421506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6113,7 +6113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_TagString

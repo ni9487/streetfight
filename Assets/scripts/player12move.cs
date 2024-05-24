@@ -666,7 +666,7 @@ public class player12move : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "player3skill3")
+        if (other.gameObject.tag == "player23skill3")
         {
             // 停止生成箭矢
             isSpawning = false;
