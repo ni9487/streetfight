@@ -1049,6 +1049,9 @@ MonoBehaviour:
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
+  player21: {fileID: 0}
+  player2: {fileID: 1041973076}
+  player23: {fileID: 0}
 --- !u!212 &481930197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1110,7 +1113,7 @@ Transform:
   m_GameObject: {fileID: 481930195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219, y: 219, z: 0}
+  m_LocalPosition: {x: 353, y: 218, z: 0}
   m_LocalScale: {x: 112.397995, y: 116.9674, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2303,7 +2306,7 @@ Transform:
   m_GameObject: {fileID: 927103845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 184, y: 219, z: 0}
+  m_LocalPosition: {x: 121, y: 226, z: 0}
   m_LocalScale: {x: 156.8844, y: 180.5304, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4048,7 +4051,7 @@ Transform:
   m_GameObject: {fileID: 1583054844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117, y: 224, z: 0}
+  m_LocalPosition: {x: 220, y: 201, z: 0}
   m_LocalScale: {x: 160, y: 160, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

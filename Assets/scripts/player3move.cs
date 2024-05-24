@@ -54,7 +54,10 @@ public class player3move : MonoBehaviour
     public GameObject targetPrefab;
     public Transform lilyPrefab;
     private float p2s1cooldown;
+
+    public GameObject player21;
     public GameObject player2;
+    public GameObject player23;
 
     void Start()
     {
