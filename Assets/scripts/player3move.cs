@@ -273,7 +273,7 @@ public class player3move : MonoBehaviour
                 }
                 //anim.SetBool("jump",true);
             }
-            if (Input.GetKeyDown(KeyCode.Keypad4) && skill1cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
             {
                 skillCount = 0;
                 GenerateBall2D();
@@ -287,7 +287,7 @@ public class player3move : MonoBehaviour
                 }
                 skill1cooldown = 0.5f;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad5) && skill2cooldown == 0)
+            if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
             {
                 GameObject skill2 = Instantiate(player3skill2, this.transform.position, Quaternion.identity);
                 player3skill2 fireball = skill2.GetComponent<player3skill2>();
@@ -302,7 +302,7 @@ public class player3move : MonoBehaviour
                 }
                 skill2cooldown = 3;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad6))
+            if (Input.GetKeyDown(KeyCode.U))
             {
                 Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 30, transform.position.z);
                 GameObject skill3 = Instantiate(player3skill3, targetPosition, Quaternion.identity);
