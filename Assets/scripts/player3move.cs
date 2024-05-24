@@ -51,6 +51,10 @@ public class player3move : MonoBehaviour
 
     public GameObject lowspeedPrefab;
     private bool isSpawning = false;
+    public GameObject targetPrefab;
+    public Transform lilyPrefab;
+    private float p2s1cooldown;
+    public GameObject player2;
 
     void Start()
     {
@@ -116,6 +120,44 @@ public class player3move : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnTarget()
+    {
+        // Instantiate the target prefab at the player's position
+
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 17, transform.position.z);
+        GameObject target = Instantiate(targetPrefab, targetPosition, Quaternion.identity);
+        StartCoroutine(RotateObject(target, 0.4f));
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(0.4f);
+
+        // Destroy the target object
+        Destroy(target);
+        Vector3 lilyPosition = new Vector3(targetPosition.x, targetPosition.y - 20, targetPosition.z);
+        // Instantiate the lily prefab at the target's (player's) last position
+        Transform lily = Instantiate(lilyPrefab, lilyPosition, Quaternion.identity);
+
+        StartCoroutine(grow(lily));
+
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RotateObject(GameObject target, float duration)
+    {
+        float time = 0f;
+
+        while (time < duration)
+        {
+            // Rotate the object each frame by 90 degrees around the Z axis
+            target.transform.Rotate(new Vector3(0, 0, 90) * Time.deltaTime);
+
+            // Increment the time by the time between frames
+            time += Time.deltaTime;
+
+            // Wait for the next frame
+            yield return null;
+        }
+    }
 
     IEnumerator dizzdelay()
     {
@@ -265,6 +307,12 @@ public class player3move : MonoBehaviour
                 fireball.isright = sprite.flipX;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Keypad2) && p2s1cooldown == 0 && player2.activeSelf)
+        {
+            StartCoroutine(SpawnTarget());
+            p2s1cooldown = 2;
+        }
+
         if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
             // 角色进入防御状态

@@ -1047,6 +1047,8 @@ MonoBehaviour:
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
+  targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
+  lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
 --- !u!212 &481930197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2154,7 +2156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &927103847
 Rigidbody2D:
   serializedVersion: 4
