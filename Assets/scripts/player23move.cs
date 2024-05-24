@@ -51,6 +51,12 @@ public class player23move : MonoBehaviour
 
     public GameObject lowspeedPrefab;
     private bool isSpawning = false;
+    private float p2s1cooldown;
+
+    public GameObject targetPrefab;  // Assign the Target prefab in inspector
+    public Transform lilyPrefab;    // Assign the Lily1 prefab in inspector
+    public GameObject player2;
+    public GameObject player12;
 
     // Start is called before the first frame update
     void Start()
@@ -195,6 +201,45 @@ public class player23move : MonoBehaviour
         yield return new WaitForSeconds(0.05f); // 等待0.5秒
         GenerateBall2D();
     }
+    //press 2
+    IEnumerator SpawnTarget()
+    {
+        // Instantiate the target prefab at the player's position
+
+        Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 17, transform.position.z);
+        GameObject target = Instantiate(targetPrefab, targetPosition, Quaternion.identity);
+        StartCoroutine(RotateObject(target, 0.4f));
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(0.4f);
+
+        // Destroy the target object
+        Destroy(target);
+        Vector3 lilyPosition = new Vector3(targetPosition.x, targetPosition.y - 20, targetPosition.z);
+        // Instantiate the lily prefab at the target's (player's) last position
+        Transform lily = Instantiate(lilyPrefab, lilyPosition, Quaternion.identity);
+
+        StartCoroutine(grow(lily));
+
+        // Wait for 1 second
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator RotateObject(GameObject target, float duration)
+    {
+        float time = 0f;
+
+        while (time < duration)
+        {
+            // Rotate the object each frame by 90 degrees around the Z axis
+            target.transform.Rotate(new Vector3(0, 0, 90) * Time.deltaTime);
+
+            // Increment the time by the time between frames
+            time += Time.deltaTime;
+
+            // Wait for the next frame
+            yield return null;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -277,6 +322,19 @@ public class player23move : MonoBehaviour
             sprite.color = defenseColor;
             StartCoroutine(ResetColorAfterDelay2());
             defensecooldown = 5;
+        }
+        if (Input.GetKeyDown(KeyCode.Y) && p2s1cooldown == 0 && player12.activeSelf)
+        {
+            StartCoroutine(SpawnTarget());
+            p2s1cooldown = 2;
+        }
+        if (p2s1cooldown > 0)
+        {
+            p2s1cooldown -= Time.deltaTime;
+            if (p2s1cooldown < 0)
+            {
+                p2s1cooldown = 0;
+            }
         }
         if (skill2cooldown > 0)
         {
@@ -398,7 +456,7 @@ public class player23move : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "player2skill1")
+        if (coll.gameObject.tag == "player12skill1")
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
@@ -460,7 +518,7 @@ public class player23move : MonoBehaviour
             }
         }
 
-        if (other.gameObject.tag == "player21skill1updown")
+        if (other.gameObject.tag == "player1skill1updown")
         {
             if ((sprite.color == originalColor || sprite.color == damageColor) && !isDefending)
             {
@@ -488,7 +546,7 @@ public class player23move : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
-        if (other.gameObject.tag == "player21skill1")
+        if (other.gameObject.tag == "player1skill1")
         {
             if (hp >= 600)
             {
@@ -530,7 +588,7 @@ public class player23move : MonoBehaviour
 
             Destroy(other.gameObject);
         }
-        if (other.gameObject.tag == "player2skill")
+        if (other.gameObject.tag == "player12skill")
         {
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
