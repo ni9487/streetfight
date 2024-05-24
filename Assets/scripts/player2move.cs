@@ -589,6 +589,27 @@ public class player2move : MonoBehaviour
             StartCoroutine(downarrowdelay());
         }
 
+        if (other.gameObject.tag == "player3skill31")
+        {
+            Destroy(other.gameObject);
+            print(other.gameObject.name);
+            if (hp >= 500)
+            {
+                hp -= 500;
+            }
+            else if (hp < 500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+
 
         if (other.gameObject.tag == "player12skill")
         {

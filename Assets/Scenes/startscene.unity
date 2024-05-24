@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235.5, y: 134}
+  m_AnchoredPosition: {x: 96.7, y: 134}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56075724
@@ -1011,7 +1011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &481930196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   player3mp: {fileID: 1995824268}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 030979c85b65470459ba6cd3f20d3019, type: 3}
-  player3skill3: {fileID: 4390629143909002730, guid: 0763edff1d1cf604eb078a2c006788e0, type: 3}
+  player3skill3: {fileID: 1996798936641943797, guid: 0763edff1d1cf604eb078a2c006788e0, type: 3}
   player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   damageColor: {r: 0.88235295, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
@@ -1047,6 +1047,9 @@ MonoBehaviour:
   dizzy: 0
   dizzcirclePrefab: {fileID: 4138748867720392067, guid: 553ba6d76723dad4298bc0dc7f0e7a95, type: 3}
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
+  targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
+  lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
+  player2: {fileID: 1041973076}
 --- !u!212 &481930197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2536,7 +2539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1041973077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3511,6 +3514,7 @@ MonoBehaviour:
   player2: {fileID: 927103845}
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
   player12: {fileID: 927103845}
+  player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
 --- !u!50 &1342816085
 Rigidbody2D:
   serializedVersion: 4
@@ -3899,7 +3903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1583054845
 Rigidbody2D:
   serializedVersion: 4
@@ -4900,7 +4904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &2022421503
 Rigidbody2D:
   serializedVersion: 4
@@ -5004,12 +5008,12 @@ MonoBehaviour:
   player3skill1mid: {fileID: 1037195192447189409, guid: a6f0b6723e69ee8449211d45330d3cb9, type: 3}
   hp: 0
   maxhp: 0
-  player3hp: {fileID: 1079105965}
+  player3hp: {fileID: 2071497368}
   maxmp: 0
-  player3mp: {fileID: 1995824268}
+  player3mp: {fileID: 1622094027}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 030979c85b65470459ba6cd3f20d3019, type: 3}
-  player3skill3: {fileID: 4390629143909002730, guid: 0763edff1d1cf604eb078a2c006788e0, type: 3}
+  player3skill3: {fileID: 1996798936641943797, guid: 0763edff1d1cf604eb078a2c006788e0, type: 3}
   player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.039215688}
   duration: 0.1
@@ -5122,7 +5126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 98.9, y: 134}
+  m_AnchoredPosition: {x: 234.2, y: 134}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2037068268
@@ -5377,7 +5381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2921254093547819328, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x

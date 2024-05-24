@@ -405,7 +405,7 @@ public class playermove : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill2cooldown = 4;
+                skill2cooldown = 3;
                 StartCoroutine(Delaymove());
             }
 
