@@ -566,7 +566,7 @@ public class player23move : MonoBehaviour
             sprite.color = damageColor;
             StartCoroutine(ResetColorAfterDelay());
         }
-        if (other.gameObject.tag == "player2skill3")
+        if (other.gameObject.tag == "player12skill3")
         {
             Destroy(other.gameObject);
             print(other.gameObject.name);
