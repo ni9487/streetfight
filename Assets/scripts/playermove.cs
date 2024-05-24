@@ -26,6 +26,7 @@ public class playermove : MonoBehaviour
     public Transform player1skill1down;
     public Transform player1skill1up;
     public Transform player1skill1mid;
+    public GameObject player23skill31;
 
     public Color damageColor = new Color32(200, 0, 0, 10); // 设置受伤时的颜色
     public float duration = 0.1f; // 变红的持续时间
@@ -40,6 +41,8 @@ public class playermove : MonoBehaviour
     private float skill1cooldown;
     private float skill2cooldown;
     private float p2s1cooldown;
+
+    private bool isSpawning = false;
 
     private bool isDefending = false; // 是否处于防御状态
     private bool canMove = true; // 是否可以移动
@@ -598,10 +601,67 @@ public class playermove : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
             }
         }
+        if (coll.gameObject.tag == "player23skill2")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                print(coll.gameObject.name);
+                if (hp >= 800)
+                {
+                    hp -= 800;
+                }
+                else if (hp < 800)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+                StartCoroutine(DestroyAfterDelay(coll.gameObject));
+            }
+
+        }
+    }
+
+    IEnumerator DestroyAfterDelay(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.1f); // 等待1秒
+        Destroy(objectToDestroy); // 销毁对象
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "player23skill2")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                // 获取 player3 的位置
+                Transform player3Transform = GameObject.FindGameObjectWithTag("Player3").transform;
+
+                // 计算 player2 和 player3 之间的距离
+                float distanceToPlayer3 = Vector2.Distance(transform.position, player3Transform.position);
+
+                // 如果距离小于等于 3 公分
+                if (distanceToPlayer3 <= 0.03f) // Unity 使用米作为单位，所以 3 公分是 0.03 米
+                {
+                    // 计算后退方向
+                    Vector2 knockbackDirection = (transform.position - player3Transform.position).normalized;
+
+                    // 计算后退距离为 6 公分（0.06 米）
+                    Vector2 knockbackDistance = knockbackDirection * 0.06f;
+
+                    // 更新 player2 的位置
+                    transform.position += new Vector3(knockbackDistance.x, knockbackDistance.y, 0);
+                }
+                Destroy(other.gameObject);
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
         if (other.gameObject.tag == "player2skill")
         {
             if (sprite.color == originalColor||sprite.color == damageColor)
@@ -735,6 +795,70 @@ public class playermove : MonoBehaviour
             
             sprite.color = damageColor;
             StartCoroutine(ResetColorAfterDelay());
+        }
+        if (other.gameObject.tag == "player23skill1")
+        {
+            if (sprite.color == originalColor || sprite.color == damageColor)
+            {
+                if (hp >= 150)
+                {
+                    hp -= 150;
+                }
+                else if (hp < 150)
+                {
+                    hp = 0;
+                }
+                if (hp == 0)
+                {
+                    player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                    playerdie();
+                }
+                sprite.color = damageColor;
+                StartCoroutine(ResetColorAfterDelay());
+            }
+        }
+        if (other.gameObject.tag == "player23skill3")
+        {
+            isSpawning = true;
+            StartCoroutine(downarrowdelay());
+        }
+        if (other.gameObject.tag == "player23skill31")
+        {
+            Destroy(other.gameObject);
+            print(other.gameObject.name);
+            if (hp >= 500)
+            {
+                hp -= 500;
+            }
+            else if (hp < 500)
+            {
+                hp = 0;
+            }
+            if (hp == 0)
+            {
+                player1hp.transform.localScale = new Vector3(0, player1hp.transform.localScale.y, player1hp.transform.localScale.z);
+                playerdie();
+            }
+            sprite.color = damageColor;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player23skill3")
+        {
+            // 停止生成箭矢
+            isSpawning = false;
+        }
+    }
+
+    IEnumerator downarrowdelay()
+    {
+        while (isSpawning)
+        {
+            GameObject skill3 = Instantiate(player23skill31, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 
