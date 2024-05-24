@@ -50,6 +50,7 @@ public class player3move : MonoBehaviour
     public GameObject dizzcirclePrefab;
 
     public GameObject lowspeedPrefab;
+    private bool isSpawning = false;
 
     void Start()
     {
@@ -558,6 +559,29 @@ public class player3move : MonoBehaviour
                 StartCoroutine(ResetColorAfterDelay());
                 StartCoroutine(dizzdelay());
             }
+        }
+        if (other.gameObject.tag == "player23skill3")
+        {
+            isSpawning = true;
+            StartCoroutine(downarrowdelay());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player23skill3")
+        {
+            // 停止生成箭矢
+            isSpawning = false;
+        }
+    }
+
+    IEnumerator downarrowdelay()
+    {
+        while (isSpawning)
+        {
+            GameObject skill3 = Instantiate(player3skill31, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(0.3f);
         }
     }
 

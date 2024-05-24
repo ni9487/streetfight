@@ -562,10 +562,19 @@ public class player23move : MonoBehaviour
                 StartCoroutine(dizzdelay());
             }
         }
-        if (other.gameObject.tag == "player23skill3")
+        if (other.gameObject.tag == "player3skill3")
         {
             isSpawning = true;
             StartCoroutine(downarrowdelay());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "player3skill3")
+        {
+            // 停止生成箭矢
+            isSpawning = false;
         }
     }
 
