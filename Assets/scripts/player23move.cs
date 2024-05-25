@@ -78,7 +78,7 @@ public class player23move : MonoBehaviour
 
     IEnumerator FollowPlayer2D(Transform ball2D)
     {
-        float existTime = 0.7f; // 圆球存在的最大时间
+        float existTime = 0.3f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
@@ -87,7 +87,7 @@ public class player23move : MonoBehaviour
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (1.5f - existTime) / 0.7f;
+            float scale = (1.2f - existTime) / 0.8f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -289,16 +289,19 @@ public class player23move : MonoBehaviour
                     GenerateBall2D();
                     shoottimes=0;
                 }
-
-                Transform ball2D = Instantiate(player3skill1mid, transform.position, Quaternion.identity);
-                if (ball2D != null)
+                else
                 {
-                    player3skill1mid fireball = ball2D.GetComponent<player3skill1mid>() as player3skill1mid;
-                    if (!sprite.flipX)
+                    Transform ball2D = Instantiate(player3skill1mid, transform.position, Quaternion.identity);
+                    if (ball2D != null)
                     {
-                        fireball.isright = false;
+                        player3skill1mid fireball = ball2D.GetComponent<player3skill1mid>() as player3skill1mid;
+                        if (!sprite.flipX)
+                        {
+                            fireball.isright = false;
+                        }
                     }
                 }
+                
                 
                 if (mp >= 20f && mp < 24f)
                 {

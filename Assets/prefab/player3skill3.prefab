@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 0
   isright: 1
+  goldlightPrefab: {fileID: 1810721240266809690, guid: 668818eaf680662459a8d0e69daf4878, type: 3}
 --- !u!61 &8003263212682328863
 BoxCollider2D:
   m_ObjectHideFlags: 0

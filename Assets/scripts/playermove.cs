@@ -104,7 +104,7 @@ public class playermove : MonoBehaviour
 
     IEnumerator FollowPlayer2Dlong(Transform ball2D)
     {
-        float existTime = 0.6f; // 圆球存在的最大时间
+        float existTime = 0.4f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
@@ -237,7 +237,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2D()
     {
-        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        if (skillCount < 10) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
 
@@ -254,7 +254,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Ddown()
     {
-        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        if (skillCount < 12) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -270,7 +270,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Dup()
     {
-        if (skillCount < 6) // 检查技能生成次数是否小于七次
+        if (skillCount < 12) // 检查技能生成次数是否小于七次
         {
             skillCount++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -287,7 +287,7 @@ public class playermove : MonoBehaviour
     //big skill
     void GenerateBall2Dbig()
     {
-        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 17) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
 
@@ -304,7 +304,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Ddownbig()
     {
-        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 17) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1down, transform.position, Quaternion.identity);
@@ -320,7 +320,7 @@ public class playermove : MonoBehaviour
 
     void GenerateBall2Dupbig()
     {
-        if (skillCountbig < 15) // 检查技能生成次数是否小于七次
+        if (skillCountbig < 17) // 检查技能生成次数是否小于七次
         {
             skillCountbig++; // 增加技能生成次数
             Transform ball2D = Instantiate(player1skill1up, transform.position, Quaternion.identity);
@@ -397,7 +397,7 @@ public class playermove : MonoBehaviour
                     mp += 4f;
                 }
                 skill1cooldown = 2;
-                StartCoroutine(DisableFlipXForDuration(0.7f));
+                StartCoroutine(DisableFlipXForDuration(1.2f));
             }
 
             if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
@@ -432,7 +432,7 @@ public class playermove : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.U) && mp == 24)
             {
                 skillCountbig = 0;
-                StartCoroutine(DisableFlipXForDuration(1.5f));
+                StartCoroutine(DisableFlipXForDuration(1.7f));
                 GenerateBall2Dbig();
                 mp = 0;
             }
