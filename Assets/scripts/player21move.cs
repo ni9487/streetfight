@@ -63,6 +63,8 @@ public class player21move : MonoBehaviour
     private bool isSpawning = false;
     public GameObject player3skill31;
 
+    public GameObject blueExPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -648,6 +650,26 @@ public class player21move : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnAndExpandBlueEx()
+    {
+        GameObject blueEx = Instantiate(blueExPrefab, transform.position, Quaternion.identity);
+        
+
+        float elapsedTime = 0f;
+        float duration = 0.15f; // 持续1秒
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float scale = 60*(elapsedTime+0.3f) / duration; // 比例线性增长
+            blueEx.transform.localScale = new Vector3(scale, scale, scale);
+
+            yield return null;
+        }
+
+        Destroy(blueEx); // 1秒后摧毁
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "player2skill")
@@ -873,6 +895,7 @@ public class player21move : MonoBehaviour
         
         if (other.gameObject.tag == "player12skill3")
         {
+            StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 2500)

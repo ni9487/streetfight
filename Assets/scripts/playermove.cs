@@ -63,6 +63,7 @@ public class playermove : MonoBehaviour
     public GameObject player23;
 
     public GameObject lowspeedPrefab;
+    public GameObject blueExPrefab;
 
     void Start()
     {
@@ -633,6 +634,26 @@ public class playermove : MonoBehaviour
         Destroy(objectToDestroy); // 销毁对象
     }
 
+    IEnumerator SpawnAndExpandBlueEx()
+    {
+        GameObject blueEx = Instantiate(blueExPrefab, transform.position, Quaternion.identity);
+        
+
+        float elapsedTime = 0f;
+        float duration = 0.15f; // 持续1秒
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float scale = 60*(elapsedTime+0.3f) / duration; // 比例线性增长
+            blueEx.transform.localScale = new Vector3(scale, scale, scale);
+
+            yield return null;
+        }
+
+        Destroy(blueEx); // 1秒后摧毁
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "player23skill2")
@@ -697,6 +718,7 @@ public class playermove : MonoBehaviour
         
         if (other.gameObject.tag == "player2skill3")
         {
+            StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 2500)

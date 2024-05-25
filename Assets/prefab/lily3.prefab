@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5954437688160005976}
   - component: {fileID: 6751808098783751708}
-  - component: {fileID: -8288576963115885753}
   - component: {fileID: 4853870716331475745}
+  - component: {fileID: -871375948608313705}
   m_Layer: 11
   m_Name: lily3
   m_TagString: player2skill3
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8288576963115885753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6557296051578957126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1953ba65c1b254d4dbbafb6c8f54e838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraShaker: {fileID: 0}
 --- !u!58 &4853870716331475745
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -134,3 +121,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4.735
+--- !u!114 &-871375948608313705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6557296051578957126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1953ba65c1b254d4dbbafb6c8f54e838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}

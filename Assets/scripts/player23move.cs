@@ -59,6 +59,7 @@ public class player23move : MonoBehaviour
     public GameObject player12;
 
     public float shoottimes;
+    public GameObject blueExPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -534,6 +535,26 @@ public class player23move : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnAndExpandBlueEx()
+    {
+        GameObject blueEx = Instantiate(blueExPrefab, transform.position, Quaternion.identity);
+        
+
+        float elapsedTime = 0f;
+        float duration = 0.15f; // 持续1秒
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float scale = 60*(elapsedTime+0.3f) / duration; // 比例线性增长
+            blueEx.transform.localScale = new Vector3(scale, scale, scale);
+
+            yield return null;
+        }
+
+        Destroy(blueEx); // 1秒后摧毁
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player1") // 确保是与 Player1 发生碰撞
@@ -618,6 +639,7 @@ public class player23move : MonoBehaviour
         }
         if (other.gameObject.tag == "player12skill3")
         {
+            StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 3500)
