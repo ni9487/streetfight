@@ -12,7 +12,7 @@ public class p23s1cool  : MonoBehaviour
         // 按下數字鍵1時觸發
         if (Input.GetKeyDown(KeyCode.Keypad1)&&numberText.text == "")
         {
-            numberText.text = "2";
+            numberText.text = "1";
             StartCoroutine(CountdownRoutine());
         }
     }
@@ -20,7 +20,7 @@ public class p23s1cool  : MonoBehaviour
     IEnumerator CountdownRoutine()
     {
         // 每秒倒數一次，直到達到0
-        for (int i = 2; i > 0; i--)
+        for (int i = 1; i > 0; i--)
         {
             // 更新Text顯示的數字
             numberText.text = i.ToString();

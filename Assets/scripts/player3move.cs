@@ -279,7 +279,7 @@ public class player3move : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
             {
                 skillCount = 0;
-                if(shoottimes>=3)
+                if(shoottimes>=4)
                 {
                     GenerateBall2D();
                     shoottimes=0;
@@ -303,7 +303,7 @@ public class player3move : MonoBehaviour
                 {
                     mp += 4f;
                 }
-                skill1cooldown = 0.9f;
+                skill1cooldown = 1f;
                 shoottimes+=1;
             }
             if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
