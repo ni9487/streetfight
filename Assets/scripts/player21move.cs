@@ -65,6 +65,8 @@ public class player21move : MonoBehaviour
 
     public GameObject blueExPrefab;
 
+    private bool canFlip = true; 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -332,6 +334,13 @@ public class player21move : MonoBehaviour
         }
     }
 
+    IEnumerator DisableFlipXForDuration(float duration)
+    {
+        canFlip = false; // 禁止 flipX 改变
+        yield return new WaitForSeconds(duration); // 等待指定时间
+        canFlip = true; // 恢复 flipX 改变
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -346,7 +355,10 @@ public class player21move : MonoBehaviour
                 rb.velocity =new Vector2(-speed,rb.velocity.y);
                 //transform.Translate(-speed * Time.deltaTime, 0, 0);
                 float curspeed = -speed * Time.deltaTime;
-                flip(curspeed);
+                if(canFlip)
+                {
+                    flip(curspeed);
+                }
                 //anim.SetBool("jump",false);
             }
             if (Input.GetKey(KeyCode.RightArrow))
@@ -354,7 +366,10 @@ public class player21move : MonoBehaviour
                 rb.velocity =new Vector2(speed,rb.velocity.y);
                 //transform.Translate(speed * Time.deltaTime, 0, 0);
                 float curspeed = speed * Time.deltaTime;
-                flip(curspeed);
+                if(canFlip)
+                {
+                    flip(curspeed);
+                }
                 //anim.SetBool("jump",false);
             }
 
@@ -382,6 +397,7 @@ public class player21move : MonoBehaviour
                     mp += 4f;
                 }
                 skill1cooldown = 2;
+                StartCoroutine(DisableFlipXForDuration(0.7f));
             }
 
             if (Input.GetKeyDown(KeyCode.Keypad2) && skill2cooldown == 0)
@@ -389,7 +405,7 @@ public class player21move : MonoBehaviour
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
-                if(sprite.flipX==false)
+                if(rb.velocity.x > 0)
                 {
                     rb.velocity=new Vector2(rb.velocity.x+jumpForce,rb.velocity.y);
                     //transform.Translate(speed*15*Time.deltaTime,0,0);
@@ -416,6 +432,7 @@ public class player21move : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Keypad3) && mp == 24)
             {
                 skillCountbig = 0;
+                StartCoroutine(DisableFlipXForDuration(1.5f));
                 GenerateBall2Dbig();
                 mp = 0;
             }
