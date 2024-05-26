@@ -346,7 +346,13 @@ public class player2move : MonoBehaviour
     }
 
     IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
-    {
+    { 
+        float timerr=1;
+        while(sprite.color != defenseColor&&timerr>0)
+        {
+            sprite.color = defenseColor;
+            timerr-=Time.deltaTime;
+        }
         yield return new WaitForSeconds(1f); // 等待一秒
 
         // 恢复移动
@@ -560,6 +566,16 @@ public class player2move : MonoBehaviour
         }
         if (other.gameObject.tag == "player1skill1")
         {
+            playermove player1Move = player1.GetComponent<playermove>() as playermove;
+            if(player1Move.hp>9200)
+            {
+                player1Move.hp=9800;
+            }
+            else
+            {
+                player1Move.hp+=600;
+            }
+
             if (hp >= 600)
             {
                 hp -= 600f;
@@ -568,7 +584,6 @@ public class player2move : MonoBehaviour
             {
                 hp = 0;
             }
-
             if (hp == 0)
             {
                 player2hp.transform.localScale = new Vector3(0, player2hp.transform.localScale.y, player2hp.transform.localScale.z);
