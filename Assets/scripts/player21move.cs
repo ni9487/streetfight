@@ -67,6 +67,8 @@ public class player21move : MonoBehaviour
 
     private bool canFlip = true; 
 
+    public GameObject player1;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -74,7 +76,7 @@ public class player21move : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         extrajump = 2;
         maxhp = 10000;
-        hp = 0.97f * maxhp;
+        hp = 0.98f * maxhp;
         maxmp = 25;
         mp = 0;
         originalColor = sprite.color;
@@ -388,9 +390,9 @@ public class player21move : MonoBehaviour
             {
                 skillCount = 0;
                 GenerateBall2D();
-                if (mp >= 20f && mp < 24f)
+                if (mp >= 20f && mp < 24.5f)
                 {
-                    mp = 24f;
+                    mp = 24.5f;
                 }
                 if (mp < 20)
                 {
@@ -417,9 +419,9 @@ public class player21move : MonoBehaviour
                     //transform.Translate(-speed*15*Time.deltaTime,0,0);
                     //rb.AddForce(Vector2.left * jumpForce*6, ForceMode2D.Impulse);
                 }
-                if (mp >= 20f && mp < 24f)
+                if (mp >= 20f && mp < 24.5f)
                 {
-                    mp = 24f;
+                    mp = 24.5f;
                 }
                 if (mp < 20)
                 {
@@ -429,7 +431,7 @@ public class player21move : MonoBehaviour
                 StartCoroutine(Delaymove());
             }
 
-            if (Input.GetKeyDown(KeyCode.Keypad3) && mp == 24)
+            if (Input.GetKeyDown(KeyCode.Keypad3) && mp >= 24.5)
             {
                 skillCountbig = 0;
                 StartCoroutine(DisableFlipXForDuration(1.7f));
@@ -467,9 +469,9 @@ public class player21move : MonoBehaviour
         {
             mp = 0;
         }
-        if (mp >= 24)
+        if (mp >= 24.5f)
         {
-            mp = 24;
+            mp = 24.5f;
         }
 
         if (hp <= 0)
@@ -522,7 +524,10 @@ public class player21move : MonoBehaviour
         // 等待一段时间
         yield return new WaitForSeconds(duration);
         // 恢复原始颜色
-        sprite.color = originalColor;
+        if(!isDefending)
+        {
+            sprite.color = originalColor;
+        }
     }
 
     IEnumerator dizzdelay()
@@ -832,11 +837,21 @@ public class player21move : MonoBehaviour
         {
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
-                if (hp >= 400)
+                playermove player1Move = player1.GetComponent<playermove>() as playermove;
+                if(player1Move.hp>9750)
                 {
-                    hp -= 400f;
+                    player1Move.hp=9800;
                 }
-                else if (hp < 400)
+                else
+                {
+                    player1Move.hp+=50;
+                }
+
+                if (hp >= 250)
+                {
+                    hp -= 250f;
+                }
+                else if (hp < 250)
                 {
                     hp = 0;
                 }
@@ -858,6 +873,16 @@ public class player21move : MonoBehaviour
         }
         if (other.gameObject.tag == "player1skill1")
         {
+            playermove player1Move = player1.GetComponent<playermove>() as playermove;
+            if(player1Move.hp>9600)
+            {
+                player1Move.hp=9800;
+            }
+            else
+            {
+                player1Move.hp+=200;
+            }
+
             if (hp >= 600)
             {
                 hp -= 600f;

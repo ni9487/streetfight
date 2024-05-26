@@ -67,7 +67,7 @@ public class player12move : MonoBehaviour
         maxmp = 25;
         mp = 0;
         maxhp = 10000;
-        hp = 0.97f * maxhp;
+        hp = 0.98f * maxhp;
         originalColor = sprite.color;
     }
 
@@ -225,9 +225,9 @@ public class player12move : MonoBehaviour
                     {
                         fireball.isright = false;
                     }
-                    if (mp >= 20 && mp < 24)
+                    if (mp >= 20f && mp < 24.5f)
                     {
-                        mp = 24;
+                        mp = 24.5f;
                     }
                     if (mp < 20)
                     {
@@ -241,9 +241,9 @@ public class player12move : MonoBehaviour
             {
                 if (skill1cooldown == 0)
                 {
-                    if (mp >= 20 && mp < 24)
+                    if (mp >= 20f && mp < 24.5f)
                     {
-                        mp = 24;
+                        mp = 24.5f;
                     }
                     if (mp < 20)
                     {
@@ -255,7 +255,7 @@ public class player12move : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.U))
             {
-                if (mp >= 24f)
+                if (mp >= 24.5)
                 {
                     // 生成圆球
                     GenerateBall2D();
@@ -322,9 +322,9 @@ public class player12move : MonoBehaviour
         {
             mp = 0;
         }
-        if (mp >= 24)
+        if (mp >= 24.5f)
         {
-            mp = 24;
+            mp = 24.5f;
         }
 
         if (hp <= 0)
@@ -342,7 +342,10 @@ public class player12move : MonoBehaviour
         // 等待一段时间
         yield return new WaitForSeconds(duration);
         // 恢复原始颜色
-        sprite.color = originalColor;
+        if(!isDefending)
+        {
+            sprite.color = originalColor;
+        }
     }
 
     IEnumerator ResetColorAfterDelay2()//碰撞完等多久回色
@@ -586,11 +589,20 @@ public class player12move : MonoBehaviour
         {
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
-                if (hp >= 400)
+                player21move player1Move = player21.GetComponent<player21move>() as player21move;
+                if(player1Move.hp>9750)
                 {
-                    hp -= 400f;
+                    player1Move.hp=9800;
                 }
-                else if (hp < 400)
+                else
+                {
+                    player1Move.hp+=50;
+                }
+                if (hp >= 250)
+                {
+                    hp -= 250f;
+                }
+                else if (hp < 250)
                 {
                     hp = 0;
                 }
@@ -612,6 +624,15 @@ public class player12move : MonoBehaviour
         }
         if (other.gameObject.tag == "player21skill1")
         {
+            player21move player1Move = player21.GetComponent<player21move>() as player21move;
+            if(player1Move.hp>9600)
+            {
+                player1Move.hp=9800;
+            }
+            else
+            {
+                player1Move.hp+=200;
+            }
             if (hp >= 600)
             {
                 hp -= 600f;
