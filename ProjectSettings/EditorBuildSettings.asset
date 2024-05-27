@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/st.unity
     guid: 8360c976243fa31409ed2dab60f16bf1
+  - enabled: 1
+    path: Assets/Scenes/vectory.unity
+    guid: 122e0a38bb677a74c946ce6a45dfca12
   m_configObjects: {}

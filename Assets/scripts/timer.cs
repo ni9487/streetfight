@@ -36,8 +36,14 @@ public class timer : MonoBehaviour
             countdownTime--;
         }
         countdownDisplay.text = "0";
+        LoadNewScene();
     }
 
-    
+    void LoadNewScene()
+    {
+        // 确保在构建设置中添加了你要加载的场景
+        // 使用场景的名称进行加载
+        SceneManager.LoadScene("vectory");  // 替换为你的新场景名称
+    }
 }
 
