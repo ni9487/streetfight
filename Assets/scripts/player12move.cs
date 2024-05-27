@@ -111,7 +111,7 @@ public class player12move : MonoBehaviour
     IEnumerator SpawnTarget()
     {
         // Instantiate the target prefab at the player's position
-        
+        AudioManager.instance.PlaychargeSound();
         Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y-17 , transform.position.z);
         GameObject target = Instantiate(targetPrefab, targetPosition, Quaternion.identity);
         StartCoroutine(RotateObject(target, 0.4f));
