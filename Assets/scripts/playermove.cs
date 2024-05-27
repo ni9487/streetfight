@@ -104,7 +104,7 @@ public class playermove : MonoBehaviour
 
     IEnumerator FollowPlayer2Dlong(Transform ball2D)
     {
-        float existTime = 0.4f; // 圆球存在的最大时间
+        float existTime = 0.3f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
@@ -113,7 +113,7 @@ public class playermove : MonoBehaviour
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (0.7f - existTime) / 0.3f;
+            float scale = (0.5f - existTime) / 0.3f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -199,7 +199,7 @@ public class playermove : MonoBehaviour
     IEnumerator SpawnTarget()
     {
         // Instantiate the target prefab at the player's position
-        
+        AudioManager.instance.PlaychargeSound();
         Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y-17 , transform.position.z);
         GameObject target = Instantiate(targetPrefab, targetPosition, Quaternion.identity);
         StartCoroutine(RotateObject(target, 0.4f));
@@ -386,6 +386,7 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
             {
+                AudioManager.instance.PlaySwordSoundRepeatedly(12, 0.1f);
                 skillCount = 0;
                 GenerateBall2D();
                 if (mp >= 20f && mp < 24.5f)
@@ -402,6 +403,7 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
             {
+                AudioManager.instance.PlaydashSound();
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
@@ -431,6 +433,7 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.U) && mp >= 24.5)
             {
+                AudioManager.instance.PlaySwordSoundRepeatedly(15, 0.1f);
                 skillCountbig = 0;
                 StartCoroutine(DisableFlipXForDuration(1.7f));
                 GenerateBall2Dbig();
@@ -602,6 +605,7 @@ public class playermove : MonoBehaviour
         }
         if (coll.gameObject.tag == "player2skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -705,6 +709,7 @@ public class playermove : MonoBehaviour
         }
         if (other.gameObject.tag == "player2skill")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 dizzy=true;
@@ -738,6 +743,7 @@ public class playermove : MonoBehaviour
         
         if (other.gameObject.tag == "player2skill3")
         {
+            AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);

@@ -106,7 +106,7 @@ public class player21move : MonoBehaviour
 
     IEnumerator FollowPlayer2Dlong(Transform ball2D)
     {
-        float existTime = 0.4f; // 圆球存在的最大时间
+        float existTime = 0.3f; // 圆球存在的最大时间
         Vector3 initialScale = ball2D.localScale; // 初始大小
         while (existTime > 0)
         {
@@ -115,7 +115,7 @@ public class player21move : MonoBehaviour
                 yield break; // 如果ball2D已经被销毁，则退出协程
             }
             // 根据距离调整球体的大小，距离越小，球体越大
-            float scale = (0.7f - existTime) / 0.3f;
+            float scale = (0.5f - existTime) / 0.3f;
             ball2D.localScale = initialScale * scale; // 调整大小
 
             existTime -= Time.deltaTime;
@@ -388,6 +388,7 @@ public class player21move : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Keypad1) && skill1cooldown == 0)
             {
+                AudioManager.instance.PlaySwordSoundRepeatedly(12, 0.1f);
                 skillCount = 0;
                 GenerateBall2D();
                 if (mp >= 20f && mp < 24.5f)
@@ -404,6 +405,7 @@ public class player21move : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Keypad2) && skill2cooldown == 0)
             {
+                AudioManager.instance.PlaydashSound();
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
@@ -433,6 +435,7 @@ public class player21move : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Keypad3) && mp >= 24.5)
             {
+                AudioManager.instance.PlaySwordSoundRepeatedly(15, 0.1f);
                 skillCountbig = 0;
                 StartCoroutine(DisableFlipXForDuration(1.7f));
                 GenerateBall2Dbig();
