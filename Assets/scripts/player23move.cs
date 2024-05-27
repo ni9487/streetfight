@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class player23move : MonoBehaviour
 {
@@ -816,6 +817,14 @@ public class player23move : MonoBehaviour
     {
         Instantiate(playerBoom, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
+        LoadNewScene();
+    }
+
+    void LoadNewScene()
+    {
+        // 确保在构建设置中添加了你要加载的场景
+        // 使用场景的名称进行加载
+        SceneManager.LoadScene("vectory");  // 替换为你的新场景名称
     }
 
     void flip(float dirx)
