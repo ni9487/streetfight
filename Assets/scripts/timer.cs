@@ -36,7 +36,8 @@ public class timer : MonoBehaviour
             countdownTime--;
         }
         countdownDisplay.text = "0";
-        LoadNewScene();
+        //LoadNewScene();
+        StartCoroutine(delayvictory());
     }
 
     void LoadNewScene()
@@ -44,6 +45,12 @@ public class timer : MonoBehaviour
         // 确保在构建设置中添加了你要加载的场景
         // 使用场景的名称进行加载
         SceneManager.LoadScene("vectory");  // 替换为你的新场景名称
+    }
+
+    IEnumerator delayvictory()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("vectory"); 
     }
 }
 

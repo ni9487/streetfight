@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 不要在加载新场景时销毁
+            //DontDestroyOnLoad(gameObject); // 不要在加载新场景时销毁
         }
         else
         {

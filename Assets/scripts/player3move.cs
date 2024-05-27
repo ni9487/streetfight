@@ -814,16 +814,25 @@ public class player3move : MonoBehaviour
     public void playerdie()
     {
         Instantiate(playerBoom, this.transform.position, Quaternion.identity);
+        GameController.instance.ExecuteAfterDelay(1.0f, () =>
+        {
+            SceneManager.LoadScene("vectory");
+        });
         Destroy(this.gameObject);
-        LoadNewScene();
     }
 
-    void LoadNewScene()
-    {
-        // 确保在构建设置中添加了你要加载的场景
-        // 使用场景的名称进行加载
-        SceneManager.LoadScene("vectory");  // 替换为你的新场景名称
-    }
+    // IEnumerator delayvictory()
+    // {
+    //     yield return new WaitForSeconds(1.5f);
+    //     SceneManager.LoadScene("vectory"); 
+    // }
+
+    // void LoadNewScene()
+    // {
+    //     // 确保在构建设置中添加了你要加载的场景
+    //     // 使用场景的名称进行加载
+    //     SceneManager.LoadScene("vectory");  // 替换为你的新场景名称
+    // }
 
     void flip(float dirx)
     {
