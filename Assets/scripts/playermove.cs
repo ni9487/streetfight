@@ -48,7 +48,7 @@ public class playermove : MonoBehaviour
     private bool isDefending = false; // 是否处于防御状态
     private bool canMove = true; // 是否可以移动
     private float defensecooldown;
-    public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
+    public Color defenseColor = new Color32(255, 255, 255, 255); // 设置防禦时的颜色
 
     public GameObject targetPrefab;  // Assign the Target prefab in inspector
     public Transform lilyPrefab;    // Assign the Lily1 prefab in inspector
@@ -67,6 +67,8 @@ public class playermove : MonoBehaviour
     public GameObject blueExPrefab;
 
     private bool canFlip = true; 
+
+    public GameObject icePrefab;
 
     void Start()
     {
@@ -342,6 +344,27 @@ public class playermove : MonoBehaviour
         canFlip = true; // 恢复 flipX 改变
     }
 
+    IEnumerator IceFollowPlayer(GameObject iceObject, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 offset = new Vector3(0f, 30f, 0f);
+        while (elapsedTime < duration)
+        {
+            if (iceObject == null)
+            {
+                yield break; // 如果iceObject已经被销毁，则退出协程
+            }
+
+            // 更新iceObject的位置，使其跟随玩家
+            iceObject.transform.position = transform.position+offset;
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(iceObject); // 持续1秒后销毁
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -453,6 +476,11 @@ public class playermove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
+            Vector3 offset = new Vector3(0f, 20f, 0f);
+            GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
+    
+            // 启动跟随协程
+            StartCoroutine(IceFollowPlayer(ice, 1f));
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动
@@ -899,6 +927,7 @@ public class playermove : MonoBehaviour
         }
         if (other.gameObject.tag == "player23skill31")
         {
+            AudioManager.instance.PlayDamageSound();
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 500)

@@ -58,6 +58,7 @@ public class player2move : MonoBehaviour
     public Transform lilyPrefab;
 
     public GameObject blueExPrefab;
+    public GameObject icePrefab;
 
     void Start()
     {
@@ -180,6 +181,26 @@ public class player2move : MonoBehaviour
         StartCoroutine(FollowPlayer2D(ball2D));
     }
 
+    IEnumerator IceFollowPlayer(GameObject iceObject, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 offset = new Vector3(0f, 30f, 0f);
+        while (elapsedTime < duration)
+        {
+            if (iceObject == null)
+            {
+                yield break; // 如果iceObject已经被销毁，则退出协程
+            }
+
+            // 更新iceObject的位置，使其跟随玩家
+            iceObject.transform.position = transform.position+offset;
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(iceObject); // 持续1秒后销毁
+    }
     // Update is called once per frame
     void Update()
     {
@@ -270,6 +291,8 @@ public class player2move : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
         {
+            Vector3 offset = new Vector3(0f, 20f, 0f);
+            GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动
@@ -416,6 +439,7 @@ public class player2move : MonoBehaviour
         }
         if (coll.gameObject.tag == "player3skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -441,6 +465,7 @@ public class player2move : MonoBehaviour
 
         if (coll.gameObject.tag == "player12skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -487,6 +512,7 @@ public class player2move : MonoBehaviour
     {
         if (other.gameObject.tag=="Player1") // 确保是与 Player1 发生碰撞
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
                 Vector3 lowspeedposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
@@ -519,6 +545,7 @@ public class player2move : MonoBehaviour
 
         if (other.gameObject.tag == "player3skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
             
@@ -542,6 +569,7 @@ public class player2move : MonoBehaviour
 
         if (other.gameObject.tag == "player1skill1updown")
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
                 playermove player1Move = player1.GetComponent<playermove>() as playermove;
@@ -579,6 +607,7 @@ public class player2move : MonoBehaviour
         }
         if (other.gameObject.tag == "player1skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             playermove player1Move = player1.GetComponent<playermove>() as playermove;
             if(player1Move.hp>9600)
             {
@@ -608,6 +637,7 @@ public class player2move : MonoBehaviour
         }
         if (other.gameObject.tag == "player3skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 // 获取 player3 的位置
@@ -648,12 +678,14 @@ public class player2move : MonoBehaviour
         }
         if (other.gameObject.tag == "player3skill3")
         {
+            AudioManager.instance.PlayDamageSound();
             isSpawning=true;
             StartCoroutine(downarrowdelay());
         }
 
         if (other.gameObject.tag == "player3skill31")
         {
+            AudioManager.instance.PlayDamageSound();
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 500)
@@ -676,6 +708,7 @@ public class player2move : MonoBehaviour
 
         if (other.gameObject.tag == "player12skill")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
                 dizzy=true;
@@ -709,6 +742,7 @@ public class player2move : MonoBehaviour
         
         if (other.gameObject.tag == "player12skill3")
         {
+            AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);
