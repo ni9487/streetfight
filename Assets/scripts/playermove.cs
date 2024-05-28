@@ -942,7 +942,7 @@ public class playermove : MonoBehaviour
         Instantiate(playerBoom, this.transform.position, Quaternion.identity);
         GameController.instance.ExecuteAfterDelay(1.0f, () =>
         {
-            SceneManager.LoadScene("vectory");
+            SceneManager.LoadScene("New scene 1");
         });
         Destroy(this.gameObject);
     }
