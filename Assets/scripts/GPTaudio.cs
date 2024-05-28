@@ -10,6 +10,16 @@ public class AudioManager : MonoBehaviour
     public AudioClip swordSound;
     public AudioClip dash;
     public AudioClip charge;
+    public AudioClip wavesword;
+
+    public AudioClip lily3boom;
+    public AudioClip lily3release;
+    public AudioClip lily2release;
+    public AudioClip lily2boom;
+
+    public AudioClip shootarrow1;
+    public AudioClip magiccircle;
+    public AudioClip yorn2shoot;
 
     void Awake()
     {
@@ -38,6 +48,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void Playlily3boom()
+    {
+        if (lily3boom != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(lily3boom);
+        }
+    }
+
     public void PlaydashSound()
     {
         if (dash != null && audioSource != null)
@@ -51,6 +69,62 @@ public class AudioManager : MonoBehaviour
         if (charge != null && audioSource != null)
         {
             audioSource.PlayOneShot(charge);
+        }
+    }
+
+    public void Playlily3release()
+    {
+        if (lily3release != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(lily3release);
+        }
+    }
+
+    public void Playshootarrow1()
+    {
+        if (shootarrow1 != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootarrow1);
+        }
+    }
+
+    public void Playmagiccircle()
+    {
+        if (magiccircle != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(magiccircle);
+        }
+    }
+
+    public void Playlily2release()
+    {
+        if (lily2release != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(lily2release);
+        }
+    }
+
+    public void Playlily2boom()
+    {
+        if (lily2boom != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(lily2boom);
+        }
+    }
+
+    public void Playyorn2shoot()
+    {
+        if (yorn2shoot != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(yorn2shoot);
+        }
+    }
+
+    public void Playwavesword()
+    {
+        if (wavesword != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(wavesword);
         }
     }
 

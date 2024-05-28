@@ -387,7 +387,8 @@ public class playermove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.T) && skill1cooldown == 0)
             {
-                AudioManager.instance.PlaySwordSoundRepeatedly(12, 0.1f);
+                AudioManager.instance.Playwavesword();
+                //AudioManager.instance.PlaySwordSoundRepeatedly(12, 0.1f);
                 skillCount = 0;
                 GenerateBall2D();
                 if (mp >= 20f && mp < 24.5f)
@@ -744,7 +745,7 @@ public class playermove : MonoBehaviour
         
         if (other.gameObject.tag == "player2skill3")
         {
-            AudioManager.instance.PlayDamageSound();
+            AudioManager.instance.Playlily3boom();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);

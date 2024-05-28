@@ -3543,7 +3543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1041973077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5970,7 +5970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1583054845
 Rigidbody2D:
   serializedVersion: 4
@@ -6897,6 +6897,14 @@ MonoBehaviour:
   swordSound: {fileID: 8300000, guid: 26709e26ad0ece84eade544d6bb1c32e, type: 3}
   dash: {fileID: 8300000, guid: 1de4fa80eb7e2ff408bb5468dbb37965, type: 3}
   charge: {fileID: 8300000, guid: 53c7920ff1d08a541a64206ca6f03d15, type: 3}
+  wavesword: {fileID: 8300000, guid: ca24af70537240f479dc02ffa286a524, type: 3}
+  lily3boom: {fileID: 8300000, guid: 0ede421f35c450a4e8f51bf010d8c591, type: 3}
+  lily3release: {fileID: 8300000, guid: 7765dbccf0822904ea7f254f054503d7, type: 3}
+  lily2release: {fileID: 8300000, guid: 90cbf3ef7f25e2c4d9ac70b30644898a, type: 3}
+  lily2boom: {fileID: 0}
+  shootarrow1: {fileID: 0}
+  magiccircle: {fileID: 0}
+  yorn2shoot: {fileID: 0}
 --- !u!1 &1814011016
 GameObject:
   m_ObjectHideFlags: 0
@@ -8139,7 +8147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2059509747937424087, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_TagString
