@@ -62,9 +62,23 @@ public class heroGenerate : MonoBehaviour
         }
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
-        
+        if (Player.activeSelf)
+            PlayerInfo.firstCharacterHealth = Player.GetComponent<playermove>().hp;
+        if (Player2.activeSelf)
+            PlayerInfo.firstCharacterHealth = Player2.GetComponent<player12move>().hp;
+        if (Player3.activeSelf)
+            PlayerInfo.firstCharacterHealth = Player3.GetComponent<player3move>().hp;
+
+        if (Player21.activeSelf)
+            PlayerInfo.secondCharacterHealth = Player21.GetComponent<player21move>().hp;
+        if (Player22.activeSelf)
+            PlayerInfo.secondCharacterHealth = Player22.GetComponent<player2move>().hp;
+        if (Player23.activeSelf)
+            PlayerInfo.secondCharacterHealth = Player23.GetComponent<player23move>().hp;
     }
 }

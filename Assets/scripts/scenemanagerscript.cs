@@ -15,4 +15,6 @@ public class scenemanagerscript : MonoBehaviourPunCallbacks
 public static class PlayerInfo {
     public static string firstCharacterSelected;
     public static string secondCharacterSelected;
+    public static float firstCharacterHealth;
+    public static float secondCharacterHealth;
 }
