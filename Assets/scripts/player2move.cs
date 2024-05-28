@@ -550,11 +550,11 @@ public class player2move : MonoBehaviour
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
             
-                if (hp >= 150)
+                if (hp >= 270)
                 {
-                    hp -= 150;
+                    hp -= 270;
                 }
-                else if (hp < 150)
+                else if (hp < 270)
                 {
                     hp = 0;
                 }
@@ -582,11 +582,11 @@ public class player2move : MonoBehaviour
                 {
                     player1Move.hp+=50;
                 }
-                if (hp >= 250)
+                if (hp >= 180)
                 {
-                    hp -= 250f;
+                    hp -= 180f;
                 }
-                else if (hp < 250)
+                else if (hp < 180)
                 {
                     hp = 0;
                 }

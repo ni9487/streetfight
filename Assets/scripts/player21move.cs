@@ -433,17 +433,30 @@ public class player21move : MonoBehaviour
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
-                if(rb.velocity.x >= 0)
+                if(rb.velocity.x > 0)
                 {
                     rb.velocity=new Vector2(rb.velocity.x+jumpForce,rb.velocity.y);
                     //transform.Translate(speed*15*Time.deltaTime,0,0);
                     //rb.AddForce(Vector2.right * jumpForce*6, ForceMode2D.Impulse);
                 }
-                else
+                else if(rb.velocity.x < 0)
                 {
                     rb.velocity=new Vector2(rb.velocity.x-jumpForce,rb.velocity.y);
                     //transform.Translate(-speed*15*Time.deltaTime,0,0);
                     //rb.AddForce(Vector2.left * jumpForce*6, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    if (sprite.flipX)
+                    {
+                        // 如果角色面向左边，向左冲刺
+                        rb.velocity = new Vector2(rb.velocity.x - jumpForce, rb.velocity.y);
+                    }
+                    else
+                    {
+                        // 如果角色面向右边，向右冲刺
+                        rb.velocity = new Vector2(rb.velocity.x + jumpForce, rb.velocity.y);
+                    }
                 }
                 if (mp >= 20f && mp < 24.5f)
                 {
@@ -763,12 +776,11 @@ public class player21move : MonoBehaviour
             AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor||sprite.color == damageColor)
             {
-            
-                if (hp >= 150)
+                if (hp >= 270)
                 {
-                    hp -= 150;
+                    hp -= 270;
                 }
-                else if (hp < 150)
+                else if (hp < 270)
                 {
                     hp = 0;
                 }
@@ -884,11 +896,11 @@ public class player21move : MonoBehaviour
                     player1Move.hp+=50;
                 }
 
-                if (hp >= 250)
+                if (hp >= 180)
                 {
-                    hp -= 250f;
+                    hp -= 180f;
                 }
-                else if (hp < 250)
+                else if (hp < 180)
                 {
                     hp = 0;
                 }
