@@ -630,6 +630,7 @@ public class playermove : MonoBehaviour
         }
         if (coll.gameObject.tag == "player23skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -684,6 +685,7 @@ public class playermove : MonoBehaviour
     {
         if (other.gameObject.tag == "player23skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 // 获取 player3 的位置
@@ -768,6 +770,7 @@ public class playermove : MonoBehaviour
 
         if (other.gameObject.tag=="player21") // 确保是与 Player1 发生碰撞
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
                 Vector3 lowspeedposition = new Vector3(transform.position.x, transform.position.y+50 , transform.position.z);
@@ -800,6 +803,7 @@ public class playermove : MonoBehaviour
 
         if (other.gameObject.tag == "player21skill1updown")
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor||sprite.color == damageColor)&&!isDefending)
             {
                 player21move player1Move = player21.GetComponent<player21move>() as player21move;
@@ -837,6 +841,7 @@ public class playermove : MonoBehaviour
         }
         if (other.gameObject.tag == "player21skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             player21move player1Move = player21.GetComponent<player21move>() as player21move;
             if(player1Move.hp>9600)
             {
@@ -867,6 +872,7 @@ public class playermove : MonoBehaviour
         }
         if (other.gameObject.tag == "player23skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 if (hp >= 150)

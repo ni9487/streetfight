@@ -220,6 +220,7 @@ public class player12move : MonoBehaviour
             {
                 if (skill2cooldown == 0)
                 {
+                    AudioManager.instance.Playlily2release();
                     GameObject skill2 = Instantiate(lily2, this.transform.position, quaternion.identity);
                     lily2 fireball = skill2.GetComponent<lily2>() as lily2;
                     if (!sprite.flipX)
@@ -258,6 +259,7 @@ public class player12move : MonoBehaviour
             {
                 if (mp >= 24.5)
                 {
+                    AudioManager.instance.Playlily3release();
                     // 生成圆球
                     GenerateBall2D();
                     mp = 0;
