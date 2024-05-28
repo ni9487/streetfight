@@ -13,6 +13,6 @@ public class vectoryShift : MonoBehaviour
     }
     public void Quitgame()
     {
-        SceneManager.LoadScene("st");
+        Application.Quit();
     }
 }
