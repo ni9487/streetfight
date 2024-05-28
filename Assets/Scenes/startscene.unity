@@ -1285,9 +1285,9 @@ MonoBehaviour:
   lowspeedPrefab: {fileID: 5067726147757716381, guid: f7f3f512ab7fd114e8a94124c336a2a6, type: 3}
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
-  player21: {fileID: 0}
+  player21: {fileID: 1342816081}
   player2: {fileID: 1041973076}
-  player23: {fileID: 0}
+  player23: {fileID: 2022421502}
   shoottimes: 0
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
 --- !u!212 &481930197
@@ -6782,7 +6782,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4346ef213abaa9c43872ea6ea8a5fb4f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6904,7 +6904,7 @@ MonoBehaviour:
   lily2boom: {fileID: 0}
   shootarrow1: {fileID: 0}
   magiccircle: {fileID: 0}
-  yorn2shoot: {fileID: 0}
+  yornkeepshoot: {fileID: 8300000, guid: 276dacb3d4c003642b9308c64307a199, type: 3}
 --- !u!1 &1814011016
 GameObject:
   m_ObjectHideFlags: 0

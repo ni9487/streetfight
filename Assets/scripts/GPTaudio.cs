@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip shootarrow1;
     public AudioClip magiccircle;
-    public AudioClip yorn2shoot;
+    public AudioClip yornkeepshoot;
 
     void Awake()
     {
@@ -112,11 +112,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Playyorn2shoot()
+    public void Playyornkeepshoot()
     {
-        if (yorn2shoot != null && audioSource != null)
+        if (yornkeepshoot != null && audioSource != null)
         {
-            audioSource.PlayOneShot(yorn2shoot);
+            audioSource.PlayOneShot(yornkeepshoot);
         }
     }
 

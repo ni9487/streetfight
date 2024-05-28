@@ -284,6 +284,7 @@ public class player3move : MonoBehaviour
                 skillCount = 0;
                 if(shoottimes>=4)
                 {
+                    AudioManager.instance.Playyornkeepshoot();
                     GenerateBall2D();
                     shoottimes=0;
                 }
@@ -486,10 +487,12 @@ public class player3move : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // 等待1秒
         Destroy(objectToDestroy); // 销毁对象
     }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "player23skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -514,6 +517,7 @@ public class player3move : MonoBehaviour
         }
         if (coll.gameObject.tag == "player2skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 print(coll.gameObject.name);
@@ -564,6 +568,7 @@ public class player3move : MonoBehaviour
     {
         if (other.gameObject.tag == "player21") // 确保是与 Player1 发生碰撞
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor || sprite.color == damageColor) && !isDefending)
             {
                 Vector3 lowspeedposition = new Vector3(transform.position.x, transform.position.y + 50, transform.position.z);
@@ -596,6 +601,7 @@ public class player3move : MonoBehaviour
 
         if (other.gameObject.tag == "player21skill1updown")
         {
+            AudioManager.instance.PlayDamageSound();
             if ((sprite.color == originalColor || sprite.color == damageColor) && !isDefending)
             {
                 player21move player1Move = player21.GetComponent<player21move>() as player21move;
@@ -634,6 +640,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player21skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             player21move player1Move = player21.GetComponent<player21move>() as player21move;
             if(player1Move.hp>9600)
             {
@@ -663,6 +670,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player2skill3")
         {
+            AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
             print(other.gameObject.name);
@@ -686,6 +694,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player2skill")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 dizzy = true;
@@ -718,11 +727,13 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player23skill3")
         {
+            AudioManager.instance.PlayDamageSound();
             isSpawning = true;
             StartCoroutine(downarrowdelay());
         }
         if (other.gameObject.tag == "player23skill31")
         {
+            AudioManager.instance.PlayDamageSound();
             Destroy(other.gameObject);
             print(other.gameObject.name);
             if (hp >= 500)
@@ -743,6 +754,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player23skill1")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
 
@@ -766,6 +778,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player23skill2")
         {
+            AudioManager.instance.PlayDamageSound();
             if (sprite.color == originalColor || sprite.color == damageColor)
             {
                 // 获取 player3 的位置
