@@ -433,7 +433,7 @@ public class player21move : MonoBehaviour
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
-                if(rb.velocity.x > 0)
+                if(rb.velocity.x >= 0)
                 {
                     rb.velocity=new Vector2(rb.velocity.x+jumpForce,rb.velocity.y);
                     //transform.Translate(speed*15*Time.deltaTime,0,0);
@@ -479,6 +479,7 @@ public class player21move : MonoBehaviour
         {
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
+            StartCoroutine(IceFollowPlayer(ice, 1f));
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动

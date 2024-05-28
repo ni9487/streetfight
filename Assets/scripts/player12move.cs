@@ -299,6 +299,7 @@ public class player12move : MonoBehaviour
         {
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
+            StartCoroutine(IceFollowPlayer(ice, 1f));
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动

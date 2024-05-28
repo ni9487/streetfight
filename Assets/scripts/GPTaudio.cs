@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip lily2boom;
 
     public AudioClip shootarrow1;
+    public AudioClip shootarrow2;
     public AudioClip magiccircle;
     public AudioClip yornkeepshoot;
 
@@ -117,6 +118,14 @@ public class AudioManager : MonoBehaviour
         if (yornkeepshoot != null && audioSource != null)
         {
             audioSource.PlayOneShot(yornkeepshoot);
+        }
+    }
+
+    public void Playshootarrow2()
+    {
+        if (shootarrow2 != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootarrow2);
         }
     }
 

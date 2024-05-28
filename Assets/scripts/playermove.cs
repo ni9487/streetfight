@@ -432,7 +432,7 @@ public class playermove : MonoBehaviour
                 isDashing = true;
                 dashTrigger.enabled=true;
                 canMove=false;
-                if(rb.velocity.x > 0)
+                if(rb.velocity.x >= 0)
                 {
                     rb.velocity=new Vector2(rb.velocity.x+jumpForce,rb.velocity.y);
                     //transform.Translate(speed*15*Time.deltaTime,0,0);

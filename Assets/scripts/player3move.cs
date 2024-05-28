@@ -337,7 +337,7 @@ public class player3move : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Y) && skill2cooldown == 0)
             {
-                AudioManager.instance.Playshootarrow1();
+                AudioManager.instance.Playshootarrow2();
                 GameObject skill2 = Instantiate(player3skill2, this.transform.position, Quaternion.identity);
                 player3skill2 fireball = skill2.GetComponent<player3skill2>();
                 fireball.isright = !sprite.flipX; // Set direction based on the player's facing direction
@@ -370,6 +370,7 @@ public class player3move : MonoBehaviour
         {
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
+            StartCoroutine(IceFollowPlayer(ice, 1f));
             // 角色进入防御状态
             isDefending = true;
             canMove = false; // 禁止移动

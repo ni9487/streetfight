@@ -1277,7 +1277,7 @@ MonoBehaviour:
   player3skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
   damageColor: {r: 0.88235295, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
-  defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
+  defenseColor: {r: 0.94905657, g: 0.9583897, b: 1, a: 1}
   player3mpnew: {fileID: 0}
   player3skill2shader: {fileID: 0}
   dizzy: 0
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   player23: {fileID: 2022421502}
   shoottimes: 0
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
-  icePrefab: {fileID: 0}
+  icePrefab: {fileID: 2538678391536438608, guid: 232b6555d2f1f5c43b1dee87eee82764, type: 3}
 --- !u!212 &481930197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3340,7 +3340,7 @@ MonoBehaviour:
   player23skill31: {fileID: 5898465905196088809, guid: 9624785182f4c874fa3c2bafdbd70382, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7176471}
   duration: 0.1
-  defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
+  defenseColor: {r: 0.9415095, g: 0.95222527, b: 1, a: 1}
   player2mpnew: {fileID: 0}
   player2skill2shader: {fileID: 0}
   lily3: {fileID: 5954437688160005976, guid: bb9fdb68bb6551c4fa063e59980d9f46, type: 3}
@@ -3351,7 +3351,7 @@ MonoBehaviour:
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
-  icePrefab: {fileID: 0}
+  icePrefab: {fileID: 2538678391536438608, guid: 232b6555d2f1f5c43b1dee87eee82764, type: 3}
 --- !u!1 &951745746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,7 +3572,7 @@ MonoBehaviour:
   player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
-  defenseColor: {r: 0.4627451, g: 0.5568628, b: 0.9764706, a: 0.7058824}
+  defenseColor: {r: 0.94905657, g: 0.9583897, b: 1, a: 1}
   player2mpnew: {fileID: 0}
   player2skill2shader: {fileID: 0}
   lily3: {fileID: 5954437688160005976, guid: 4419d9082651f9d43bc607450fc18da3, type: 3}
@@ -3583,7 +3583,7 @@ MonoBehaviour:
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: d23e3cae5e8d67e4f8f2e5e1a2a37333, type: 3}
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
-  icePrefab: {fileID: 0}
+  icePrefab: {fileID: 2538678391536438608, guid: 232b6555d2f1f5c43b1dee87eee82764, type: 3}
 --- !u!50 &1041973078
 Rigidbody2D:
   serializedVersion: 4
@@ -5076,7 +5076,7 @@ MonoBehaviour:
   duration: 0.1
   playermpnew: {fileID: 0}
   player1skill1shader: {fileID: 0}
-  defenseColor: {r: 0.34528297, g: 0.5758615, b: 1, a: 0.72156864}
+  defenseColor: {r: 0.9264151, g: 0.9524121, b: 1, a: 1}
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: d23e3cae5e8d67e4f8f2e5e1a2a37333, type: 3}
   dizzy: 0
@@ -5089,7 +5089,7 @@ MonoBehaviour:
   player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
   player1: {fileID: 1583054844}
-  icePrefab: {fileID: 0}
+  icePrefab: {fileID: 2538678391536438608, guid: 232b6555d2f1f5c43b1dee87eee82764, type: 3}
 --- !u!50 &1342816085
 Rigidbody2D:
   serializedVersion: 4
@@ -5974,7 +5974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1583054845
 Rigidbody2D:
   serializedVersion: 4
@@ -6155,7 +6155,7 @@ MonoBehaviour:
   duration: 0.1
   playermpnew: {fileID: 0}
   player1skill1shader: {fileID: 0}
-  defenseColor: {r: 0.42830187, g: 0.6166258, b: 1, a: 0.7058824}
+  defenseColor: {r: 0.9264151, g: 0.9426703, b: 1, a: 1}
   targetPrefab: {fileID: 1746008037039005584, guid: 4eaea6af4fc2e9b41a5baa9814fc6ddb, type: 3}
   lilyPrefab: {fileID: 584768981286125758, guid: 6208b78cb98252d4a90212c4861153c1, type: 3}
   dizzy: 0
@@ -6907,7 +6907,8 @@ MonoBehaviour:
   lily3release: {fileID: 8300000, guid: 7765dbccf0822904ea7f254f054503d7, type: 3}
   lily2release: {fileID: 8300000, guid: 90cbf3ef7f25e2c4d9ac70b30644898a, type: 3}
   lily2boom: {fileID: 0}
-  shootarrow1: {fileID: 8300000, guid: c55e069e2be36104fa273985aa31f9c7, type: 3}
+  shootarrow1: {fileID: 8300000, guid: 59011e8b1cb6cb94da12460e1bd003d8, type: 3}
+  shootarrow2: {fileID: 8300000, guid: c55e069e2be36104fa273985aa31f9c7, type: 3}
   magiccircle: {fileID: 0}
   yornkeepshoot: {fileID: 8300000, guid: 276dacb3d4c003642b9308c64307a199, type: 3}
 --- !u!1 &1814011016
@@ -7597,11 +7598,11 @@ MonoBehaviour:
   player3mp: {fileID: 1622094027}
   playerBoom: {fileID: 8485766508657497564, guid: 2fec313a6b670c04888b389b4e56da7c, type: 3}
   player3skill2: {fileID: 8463804640586992008, guid: 29565087d1eca1241b54562c08baf976, type: 3}
-  player3skill3: {fileID: 4390629143909002730, guid: 986608686e6e6b04c8cd07dc920d4c32, type: 3}
+  player3skill3: {fileID: 5272270594528804120, guid: 795b7b0342faa3b4dafb3a26d6ab43cc, type: 3}
   player3skill31: {fileID: 5898465905196088809, guid: ec87fc8e536b98d40918947ef6e2dd14, type: 3}
   damageColor: {r: 0.78431374, g: 0, b: 0, a: 0.7058824}
   duration: 0.1
-  defenseColor: {r: 0.34509805, g: 0.5764706, b: 1, a: 1}
+  defenseColor: {r: 0.9264151, g: 0.9524121, b: 1, a: 1}
   player3mpnew: {fileID: 0}
   player3skill2shader: {fileID: 0}
   dizzy: 0
@@ -7614,7 +7615,7 @@ MonoBehaviour:
   shoottimes: 0
   blueExPrefab: {fileID: 5186561757948502350, guid: 8a339a1c4abdc5c43ae34a95d94fa8f7, type: 3}
   player1: {fileID: 1583054844}
-  icePrefab: {fileID: 0}
+  icePrefab: {fileID: 2538678391536438608, guid: 232b6555d2f1f5c43b1dee87eee82764, type: 3}
 --- !u!212 &2022421506
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8207,6 +8208,22 @@ PrefabInstance:
       propertyPath: player2mp
       value: 
       objectReference: {fileID: 1622094027}
+    - target: {fileID: 3554865093310920012, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: defenseColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554865093310920012, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: defenseColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554865093310920012, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: defenseColor.g
+      value: 0.9583897
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554865093310920012, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
+      propertyPath: defenseColor.r
+      value: 0.94905657
+      objectReference: {fileID: 0}
     - target: {fileID: 8555776462106207674, guid: 2fed7fa071bb9fa488ae00fa651c4de1, type: 3}
       propertyPath: m_LocalScale.x
       value: 150
