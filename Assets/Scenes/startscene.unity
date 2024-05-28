@@ -6906,10 +6906,10 @@ MonoBehaviour:
   lily3boom: {fileID: 8300000, guid: 0ede421f35c450a4e8f51bf010d8c591, type: 3}
   lily3release: {fileID: 8300000, guid: 7765dbccf0822904ea7f254f054503d7, type: 3}
   lily2release: {fileID: 8300000, guid: 90cbf3ef7f25e2c4d9ac70b30644898a, type: 3}
-  lily2boom: {fileID: 0}
+  ice: {fileID: 8300000, guid: eb3c1d7e907eeed4897214e32766423d, type: 3}
   shootarrow1: {fileID: 8300000, guid: 59011e8b1cb6cb94da12460e1bd003d8, type: 3}
   shootarrow2: {fileID: 8300000, guid: c55e069e2be36104fa273985aa31f9c7, type: 3}
-  magiccircle: {fileID: 0}
+  magiccircle: {fileID: 8300000, guid: 00259f378e5d6f34f953a2e7d9667133, type: 3}
   yornkeepshoot: {fileID: 8300000, guid: 276dacb3d4c003642b9308c64307a199, type: 3}
 --- !u!1 &1814011016
 GameObject:

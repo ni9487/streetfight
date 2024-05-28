@@ -356,6 +356,7 @@ public class player23move : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Keypad3)&&mp >= 24.5)
             {
+                AudioManager.instance.Playmagiccircle();
                 Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 30, transform.position.z);
                 GameObject skill3 = Instantiate(player3skill3, targetPosition, Quaternion.identity);
                 player3skill3 fireball = skill3.GetComponent<player3skill3>();
@@ -366,6 +367,7 @@ public class player23move : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
         {
+            AudioManager.instance.Playice();
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
     
@@ -696,7 +698,8 @@ public class player23move : MonoBehaviour
             StartCoroutine(ResetColorAfterDelay());
         }
         if (other.gameObject.tag == "player12skill3")
-        {   
+        {  
+            AudioManager.instance.Playlily3boom(); 
             AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);

@@ -15,7 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip lily3boom;
     public AudioClip lily3release;
     public AudioClip lily2release;
-    public AudioClip lily2boom;
+    public AudioClip ice;
 
     public AudioClip shootarrow1;
     public AudioClip shootarrow2;
@@ -105,11 +105,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Playlily2boom()
+    public void Playice()
     {
-        if (lily2boom != null && audioSource != null)
+        if (ice != null && audioSource != null)
         {
-            audioSource.PlayOneShot(lily2boom);
+            audioSource.PlayOneShot(ice);
         }
     }
 

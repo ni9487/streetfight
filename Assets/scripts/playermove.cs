@@ -489,6 +489,7 @@ public class playermove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
+            AudioManager.instance.Playice();
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
     

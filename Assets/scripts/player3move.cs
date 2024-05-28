@@ -353,6 +353,7 @@ public class player3move : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.U)&&mp >= 24.5)
             {
+                AudioManager.instance.Playmagiccircle();
                 Vector3 targetPosition = new Vector3(transform.position.x, transform.position.y - 30, transform.position.z);
                 GameObject skill3 = Instantiate(player3skill3, targetPosition, Quaternion.identity);
                 player3skill3 fireball = skill3.GetComponent<player3skill3>();
@@ -368,6 +369,7 @@ public class player3move : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) && (defensecooldown == 0))
         {
+            AudioManager.instance.Playice();
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
             StartCoroutine(IceFollowPlayer(ice, 1f));
@@ -697,6 +699,7 @@ public class player3move : MonoBehaviour
         }
         if (other.gameObject.tag == "player2skill3")
         {
+            AudioManager.instance.Playlily3boom();
             AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);

@@ -490,6 +490,7 @@ public class player21move : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && (defensecooldown == 0))
         {
+            AudioManager.instance.Playice();
             Vector3 offset = new Vector3(0f, 20f, 0f);
             GameObject ice = Instantiate(icePrefab, transform.position+offset, Quaternion.identity);
             StartCoroutine(IceFollowPlayer(ice, 1f));
@@ -988,6 +989,7 @@ public class player21move : MonoBehaviour
         
         if (other.gameObject.tag == "player12skill3")
         {
+            AudioManager.instance.Playlily3boom();
             AudioManager.instance.PlayDamageSound();
             StartCoroutine(SpawnAndExpandBlueEx());
             Destroy(other.gameObject);
