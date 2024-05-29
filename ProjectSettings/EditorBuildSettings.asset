@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/st.unity
+    guid: 8360c976243fa31409ed2dab60f16bf1
+  - enabled: 1
     path: Assets/Scenes/pickhero.unity
     guid: dd2c1ad2349225a42b9081c2ae28533c
   - enabled: 1
@@ -23,9 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Choose.unity
     guid: 3dc219c81c863c444a69d16c1f0b06d5
-  - enabled: 1
-    path: Assets/Scenes/st.unity
-    guid: 8360c976243fa31409ed2dab60f16bf1
   - enabled: 1
     path: Assets/Scenes/vectory.unity
     guid: 122e0a38bb677a74c946ce6a45dfca12
