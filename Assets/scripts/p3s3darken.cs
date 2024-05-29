@@ -9,7 +9,7 @@ public class p3s3darken : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.U)&&targetImage.color == Color.white&&player3move.mp >= 24)
+        if (Input.GetKeyDown(KeyCode.U)&&targetImage.color == Color.white&&player3move.mp >= 24&&player3move.canMove==true)
         {
             DarkenImageCoroutine();
         }

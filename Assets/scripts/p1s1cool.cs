@@ -10,7 +10,7 @@ public class p1s1cool : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.T)&&numberText.text == "")
+        if (Input.GetKeyDown(KeyCode.T)&&numberText.text == ""&&playermove.canMove==true)
         {
             numberText.text = "2";
             StartCoroutine(CountdownRoutine());

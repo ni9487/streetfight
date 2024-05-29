@@ -10,7 +10,7 @@ public class p21s2cool : MonoBehaviour
     void Update()
     {
         // 按下數字鍵1時觸發
-        if (Input.GetKeyDown(KeyCode.Keypad2)&&numberText.text == "")
+        if (Input.GetKeyDown(KeyCode.Keypad2)&&numberText.text == ""&&player21move.canMove==true)
         {
             numberText.text = "3";
             StartCoroutine(CountdownRoutine());

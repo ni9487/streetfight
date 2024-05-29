@@ -43,7 +43,7 @@ public class player21move : MonoBehaviour
     private float p2s1cooldown;
 
     private bool isDefending = false; // 是否处于防御状态
-    private bool canMove = true; // 是否可以移动
+    public static bool canMove = true; // 是否可以移动
     private float defensecooldown;
     public Color defenseColor = new Color32(32, 0, 0, 10); // 设置防禦时的颜色
 
@@ -70,6 +70,8 @@ public class player21move : MonoBehaviour
 
     public GameObject player1;
     public GameObject icePrefab;
+
+    public static int died=0;
 
     void Start()
     {
@@ -1024,6 +1026,7 @@ public class player21move : MonoBehaviour
 
     public void playerdie()
     {
+        died=1;
         Instantiate(playerBoom, this.transform.position, Quaternion.identity);
         GameController.instance.ExecuteAfterDelay(1.0f, () =>
         {

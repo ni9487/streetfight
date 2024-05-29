@@ -41,7 +41,7 @@ public class player2move : MonoBehaviour
     private float defensecooldown;
 
     private bool isDefending = false; // 是否处于防御状态
-    private bool canMove = true; // 是否可以移动
+    public static bool canMove = true; // 是否可以移动
 
     //大招球
     public Transform lily3;
@@ -59,6 +59,8 @@ public class player2move : MonoBehaviour
 
     public GameObject blueExPrefab;
     public GameObject icePrefab;
+
+    public static int died=0;
 
     void Start()
     {
@@ -817,6 +819,7 @@ public class player2move : MonoBehaviour
 
     public void playerdie()
     {
+        died=1;
         Instantiate(playerBoom, this.transform.position, Quaternion.identity);
         GameController.instance.ExecuteAfterDelay(1.0f, () =>
         {

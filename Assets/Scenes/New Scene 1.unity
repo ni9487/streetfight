@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.5545044, y: 0}
+  m_SizeDelta: {x: 63.2191, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6621808
 MonoBehaviour:
@@ -497,7 +497,7 @@ MonoBehaviour:
   player1: {fileID: 728660350852990679, guid: b1a245a7e0659eb4ba59e3647a6bda6c, type: 3}
   player2: {fileID: 5608803551163116891, guid: 7c2d155c7525aaa41becdba61d5be77c, type: 3}
   player3: {fileID: 1967517597083887271, guid: 4563970aba21892449acf27f007ab494, type: 3}
-  player12: {fileID: 5608803551163116891, guid: 7c2d155c7525aaa41becdba61d5be77c, type: 3}
+  player12: {fileID: 5608803551163116891, guid: d8dce874210514d4eb6fdf4745b6ca86, type: 3}
   player21: {fileID: 728660350852990679, guid: 3fac68c8f3cbb7648bb02480940d3556, type: 3}
   player23: {fileID: 1967517597083887271, guid: fd3b1aab79219fc48b7343afb18ff419, type: 3}
   resultText: {fileID: 576009225}
@@ -1135,7 +1135,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1313824564}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 390435764d1ec8b469e90f6321cfbfef, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
