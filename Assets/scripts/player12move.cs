@@ -290,7 +290,7 @@ public class player12move : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0&&player2.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Keypad2)&&p2s1cooldown==0&&player2.activeSelf&&player2move.canMove==true)
         {
             StartCoroutine(SpawnTarget());
             p2s1cooldown=2;

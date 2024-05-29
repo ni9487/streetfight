@@ -305,7 +305,7 @@ public class player2move : MonoBehaviour
             defensecooldown = 5;
         }
 
-        if (Input.GetKeyDown(KeyCode.Y)&&p2s1cooldown==0&&player12.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Y)&&p2s1cooldown==0&&player12.activeSelf&&player12move.canMove==true)
         {
             StartCoroutine(SpawnTarget());
             p2s1cooldown=2;
